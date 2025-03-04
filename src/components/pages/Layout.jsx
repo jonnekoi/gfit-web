@@ -33,7 +33,7 @@ const Layout = () => {
                             <Link to="/customers" className="text-white montserrat-text text-2xl p-2">Customers</Link>
                             <Link to="/workouts" className="text-white montserrat-text text-2xl p-2">Workouts</Link>
                             <Link to="/meals" className="text-white montserrat-text text-2xl p-2">Meals</Link>
-                            <button onClick={handleLogout} className="text-white montserrat-text text-2xl p-2">Log out</button>
+                            <button onClick={handleLogout} className="text-white font-bold montserrat-text text-2xl p-2">Log out</button>
                         </div>
                     </>
                 ) : (
