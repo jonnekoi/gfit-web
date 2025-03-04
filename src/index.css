@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Farsan&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  background-color: #21263a;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100dvw;
+  height: 100dvh;
+}
+
+
+.montserrat-text {
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+}
+.farsan-regular {
+  font-family: 'Farsan', cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+.poppins-text {
+  font-family: 'Poppins', sans-serif;
+}
+
+.code-text {
+  font-family: 'Fira Code', monospace;
+  font-weight: 400;
+}
+
+.big-shoulders-text {
+  font-family: "Big Shoulders", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
