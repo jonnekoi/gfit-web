@@ -6,4 +6,4 @@ This is the web application for the platform for trainers to manage clients and 
 
 Client application will be made with react native.
 
-Backend can be found here: [Backend]()
+Backend can be found here: [Backend](https://github.com/jonnekoi/GFit-Server)
