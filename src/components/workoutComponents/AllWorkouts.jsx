@@ -188,7 +188,7 @@ const AllWorkouts = () => {
                                         {
                                             editableExercises.map((exercise, index) => (
                                     <li key={exercise.exercise_id}
-                                        className="mt-2 flex items-center justify-between text-black">
+                                        className="mb-4 flex items-center justify-between text-black">
                                         <h3 className="font-semibold text-orange-500 montserrat-text p-2 w-1/5">{exercise.exercise_name}</h3>
                                         <p className="poppins-text p-2 w-1/5 text-white">{exercise.exercise_description}</p>
                                         {isReadOnly ? (
@@ -238,7 +238,7 @@ const AllWorkouts = () => {
                                     Close
                                 </button>
                             </div>
-                            {updateText && <p className="text-green-500 montserrat-text text-1xl">{updateText}</p>}
+                            {updateText && <p className="text-green-500 montserrat-text mt-5 text-1xl">{updateText}</p>}
                         </div>
                     </div>
                 )}
