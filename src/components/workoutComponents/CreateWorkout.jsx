@@ -1,6 +1,7 @@
 "use client";
 import {useState, useEffect} from "react";
-import _default from "eslint-plugin-react-refresh";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 const url = 'http://127.0.0.1:3000/v1';
 
@@ -142,8 +143,11 @@ const CreateWorkout = () => {
     }
 
     const moveBackToExercises = (exercise) => {
+        if (!exercises.some(ex => ex.id === exercise.id)) {
+            setExercises([...exercises, exercise]);
+        }
         setSelectedExercises(selectedExercises.filter((ex) => ex.id !== exercise.id));
-        setExercises([...exercises, exercise]);
+        setCurrentExercise(null);
     };
 
     return (
@@ -181,10 +185,10 @@ const CreateWorkout = () => {
             )}
             {currentExercise && (
                 <div className="w-2/3 flex flex-col items-center justify-center border p-5 m-5 rounded min-h-[300px]">
-                    <div
-                        className="p-2 m-1 text-white text-center font-bold w-2/3 bg-orange-500 montserrat-text text-1xl border border-orange-500 rounded">
-                        {currentExercise.name}
-                    </div>
+                        <div
+                            className="p-2 m-1 ml-15 text-white text-center font-bold w-2/3 bg-orange-500 montserrat-text text-1xl border border-orange-500 rounded">
+                            {currentExercise.name}
+                        </div>
                     <p className="text-2xl mt-2 text-white text-center montserrat-text">Rep count</p>
                     <div className="flex w-full justify-center items-center">
                         <button onClick={() => setRepsLows(reps_low > 0 ? Math.min(reps_low - 1, reps_max) : 0)}
@@ -212,10 +216,15 @@ const CreateWorkout = () => {
                     <textarea placeholder="Description..." value={description}
                               onChange={(e) => setDescription(e.target.value)}
                               className="m-1 w-full min-h-24 p-1 border rounded text-top"/>
-                    <button onClick={addToWorkout}
-                            className="text-white font-bold m-2 p-2.5 w-2/3 montserrat-text text-1xl border border-orange-500 rounded hover:border-orange-300">Add
-                        to Workout
-                    </button>
+                    <div className="w-full flex justify-center ">
+                        <button onClick={() => moveBackToExercises(currentExercise)} className="w-1/2 m-2 p-2.5 border border-orange-500 rounded hover:border-orange-300">
+                        <FontAwesomeIcon className="text-white text-3xl " icon={faArrowLeft}/>
+                        </button>
+                        <button onClick={addToWorkout}
+                                className="text-white font-bold m-2 p-2.5 w-1/2 montserrat-text text-1xl border border-orange-500 rounded hover:border-orange-300">Add
+                            to Workout
+                        </button>
+                    </div>
                     {errorSecond && <p className="text-red-500 montserrat-text">{errorSecond}</p>}
                 </div>
             )}
@@ -251,7 +260,7 @@ const CreateWorkout = () => {
                              className="m-2 w-full bg-orange-500 border border-orange-500 rounded flex flex-row justify-between">
                             <div
                                 className="p-2 text-white text-center montserrat-text text-1xl">
-                                {exercise.name} - R: {exercise.reps_low} - {exercise.reps_max} W: {exercise.weight}
+                                <strong>{exercise.name}</strong> - Reps: {exercise.reps_low} - {exercise.reps_max} / Sets: {exercise.sets} / Weight: {exercise.weight}
                             </div>
                             <button onClick={() => moveBackToExercises(exercise)}
                                     className="text-white font-bold montserrat-text mr-5">X

@@ -129,7 +129,7 @@ const AllWorkouts = () => {
                         <th className="p-5">Name</th>
                         <th className="p-5">Type</th>
                         <th className="p-5">Level</th>
-                        <th className="p-5">Created</th>
+                        <th className="p-5">Crafted</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -161,7 +161,7 @@ const AllWorkouts = () => {
                     </button>
                 </div>
                 {selectedWorkout && (
-                    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-55">
                         <div className="väribg text-white p-8 rounded max-w-4xl w-full text-center">
                             <h2 className="font-bold montserrat-text text-2xl pb-2">{selectedWorkout.workout_name || "Unnamed Workout"}</h2>
                             <p className="montserrat-text font-bold text-1xl"> Crafted {dateFormatter.format(new Date(selectedWorkout.workout_created_at))}</p>
