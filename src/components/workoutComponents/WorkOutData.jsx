@@ -50,7 +50,7 @@ const WorkOutData = () => {
 
     return (
         <div className="flex flex-col p-4">
-            <div className="border border-orange-500 flex justify-center flex-col rounded min-w-96">
+            <div className="border flex justify-center flex-col rounded min-w-96">
                 <h1 className="text-2xl font-bold text-center text-white montserrat-text m-5">Workout Types</h1>
                 {chartData.length > 0 ? (
                     <div className="pr-10">
