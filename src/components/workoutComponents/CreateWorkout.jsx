@@ -1,5 +1,6 @@
 "use client";
 import {useState, useEffect} from "react";
+import _default from "eslint-plugin-react-refresh";
 
 const url = 'http://127.0.0.1:3000/v1';
 
@@ -13,6 +14,7 @@ const CreateWorkout = () => {
     const [weight, setWeight] = useState(0);
     const [description, setDescription] = useState("");
     const [workoutName, setWorkoutName] = useState("");
+    const [workoutType, setWorkoutType] = useState("");
     const [error, setError] = useState("");
     const [errorSecond, setErrorSecond] = useState("");
     const [workoutAddedText, setWorkoutAddedText] = useState("");
@@ -70,6 +72,7 @@ const CreateWorkout = () => {
         }
         const workoutDetails = {
             workoutName: workoutName,
+            workoutType: workoutType,
             exercises: selectedExercises
         };
 
@@ -89,6 +92,8 @@ const CreateWorkout = () => {
                 });
                 setSelectedExercises([]);
                 setErrorSecond("");
+                setError("");
+                setWorkoutType("");
                 setWorkoutAddedText("Workout added!");
                 setWorkoutName("");
             }
@@ -169,16 +174,24 @@ const CreateWorkout = () => {
                             <button onClick={() => moveBackToExercises(exercise)} className="text-white font-bold montserrat-text mr-5">X</button>
                         </div>
                     ))}
-                    <div className="flex flex-col mt-10 justify-center items-center max-h-20">
+                    <div className="flex flex-row mt-48 justify-center items-center max-h-20">
                         <input value={workoutName} className="border rounded p-2.5 m-2 w-full" onChange={(e)=> setWorkoutName(e.target.value)} type="text" name="workoutName"
-                               placeholder="Enter name for workout..."/>
+                               placeholder="Workout name..."/>
+                        <select className="border rounded p-2.5 m-2 w-full" name="workoutType" onChange={(e)=> setWorkoutType(e.target.value)}>
+                            <option value="none" selected disabled hidden>Workout Type</option>
+                            <option value="Push">Push</option>
+                            <option value="Pull">Pull</option>
+                            <option value="Legs">Legs</option>
+                            <option value="Full Body">Full Body</option>
+                            <option value="Cardio">Cardio</option>
+                        </select>
                         <button onClick={submitWorkout} type="submit"
                                 className="text-white font-bold p-2.5 m-2 w-full montserrat-text text-1xl border border-orange-500 rounded hover:border-orange-300">Add
                             Workout
                         </button>
-                        {error && <p className="text-red-500 montserrat-text">{error}</p>}
-                        {workoutAddedText && <p className="text-green-500 montserrat-text">{workoutAddedText}</p>}
                     </div>
+                    {error && <p className="text-red-500 montserrat-text">{error}</p>}
+                    {workoutAddedText && <p className="text-green-500 montserrat-text">{workoutAddedText}</p>}
                 </form>
             </div>
         </div>

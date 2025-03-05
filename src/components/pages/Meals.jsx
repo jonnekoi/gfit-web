@@ -18,13 +18,13 @@ const Meals = () => {
                     section === "Add Ingredient" ? (
                         <button
                             key={section}
-                            className="text-white font-bold bg-orange-500 montserrat-text text-1xl border border-orange-500 p-2 rounded"
+                            className="text-white font-bold bg-orange-500 montserrat-text text-1xl border min-w-56 border-orange-500 p-2 rounded"
                             onClick={() => handleSectionClick(section)}>{section}
                         </button>
                     ) : (
                         <button
                             key={section}
-                            className="text-white font-bold montserrat-text text-1xl border border-orange-500 p-2 rounded hover:border-orange-300"
+                            className="text-white font-bold montserrat-text text-1xl border border-orange-500 p-2 min-w-56 rounded hover:border-orange-300"
                             onClick={() => handleSectionClick(section)}>{section}
                         </button>
                     )
