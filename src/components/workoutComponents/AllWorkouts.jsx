@@ -39,8 +39,8 @@ const AllWorkouts = () => {
         setIsReadOnly(true);
     };
 
-    const toggleReadOnly = () => {
-        setIsReadOnly(!isReadOnly);
+    const toggleEditMode = () => {
+        console.log("Toggle edit mode");
     };
 
     const handleInputChange = (index, field, value) => {
@@ -108,43 +108,25 @@ const AllWorkouts = () => {
                             <p className="montserrat-text m-2">{selectedWorkout.workout_description || "No description available"}</p>
                             <ul>
                                 <div className="flex items-center justify-between text-black">
-                                    <p className="poppins-text p-2 w-1/5 mr-4 text-white font-bold">Exercise</p>
-                                    <p className="poppins-text p-2 w-1/5 mr-4 text-white font-bold">Description</p>
-                                    <p className="poppins-text p-2 w-1/5 mr-4 text-white font-bold">Low Reps</p>
-                                    <p className="poppins-text p-2 w-1/5 mr-4 text-white font-bold">Max Reps</p>
-                                    <p className="poppins-text p-2 w-1/5 mr-4 text-white font-bold">Weight</p>
+                                    <p className="poppins-text p-2 w-1/5  text-white font-bold">Exercise</p>
+                                    <p className="poppins-text p-2 w-1/5  text-white font-bold">Description</p>
+                                    <p className="poppins-text p-2 w-1/5  text-white font-bold">Reps</p>
+                                    <p className="poppins-text p-2 w-1/5  text-white font-bold">Sets</p>
+                                    <p className="poppins-text p-2 w-1/5  text-white font-bold">Weight</p>
                                 </div>
                                 {editableExercises.map((exercise, index) => (
                                     <li key={exercise.exercise_id}
                                         className="mt-2 flex items-center justify-between text-black">
                                         <h3 className="font-semibold text-orange-500 montserrat-text p-2 w-1/5">{exercise.exercise_name}</h3>
                                         <p className="poppins-text p-2 w-1/5 text-white">{exercise.exercise_description}</p>
-                                        <input
-                                            type="number"
-                                            value={exercise.low_reps}
-                                            onChange={(e) => handleInputChange(index, "low_reps", e.target.value)}
-                                            className="p-2 m-2 border rounded w-1/5"
-                                            readOnly={isReadOnly}
-                                        />
-                                        <input
-                                            type="number"
-                                            value={exercise.max_reps}
-                                            onChange={(e) => handleInputChange(index, "max_reps", e.target.value)}
-                                            className="p-2 m-2 border rounded w-1/5"
-                                            readOnly={isReadOnly}
-                                        />
-                                        <input
-                                            type="number"
-                                            value={exercise.weight}
-                                            onChange={(e) => handleInputChange(index, "weight", e.target.value)}
-                                            className="p-2 m-2 border rounded w-1/5"
-                                            readOnly={isReadOnly}
-                                        />
+                                        <p className="poppins-text p-2 w-1/5 text-white">{exercise.low_reps} - {exercise.max_reps}</p>
+                                        <p className="poppins-text p-2 w-1/5 text-white">{exercise.sets}</p>
+                                        <p className="poppins-text p-2 w-1/5 text-white">{exercise.weight}</p>
                                     </li>
                                 ))}
                             </ul>
                             <div className="flex flex-row">
-                                <button onClick={toggleReadOnly}
+                                <button onClick={toggleEditMode}
                                         className="text-white bg-orange-500 font-bold p-2 m-2 w-full montserrat-text text-1xl border border-orange-500 rounded hover:border-orange-300">
                                     {isReadOnly ? "Edit" : "Save"}
                                 </button>

@@ -11,6 +11,7 @@ const CreateWorkout = () => {
     const [currentExercise, setCurrentExercise] = useState(null);
     const [reps_low, setRepsLows] = useState(0);
     const [reps_max, setRepsMax] = useState(0);
+    const [sets, setSets] = useState(0);
     const [weight, setWeight] = useState(0);
     const [description, setDescription] = useState("");
     const [workoutName, setWorkoutName] = useState("");
@@ -52,13 +53,14 @@ const CreateWorkout = () => {
             return;
         }
         if (currentExercise) {
-            const exerciseWithDetails = { ...currentExercise, reps_low, reps_max, weight, description };
+            const exerciseWithDetails = { ...currentExercise, reps_low, reps_max, weight, description, sets };
             setExercises(exercises.filter((ex) => ex.id !== currentExercise.id));
             setSelectedExercises([...selectedExercises, exerciseWithDetails]);
             setCurrentExercise(null);
             setRepsLows(0);
             setRepsMax(0);
             setWeight(0);
+            setSets(0);
             setDescription("");
             setErrorSecond("");
         }
@@ -151,8 +153,13 @@ const CreateWorkout = () => {
                                 className="text-white font-bold m-1 p-3 montserrat-text w-1/6 text-1xl border border-orange-500 rounded hover:border-orange-300">+
                         </button>
                     </div>
+                    <label className="text-white montserrat-text">Weight</label>
                     <input type="text" placeholder="Weight..." value={weight}
                            onChange={(e) => setWeight(e.target.value)} className="m-1 w-full p-1 border rounded"/>
+                    <label className="text-white montserrat-text">Sets</label>
+                    <input type="text" placeholder="Sets..." value={sets} onChange={(e) => setSets(e.target.value)}
+                           className="m-1 w-full p-1 border rounded"/>
+                    <label className="text-white montserrat-text">Description</label>
                     <textarea placeholder="Description..." value={description}
                               onChange={(e) => setDescription(e.target.value)}
                               className="m-1 w-full min-h-24 p-1 border rounded text-top"/>
@@ -164,32 +171,37 @@ const CreateWorkout = () => {
                 </div>
             )}
             <div className="w-full flex flex-col border p-5 m-5 rounded min-h-[300px]">
+                <div className="flex flex-row mb-1 justify-center items-center max-h-12">
+                    <input value={workoutName} className="border rounded p-2.5 m-2 w-full"
+                           onChange={(e) => setWorkoutName(e.target.value)} type="text" name="workoutName"
+                           placeholder="Workout name..."/>
+                    <select className="border rounded p-2.5 m-2 w-full" name="workoutType"
+                            onChange={(e) => setWorkoutType(e.target.value)}>
+                        <option value="none" selected disabled hidden>Workout Type</option>
+                        <option value="Push">Push</option>
+                        <option value="Pull">Pull</option>
+                        <option value="Legs">Legs</option>
+                        <option value="Full Body">Full Body</option>
+                        <option value="Cardio">Cardio</option>
+                    </select>
+                    <button onClick={submitWorkout} type="submit"
+                            className="text-white font-bold p-2.5 m-2 w-full montserrat-text text-1xl border border-orange-500 rounded hover:border-orange-300">Add
+                        Workout
+                    </button>
+                </div>
                 <form className="w-full items-center flex flex-col">
                     {selectedExercises.map((exercise) => (
-                        <div key={exercise.id} className="m-2 w-full bg-orange-500 border border-orange-500 rounded flex flex-row justify-between">
+                        <div key={exercise.id}
+                             className="m-2 w-full bg-orange-500 border border-orange-500 rounded flex flex-row justify-between">
                             <div
                                 className="p-2 text-white text-center montserrat-text text-1xl">
                                 {exercise.name} - R: {exercise.reps_low} - {exercise.reps_max} W: {exercise.weight}
                             </div>
-                            <button onClick={() => moveBackToExercises(exercise)} className="text-white font-bold montserrat-text mr-5">X</button>
+                            <button onClick={() => moveBackToExercises(exercise)}
+                                    className="text-white font-bold montserrat-text mr-5">X
+                            </button>
                         </div>
                     ))}
-                    <div className="flex flex-row mt-48 justify-center items-center max-h-20">
-                        <input value={workoutName} className="border rounded p-2.5 m-2 w-full" onChange={(e)=> setWorkoutName(e.target.value)} type="text" name="workoutName"
-                               placeholder="Workout name..."/>
-                        <select className="border rounded p-2.5 m-2 w-full" name="workoutType" onChange={(e)=> setWorkoutType(e.target.value)}>
-                            <option value="none" selected disabled hidden>Workout Type</option>
-                            <option value="Push">Push</option>
-                            <option value="Pull">Pull</option>
-                            <option value="Legs">Legs</option>
-                            <option value="Full Body">Full Body</option>
-                            <option value="Cardio">Cardio</option>
-                        </select>
-                        <button onClick={submitWorkout} type="submit"
-                                className="text-white font-bold p-2.5 m-2 w-full montserrat-text text-1xl border border-orange-500 rounded hover:border-orange-300">Add
-                            Workout
-                        </button>
-                    </div>
                     {error && <p className="text-red-500 montserrat-text">{error}</p>}
                     {workoutAddedText && <p className="text-green-500 montserrat-text">{workoutAddedText}</p>}
                 </form>
