@@ -38,8 +38,8 @@ const Layout = () => {
                     </>
                 ) : (
                     <div className="space-x-7">
-                        <Link to="/login" className="text-white farsan-regular text-3xl">Login</Link>
-                        <Link to="/register" className="text-white farsan-regular text-3xl">Register</Link>
+                        <Link to="/login" className="text-white montserrat-text text-3xl">Login</Link>
+                        <Link to="/register" className="text-white montserrat-text text-3xl">Register</Link>
                 </div>
                 )}
             </header>

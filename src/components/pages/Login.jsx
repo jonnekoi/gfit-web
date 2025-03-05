@@ -35,13 +35,13 @@ const Login = () => {
     const { setIsLoggedIn } = useAuth();
 
     return (
-        <div className="flex flex-col text-center p-5 border rounded-2xl w-1/3 mt-10">
+        <div className="flex flex-col text-center p-5 border border-orange-500 rounded-2xl w-1/3 mt-10">
             <form onSubmit={(e) => handleLogin(e, setIsLoggedIn)} className="flex flex-col m-auto justify-center w-2/3">
-                <label className="code-text text-white m-2">Username</label>
+                <label className="montserrat-text text-white m-2">Username</label>
                 <input className="p-2 rounded" type="text" name="username" placeholder="Username" />
-                <label className="code-text text-white m-2">Passoword</label>
+                <label className="montserrat-text text-white m-2">Passoword</label>
                 <input className="p-2 rounded" type="password" name="password" placeholder="Password" />
-                <button className="border text-white p-2 m-5 rounded code-text hover:bg-white hover:text-black" type="submit">Login</button>
+                <button className="bg-orange-500 text-white p-2 m-5 rounded montserrat-text hover:cursor-pointer" type="submit">Login</button>
             </form>
         </div>
     )
