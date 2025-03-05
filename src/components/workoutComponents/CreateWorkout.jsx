@@ -19,6 +19,8 @@ const CreateWorkout = () => {
     const [error, setError] = useState("");
     const [errorSecond, setErrorSecond] = useState("");
     const [workoutAddedText, setWorkoutAddedText] = useState("");
+    const [workOutLevel, setWorkOutLevel] = useState("");
+    const [addExercise, setAddExercise] = useState(false);
 
     const fetchExercises = async () => {
         try {
@@ -44,6 +46,7 @@ const CreateWorkout = () => {
 
     const moveExercise = (exercise) => {
         setCurrentExercise(exercise);
+        setAddExercise(false);
         setErrorSecond("");
     };
 
@@ -66,6 +69,31 @@ const CreateWorkout = () => {
         }
     };
 
+    const postAddNewExe = async (e) => {
+        e.preventDefault();
+        const newExercise = {
+            name: e.target.name.value,
+            description: e.target.descri.value
+        };
+        try {
+            const response = await fetch(url + '/workouts/exercise/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newExercise),
+            });
+            const data = await response.json();
+            console.log(data);
+            if (response.status === 201) {
+                setExercises((prevExercises) => [...prevExercises, newExercise]);
+                setAddExercise(false);
+            }
+        } catch (error) {
+            console.error("Error adding exercise:", error);
+        }
+    }
+
     const submitWorkout = async (e) => {
         e.preventDefault();
         if (!workoutName) {
@@ -75,6 +103,7 @@ const CreateWorkout = () => {
         const workoutDetails = {
             workoutName: workoutName,
             workoutType: workoutType,
+            workoutLevel: workOutLevel,
             exercises: selectedExercises
         };
 
@@ -96,6 +125,7 @@ const CreateWorkout = () => {
                 setErrorSecond("");
                 setError("");
                 setWorkoutType("");
+                setWorkOutLevel("");
                 setWorkoutAddedText("Workout added!");
                 setWorkoutName("");
             }
@@ -104,6 +134,12 @@ const CreateWorkout = () => {
         }
         setWorkoutName("");
     };
+
+    const CreateAddNewExercise = () => {
+        setAddExercise(true);
+        setCurrentExercise(null);
+        setErrorSecond("");
+    }
 
     const moveBackToExercises = (exercise) => {
         setSelectedExercises(selectedExercises.filter((ex) => ex.id !== exercise.id));
@@ -118,8 +154,8 @@ const CreateWorkout = () => {
                            onChange={(e) => setSearchQuery(e.target.value)}
                            className="border rounded w-full p-1"
                     />
-                    <button
-                        className="text-white font-bold p-1 w-1/3 montserrat-text text-1xl border border-orange-500 rounded hover:border-orange-300">Add
+                    <button onClick={CreateAddNewExercise}
+                        className="text-white font-bold bg-orange-500 p-1 w-1/3 montserrat-text text-1xl border border-orange-500 rounded">Add
                         Exercise
                     </button>
                 </div>
@@ -130,6 +166,19 @@ const CreateWorkout = () => {
                     </button>
                 ))}
             </div>
+            {addExercise && (
+                <div className="w-2/3 flex flex-col items-center justify-center border p-5 m-5 rounded min-h-[300px] text-center">
+                    <form onSubmit={postAddNewExe}>
+                    <label className="mt-2 text-white montserrat-text">Exercise name</label>
+                    <input type="text" placeholder="Exercise name..." name="name"
+                            className="m-1 w-full p-1 border rounded" />
+                    <label className="mt-2 text-white montserrat-text">Description</label>
+                    <textarea placeholder="Description..." name="descri"
+                              className="m-1 w-full min-h-24 p-1 border rounded text-top"/>
+                    <button type="submit" className="text-white font-bold p-2.5 m-2 w-full montserrat-text text-1xl border border-orange-500 rounded hover:border-orange-300">Add</button>
+                    </form>
+                </div>
+            )}
             {currentExercise && (
                 <div className="w-2/3 flex flex-col items-center justify-center border p-5 m-5 rounded min-h-[300px]">
                     <div
@@ -184,8 +233,15 @@ const CreateWorkout = () => {
                         <option value="Full Body">Full Body</option>
                         <option value="Cardio">Cardio</option>
                     </select>
+                    <select className="flex flex-row border rounded p-2.5 m-2 w-full" name="level"
+                            onChange={(e) => setWorkOutLevel(e.target.value)}>
+                        <option value="none" selected disabled hidden>Workout Level</option>
+                        <option value="Easy">Easy</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Hard">Hard</option>
+                    </select>
                     <button onClick={submitWorkout} type="submit"
-                            className="text-white font-bold p-2.5 m-2 w-full montserrat-text text-1xl border border-orange-500 rounded hover:border-orange-300">Add
+                            className="text-white font-bold p-2.5 m-2 w-full montserrat-text text-1xl border border-orange-500 rounded bg-orange-500">Add
                         Workout
                     </button>
                 </div>

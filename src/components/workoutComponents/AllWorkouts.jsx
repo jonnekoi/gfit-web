@@ -7,6 +7,9 @@ const AllWorkouts = () => {
     const [isReadOnly, setIsReadOnly] = useState(true);
     const [selectedWorkout, setSelectedWorkout] = useState(null);
     const [editableExercises, setEditableExercises] = useState([]);
+    const [currentPage, setCurrentPage] = useState(0);
+    const rowsPerPage = 8;
+    const [updateText, setUpdateText] = useState("");
 
 
     const fetchWorkouts = async () => {
@@ -25,9 +28,29 @@ const AllWorkouts = () => {
         }
     };
 
+    const saveWorkout = async (workoutId) => {
+        try {
+            const response = await fetch(URL + "/workouts", {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id: workoutId, exercises: editableExercises }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to save workout');
+            }
+            setUpdateText("Workout updated successfully");
+
+        } catch (error) {
+            console.error('Error saving workout:', error);
+        }
+    };
+
     useEffect(() => {
         fetchWorkouts();
-    }, []);
+    }, [saveWorkout]);
 
     const toggleVisibility = (workout) => {
         setSelectedWorkout(workout);
@@ -37,10 +60,14 @@ const AllWorkouts = () => {
     const closeModal = () => {
         setSelectedWorkout(null);
         setIsReadOnly(true);
+        setUpdateText("");
     };
 
     const toggleEditMode = () => {
-        console.log("Toggle edit mode");
+        if (!isReadOnly) {
+            saveWorkout(selectedWorkout.workout_id);
+        }
+        setIsReadOnly(prev => !prev);
     };
 
     const handleInputChange = (index, field, value) => {
@@ -81,24 +108,58 @@ const AllWorkouts = () => {
         minute: "numeric",
     });
 
-    return (
-            <div className="grid grid-cols-4 gap-4">
-                {workouts.map((workout) => (
-                    <div onClick={() => toggleVisibility(workout)} key={workout.workout_id}
-                         className="border rounded text-center text-white overflow-y-auto w-64 hover:cursor-pointer">
-                        <div className="flex flex-row justify-center">
-                            <h2 className="font-bold montserrat-text text-2xl mt-5">{workout.workout_name || "Unnamed Workout"}</h2>
-                        </div>
-                        <ul className="p-12">
-                            {workout.exercises.slice(0, 3).map((exercise) => (
-                                <li key={exercise.exercise_id} className="mt-2">
-                                    <h3 className="font-semibold text-orange-500 montserrat-text rounded border border-orange-500 w-full">{exercise.exercise_name}</h3>
-                                </li>
+    const startIndex = currentPage * rowsPerPage;
+    const endIndex = startIndex + rowsPerPage;
+    const visibleWorkouts = workouts.slice(startIndex, endIndex);
 
-                            ))}
-                        </ul>
-                    </div>
-                ))}
+    const nextPage = () => {
+        if (endIndex < workouts.length) setCurrentPage(prev => prev + 1);
+    };
+
+    const prevPage = () => {
+        if (currentPage > 0) setCurrentPage(prev => prev - 1);
+    };
+
+    return (
+        <>
+            <div className="w-2/3 p-10">
+                <table className="w-full text-white montserrat-text">
+                    <thead>
+                    <tr className="border-b border-b-orange-500 text-2xl font-bold text-center">
+                        <th className="p-5">Name</th>
+                        <th className="p-5">Type</th>
+                        <th className="p-5">Level</th>
+                        <th className="p-5">Created</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {visibleWorkouts.map((workout, index) => (
+                        <tr key={index} onClick={() => toggleVisibility(workout)}
+                            className="cursor-pointer text-center">
+                            <td className="p-4 border-b border-b-orange-500">{workout.workout_name}</td>
+                            <td className="p-4 border-b border-b-orange-500">{workout.workout_type}</td>
+                            <td className="p-4 border-b border-b-orange-500">{workout.workout_level}</td>
+                            <td className="p-4 border-b border-b-orange-500">{dateFormatter.format(new Date(workout.workout_created_at))}</td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+                <div className="flex justify-center mt-4 text-white montserrat-text text-1xl">
+                    <button
+                        onClick={prevPage}
+                        disabled={currentPage === 0}
+                        className={`px-4 py-2 rounded ${currentPage === 0 ? "cursor-not-allowed" : "text-white"}`}
+                    >
+                        Previous
+                    </button>
+                    <button
+                        onClick={nextPage}
+                        disabled={endIndex >= workouts.length}
+                        className={`px-4 py-2 rounded ${endIndex >= workouts.length ? "cursor-not-allowed" : "text-white"}`}
+                    >
+                        Next
+                    </button>
+                </div>
                 {selectedWorkout && (
                     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                         <div className="väribg text-white p-8 rounded max-w-4xl w-full text-center">
@@ -110,18 +171,60 @@ const AllWorkouts = () => {
                                 <div className="flex items-center justify-between text-black">
                                     <p className="poppins-text p-2 w-1/5  text-white font-bold">Exercise</p>
                                     <p className="poppins-text p-2 w-1/5  text-white font-bold">Description</p>
-                                    <p className="poppins-text p-2 w-1/5  text-white font-bold">Reps</p>
-                                    <p className="poppins-text p-2 w-1/5  text-white font-bold">Sets</p>
-                                    <p className="poppins-text p-2 w-1/5  text-white font-bold">Weight</p>
-                                </div>
-                                {editableExercises.map((exercise, index) => (
+                                    {isReadOnly ? (
+                                            <>
+                                            <p className="poppins-text p-2 w-1/5  text-white font-bold">Reps</p>
+                                            </>
+                                    ) : (
+                                            <>
+                                            <p className="poppins-text p-2 w-1/6  text-white font-bold">Reps Low</p>
+                                            <p className="poppins-text p-2 w-1/6  text-white font-bold">Reps Max</p>
+                                            </>
+                                    )
+                                            }
+                                            <p className="poppins-text p-2 w-1/5  text-white font-bold">Sets</p>
+                                            <p className="poppins-text p-2 w-1/5  text-white font-bold">Weight</p>
+                                            </div>
+                                        {
+                                            editableExercises.map((exercise, index) => (
                                     <li key={exercise.exercise_id}
                                         className="mt-2 flex items-center justify-between text-black">
                                         <h3 className="font-semibold text-orange-500 montserrat-text p-2 w-1/5">{exercise.exercise_name}</h3>
                                         <p className="poppins-text p-2 w-1/5 text-white">{exercise.exercise_description}</p>
-                                        <p className="poppins-text p-2 w-1/5 text-white">{exercise.low_reps} - {exercise.max_reps}</p>
-                                        <p className="poppins-text p-2 w-1/5 text-white">{exercise.sets}</p>
-                                        <p className="poppins-text p-2 w-1/5 text-white">{exercise.weight}</p>
+                                        {isReadOnly ? (
+                                            <>
+                                                <p className="poppins-text p-2 w-1/5 text-white">{exercise.low_reps} - {exercise.max_reps}</p>
+                                                <p className="poppins-text p-2 w-1/5 text-white">{exercise.sets}</p>
+                                                <p className="poppins-text p-2 w-1/5 text-white">{exercise.weight}</p>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <input
+                                                    type="number"
+                                                    value={exercise.low_reps}
+                                                    onChange={(e) => handleInputChange(index, 'low_reps', e.target.value)}
+                                                    className="poppins-text p-2 w-1/6 m-1 rounded text-black"
+                                                />
+                                                <input
+                                                    type="number"
+                                                    value={exercise.max_reps}
+                                                    onChange={(e) => handleInputChange(index, 'max_reps', e.target.value)}
+                                                    className="poppins-text p-2 w-1/6 m-1 rounded text-black"
+                                                />
+                                                <input
+                                                    type="number"
+                                                    value={exercise.sets}
+                                                    onChange={(e) => handleInputChange(index, 'sets', e.target.value)}
+                                                    className="poppins-text p-2 w-1/6 m-1 rounded text-black"
+                                                />
+                                                <input
+                                                    type="number"
+                                                    value={exercise.weight}
+                                                    onChange={(e) => handleInputChange(index, 'weight', e.target.value)}
+                                                    className="poppins-text p-2 w-1/6 m-1 rounded text-black"
+                                                />
+                                            </>
+                                        )}
                                     </li>
                                 ))}
                             </ul>
@@ -135,10 +238,12 @@ const AllWorkouts = () => {
                                     Close
                                 </button>
                             </div>
+                            {updateText && <p className="text-green-500 montserrat-text text-1xl">{updateText}</p>}
                         </div>
                     </div>
                 )}
             </div>
+        </>
     );
 };
 
