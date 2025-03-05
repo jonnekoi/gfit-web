@@ -22,7 +22,9 @@
   height: 100dvh;
 }
 
-
+.väribg {
+  background-color: #21263a;
+}
 .montserrat-text {
   font-family: "Montserrat", sans-serif;
   font-style: normal;

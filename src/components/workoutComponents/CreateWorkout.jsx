@@ -1,5 +1,5 @@
 "use client";
-import {useState, useEffect, use} from "react";
+import {useState, useEffect} from "react";
 
 const url = 'http://127.0.0.1:3000/v1';
 
@@ -15,6 +15,7 @@ const CreateWorkout = () => {
     const [workoutName, setWorkoutName] = useState("");
     const [error, setError] = useState("");
     const [errorSecond, setErrorSecond] = useState("");
+    const [workoutAddedText, setWorkoutAddedText] = useState("");
 
     const fetchExercises = async () => {
         try {
@@ -71,7 +72,29 @@ const CreateWorkout = () => {
             workoutName: workoutName,
             exercises: selectedExercises
         };
-        console.log(workoutDetails);
+
+        try {
+            const response = await fetch(url + '/workouts/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(workoutDetails),
+            });
+            const data = await response.json();
+            console.log(data);
+            if (response.status === 201) {
+                selectedExercises.forEach((exercise) => {
+                    setExercises((prevExercises) => [...prevExercises, exercise]);
+                });
+                setSelectedExercises([]);
+                setErrorSecond("");
+                setWorkoutAddedText("Workout added!");
+                setWorkoutName("");
+            }
+        } catch (error) {
+            console.error("Error adding workout:", error);
+        }
         setWorkoutName("");
     };
 
@@ -147,13 +170,14 @@ const CreateWorkout = () => {
                         </div>
                     ))}
                     <div className="flex flex-col mt-10 justify-center items-center max-h-20">
-                        <input className="border rounded p-2.5 m-2 w-full" onChange={(e)=> setWorkoutName(e.target.value)} type="text" name="workoutName"
+                        <input value={workoutName} className="border rounded p-2.5 m-2 w-full" onChange={(e)=> setWorkoutName(e.target.value)} type="text" name="workoutName"
                                placeholder="Enter name for workout..."/>
                         <button onClick={submitWorkout} type="submit"
                                 className="text-white font-bold p-2.5 m-2 w-full montserrat-text text-1xl border border-orange-500 rounded hover:border-orange-300">Add
                             Workout
                         </button>
                         {error && <p className="text-red-500 montserrat-text">{error}</p>}
+                        {workoutAddedText && <p className="text-green-500 montserrat-text">{workoutAddedText}</p>}
                     </div>
                 </form>
             </div>
