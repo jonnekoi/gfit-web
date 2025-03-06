@@ -9,6 +9,7 @@ import Meals from "./components/pages/Meals.jsx";
 import {AuthProvider} from "./context/AuthContext.jsx";
 import Login from "./components/pages/Login.jsx";
 import Register from "./components/pages/Register.jsx";
+import ClientDetails from "./components/customerComponents/ClientDetails.jsx";
 
 function App() {
     return (
@@ -23,6 +24,7 @@ function App() {
                         <Route path="profile" element={<Profile />} />
                         <Route path="login" element={<Login />} />
                         <Route path="register" element={<Register />} />
+                        <Route path="/clients/:clientId" element={<ClientDetails />} />
                     </Route>
                 </Routes>
             </Router>

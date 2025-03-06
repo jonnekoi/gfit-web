@@ -1,10 +1,13 @@
 import {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 const URL = "http://127.0.0.1:3000/v1";
 
 
 const AllClients = () => {
     const [clients, setClients] = useState(null);
+    const navigate = useNavigate();
+
 
     const fecthClients = async () => {
         try {
@@ -20,7 +23,6 @@ const AllClients = () => {
         fecthClients();
     }, []);
 
-    console.log(clients);
 
     if (!clients) {
         return <div>Loading...</div>
@@ -37,6 +39,7 @@ const AllClients = () => {
 
 
 
+
     return (
         <div className="w-full">
             <table className="w-full text-white montserrat-text">
@@ -49,11 +52,11 @@ const AllClients = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {clients.map((client, index) => (
-                    <tr key={index} className="cursor-pointer text-center">
+                {clients.map((client) => (
+                    <tr key={client.id} className="cursor-pointer text-center" onClick={() => navigate(`/clients/${client.id}`)}>
                         <td className="p-4 border-b border-b-orange-500">{client.FirstName} {client.LastName}</td>
                         <td className="p-4 border-b border-b-orange-500">{formatDate(client.birthday)}</td>
-                        <td className="p-4 border-b border-b-orange-500">{client.plan}</td>
+                        <td className="p-4 border-b border-b-orange-500">{client.plan_name}</td>
                         <td className="p-4 border-b border-orange-500">{client.status}</td>
                     </tr>
                 ))}
