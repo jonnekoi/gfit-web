@@ -1,7 +1,6 @@
 import {useState} from "react";
 import AllMeals from "../mealComponents/AllMeals.jsx";
 import CreateMeal from "../mealComponents/CreateMeal.jsx";
-import AddIngredient from "../mealComponents/AddIngredient.jsx";
 
 const Meals = () => {
     const [activeSection, setActiveSection] = useState(null);
@@ -12,10 +11,10 @@ const Meals = () => {
     };
 
     return (
-        <div className="">
+        <div className="w-full justify-center flex flex-col items-center">
             <nav className="space-x-5 mt-5">
-                {["All Meals", "Craft Meal", "Add Ingredient"].map((section) => (
-                    section === "Add Ingredient" ? (
+                {["All Meals", "Craft Meal"].map((section) => (
+                    section === "Craft Meal" ? (
                         <button
                             key={section}
                             className="text-white font-bold bg-orange-500 montserrat-text text-1xl border min-w-48 border-orange-500 p-2 rounded"
@@ -33,7 +32,6 @@ const Meals = () => {
             <div className="flex justify-center mt-5">
                 {activeSection === "All Meals" && (<AllMeals/>)}
                 {activeSection === "Craft Meal" && (<CreateMeal/>)}
-                {activeSection === "Add Ingredient" && (<AddIngredient/>)}
             </div>
         </div>
     )
