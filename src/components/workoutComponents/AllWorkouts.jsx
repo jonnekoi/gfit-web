@@ -172,18 +172,19 @@ const AllWorkouts = () => {
                                     <p className="poppins-text p-2 w-1/5  text-white font-bold">Exercise</p>
                                     <p className="poppins-text p-2 w-1/5  text-white font-bold">Description</p>
                                     {isReadOnly ? (
-                                            <>
+                                        <>
                                             <p className="poppins-text p-2 w-1/5  text-white font-bold">Reps</p>
-                                            </>
-                                    ) : (
-                                            <>
-                                            <p className="poppins-text p-2 w-1/6  text-white font-bold">Reps Low</p>
-                                            <p className="poppins-text p-2 w-1/6  text-white font-bold">Reps Max</p>
-                                            </>
-                                    )
-                                            }
                                             <p className="poppins-text p-2 w-1/5  text-white font-bold">Sets</p>
                                             <p className="poppins-text p-2 w-1/5  text-white font-bold">Weight</p>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <p className="poppins-text p-2 w-1/6  text-white font-bold">Reps Low</p>
+                                            <p className="poppins-text p-2 w-1/6  text-white font-bold">Reps Max</p>
+                                            <p className="poppins-text p-2 w-1/6  text-white font-bold">Sets</p>
+                                            <p className="poppins-text p-2 w-1/6  text-white font-bold">Weight</p>
+                                        </>
+                                    )}
                                             </div>
                                         {
                                             editableExercises.map((exercise, index) => (

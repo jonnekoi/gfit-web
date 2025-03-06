@@ -18,13 +18,13 @@ const Workouts = () => {
                     section === "Craft Workouts" ? (
                         <button
                             key={section}
-                            className="text-white font-bold bg-orange-500 montserrat-text text-1xl border border-orange-500 p-2 rounded min-w-56"
+                            className="text-white font-bold bg-orange-500 montserrat-text text-1xl border border-orange-500 p-2 rounded min-w-48"
                             onClick={() => handleSectionClick(section)}>{section}
                         </button>
                     ) : (
                         <button
                             key={section}
-                            className="text-white font-bold montserrat-text text-1xl border border-orange-500 p-2 rounded hover:border-orange-300 min-w-56"
+                            className="text-white font-bold montserrat-text text-1xl border border-orange-500 p-2 rounded min-w-48"
                             onClick={() => handleSectionClick(section)}>{section}
                         </button>
                     )

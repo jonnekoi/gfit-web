@@ -15,17 +15,17 @@ const Customers = () => {
     return (
         <div className="">
             <nav className="space-x-5 mt-5">
-                {["All Clients", "New Clients", "New Reports", "Ending Clients", "Add Client",].map((section) => (
+                {["All Clients", "New Clients", "Pending Clients", "New Reports", "Ending Clients", "Add Client",].map((section) => (
                     section === "Add Client" ? (
                         <button
                         key={section}
-                        className="text-white font-bold bg-orange-500 montserrat-text text-1xl border min-w-56 border-orange-500 p-2 rounded"
+                        className="text-white font-bold bg-orange-500 montserrat-text text-1xl border min-w-48 border-orange-500 p-2 rounded"
                         onClick={() => handleSectionClick(section)}>{section}
                     </button>
                         ) : (
                 <button
                     key={section}
-                    className="text-white font-bold montserrat-text text-1xl border border-orange-500 p-2 rounded min-w-56 hover:border-orange-300"
+                    className="text-white font-bold montserrat-text text-1xl border border-orange-500 p-2 rounded min-w-48 hover:border-orange-300"
                     onClick={() => handleSectionClick(section)}>{section}
                 </button>
                 )))}

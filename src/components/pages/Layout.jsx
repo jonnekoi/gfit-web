@@ -28,12 +28,12 @@ const Layout = () => {
                 </div>
                 {isLoggedIn ? (
                     <>
-                        <div className="space-x-5">
-                            <Link to="/" className="text-white montserrat-text text-2xl p-2">Home</Link>
-                            <Link to="/customers" className="text-white montserrat-text text-2xl p-2">Customers</Link>
-                            <Link to="/workouts" className="text-white montserrat-text text-2xl p-2">Workouts</Link>
-                            <Link to="/meals" className="text-white montserrat-text text-2xl p-2">Meals</Link>
-                            <button onClick={handleLogout} className="text-white font-bold montserrat-text text-2xl p-2">Log out</button>
+                        <div className="space-x-5 text-orange-500">
+                            <Link to="/" className="text-white font-semibold montserrat-text text-1xl p-2">Home</Link>
+                            <Link to="/customers" className="text-white font-semibold montserrat-text text-1xl p-2">Customers</Link>
+                            <Link to="/workouts" className="text-white font-semibold montserrat-text text-1xl p-2">Workouts</Link>
+                            <Link to="/meals" className="text-white font-semibold montserrat-text text-1xl p-2">Meals</Link>
+                            <button onClick={handleLogout} className="text-orange-500 font-semibold montserrat-text text-1xl p-2">Log out</button>
                         </div>
                     </>
                 ) : (
