@@ -1,8 +1,8 @@
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";;
-import ClientWorkouts from "./clientPage/ClientWorkouts.jsx";
-import ClientOverview from "./clientPage/ClientOverview.jsx";
-import ClientMeals from "./clientPage/ClientMeals.jsx";
+import ClientWorkouts from "./ClientWorkouts.jsx";
+import ClientOverview from "./ClientOverview.jsx";
+import ClientMeals from "./ClientMeals.jsx";
 
 const url = "http://localhost:3000/v1"
 

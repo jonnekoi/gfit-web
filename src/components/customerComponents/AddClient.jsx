@@ -5,6 +5,7 @@ const URL = 'http://localhost:3000/v1';
 
 const AddClient = () => {
     const [clientText, setClientText] = useState('');
+    const [errorText, setErrorText] = useState('');
 
 
     const handleAddClient = async (e) => {
@@ -28,9 +29,12 @@ const AddClient = () => {
             body: JSON.stringify(client)
         };
         const response = await fetch(URL + '/clients/add', options);
-        const data = await response.json();
-        if (data){
+        if (response.status === 201){
+            setErrorText("");
             setClientText('Client Added');
+        } else {
+            setClientText("");
+            setErrorText('Client not added');
         }
     }
 
@@ -90,6 +94,7 @@ const AddClient = () => {
             </form>
             <div className="flex justify-center mt-5">
                 {clientText && <p className="montserrat-text text-green-500 text-1xl">{clientText}</p>}
+                {errorText && <p className="montserrat-text text-red-500 text-1xl">{errorText}</p>}
             </div>
         </div>
     )

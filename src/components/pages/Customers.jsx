@@ -8,7 +8,7 @@ const Customers = () => {
     const [activeSection, setActiveSection] = useState("All Clients");
 
     const handleSectionClick = (section) => {
-        setActiveSection((prevSection) => (prevSection === section ? null : section));
+        setActiveSection((prevSection) => (prevSection === section ? prevSection : section));
     };
 
     return (
