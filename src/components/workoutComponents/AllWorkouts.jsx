@@ -122,7 +122,7 @@ const AllWorkouts = () => {
 
     return (
         <>
-            <div className="w-full">
+            <div className="w-2/3">
                 <table className="w-full text-white montserrat-text">
                     <thead>
                     <tr className="border-b border-b-orange-500 text-2xl font-bold text-center">
