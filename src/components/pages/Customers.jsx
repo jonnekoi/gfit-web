@@ -2,20 +2,19 @@ import {useState} from "react";
 import AllClients from "../customerComponents/AllClients.jsx";
 import NewClients from "../customerComponents/NewClients.jsx";
 import NewReports from "../customerComponents/NewReports.jsx";
-import EndingClients from "../customerComponents/EndingClients.jsx";
 import AddClient from "../customerComponents/AddClient.jsx";
 
 const Customers = () => {
-    const [activeSection, setActiveSection] = useState(null);
+    const [activeSection, setActiveSection] = useState("All Clients");
 
     const handleSectionClick = (section) => {
         setActiveSection((prevSection) => (prevSection === section ? null : section));
     };
 
     return (
-        <div className="">
+        <div className="w-full justify-center flex flex-col items-center">
             <nav className="space-x-5 mt-5">
-                {["All Clients", "New Clients", "Pending Clients", "New Reports", "Ending Clients", "Add Client",].map((section) => (
+                {["All Clients", "New Clients", "Pending Clients", "New Reports", "Add Client",].map((section) => (
                     section === "Add Client" ? (
                         <button
                         key={section}
@@ -30,11 +29,10 @@ const Customers = () => {
                 </button>
                 )))}
                 </nav>
-            <div className="flex justify-center mt-5">
+            <div className="flex w-2/3 justify-center mt-5">
                 {activeSection === "All Clients" && (<AllClients/>)}
                 {activeSection === "New Clients" && (<NewClients/>)}
                 {activeSection === "New Reports" && (<NewReports/>)}
-                {activeSection === "Ending Clients" && (<EndingClients/>)}
                 {activeSection === "Add Client" && (<AddClient/>)}
             </div>
         </div>

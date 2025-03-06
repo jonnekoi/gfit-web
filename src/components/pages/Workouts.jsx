@@ -12,7 +12,7 @@ const Workouts = () => {
     };
 
     return (
-        <div className="flex w-full flex-col items-center">
+        <div className="w-full justify-center flex flex-col items-center">
             <nav className="space-x-5 mt-5">
                 {["All Workouts", "Data", "Craft Workouts"].map((section) => (
                     section === "Craft Workouts" ? (
@@ -30,7 +30,7 @@ const Workouts = () => {
                     )
                 ))}
             </nav>
-            <div className="flex justify-center mt-5 w-full">
+            <div className="flex w-2/3 justify-center mt-5">
                 {activeSection === "All Workouts" && (<AllWorkouts/>)}
                 {activeSection === "Craft Workouts" && (<CreateWorkout/>)}
                 {activeSection === "Data" && (<WorkOutData/>)}
