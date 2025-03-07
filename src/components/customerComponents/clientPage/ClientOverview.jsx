@@ -10,6 +10,7 @@ import {
     Tooltip,
     ResponsiveContainer, CartesianGrid,
 } from 'recharts';
+import formatDate from "../../../scripts/formatDate";
 
 const url = 'http://127.0.0.1:3000/v1';
 
@@ -63,15 +64,6 @@ const ClientOverview = ({ client }) => {
     const minWeight = Math.floor(Math.min(...data.map(d => d.weight)) / 5) * 5;
     const maxWeight = Math.ceil(Math.max(...data.map(d => d.weight)) / 5) * 5;
 
-
-    const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        const day = String(date.getDate());
-        const month = String(date.getMonth() + 1);
-        const year = date.getFullYear();
-
-        return `${day} / ${month} / ${year}`;
-    };
 
     const weight = clientData.weight;
     const targetWeight = clientData.targetWeight;
