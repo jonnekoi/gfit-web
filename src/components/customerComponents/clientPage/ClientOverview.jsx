@@ -66,8 +66,8 @@ const ClientOverview = ({ client }) => {
 
     const formatDate = (dateString) => {
         const date = new Date(dateString);
-        const day = String(date.getDate()).padStart(2, '0');
-        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate());
+        const month = String(date.getMonth() + 1);
         const year = date.getFullYear();
 
         return `${day} / ${month} / ${year}`;
@@ -104,8 +104,12 @@ const ClientOverview = ({ client }) => {
                 </div>
             </div>
             <div className={`${notWeightData ? 'col-span-1' : 'col-span-2'} mt-5 items-center`}>
+                {!notWeightData && (
+                    <h1 className="text-2xl font-bold text-center text-white montserrat-text">Weight Progress</h1>
+                )}
                 {notWeightData ? (
-                    <div className="col-span-2 border h-full flex items-center justify-center rounded p-5 text-center text-white">
+                    <div
+                        className="col-span-2 border h-full flex items-center justify-center rounded p-5 text-center text-white">
                         <FontAwesomeIcon icon={faTriangleExclamation} className="text-6xl" title="No data"/>
                     </div>
                 ) : (
@@ -122,10 +126,11 @@ const ClientOverview = ({ client }) => {
                                 bottom: 0,
                             }}
                         >
-                            <XAxis dataKey="date" tick={{ fill: "white", dy: 10, dx: 15 }} stroke="none" interval={5}/>
-                            <YAxis tickCount={6} tick={{ fill: "white" }} stroke="none" domain={[minWeight, maxWeight]}/>
-                            <CartesianGrid strokeDasharray="" horizontal={true} vertical={false} stroke="#ffff" strokeOpacity={0.2}/>
-                            <Tooltip content={<CustomTooltip />} />
+                            <XAxis dataKey="date" tick={{fill: "white", dy: 10, dx: 15}} stroke="none" interval={5}/>
+                            <YAxis tickCount={6} tick={{fill: "white"}} stroke="none" domain={[minWeight, maxWeight]}/>
+                            <CartesianGrid strokeDasharray="" horizontal={true} vertical={false} stroke="#ffff"
+                                           strokeOpacity={0.2}/>
+                            <Tooltip content={<CustomTooltip/>}/>
                             <Line type="monotone" dataKey="weight" stroke="#ffff" fill="#ffff"/>
                             <ReferenceLine y={targetWeight} stroke="#ea580c" strokeDasharray="6 6"/>
                         </LineChart>

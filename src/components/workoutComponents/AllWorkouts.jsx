@@ -98,7 +98,7 @@ const AllWorkouts = () => {
 
 
 
-    if (!workouts) return <p>Loading...</p>;
+    if (!workouts) return <div></div>;
 
     const dateFormatter = new Intl.DateTimeFormat("en-FI", {
         day: "numeric",
