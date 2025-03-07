@@ -12,7 +12,7 @@ const ClientDetails = () => {
     const [activeSection, setActiveSection] = useState("Overview");
 
     const handleSectionClick = (section) => {
-        setActiveSection((prevSection) => (prevSection === section ? null : section));
+        setActiveSection((prevSection) => (prevSection === section ? prevSection : section));
         console.log(activeSection);
     };
 

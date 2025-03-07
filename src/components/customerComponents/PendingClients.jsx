@@ -2,8 +2,8 @@ import { useNavigate } from "react-router-dom";
 import useFetchClients from "../../hooks/useFetchClients";
 import {useState} from "react";
 
-const AllClients = () => {
-    const clients = useFetchClients("all");
+const PendingClients = () => {
+    const clients = useFetchClients("pending");
     const navigate = useNavigate();
     const [currentPage, setCurrentPage] = useState(0);
     const rowsPerPage = 8;
@@ -91,4 +91,4 @@ const AllClients = () => {
     );
 };
 
-export default AllClients;
+export default PendingClients;

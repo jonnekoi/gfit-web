@@ -1,6 +1,6 @@
 import {useState} from "react";
 import AllClients from "../customerComponents/AllClients.jsx";
-import NewClients from "../customerComponents/NewClients.jsx";
+import PendingClients from "../customerComponents/PendingClients.jsx";
 import NewReports from "../customerComponents/NewReports.jsx";
 import AddClient from "../customerComponents/AddClient.jsx";
 
@@ -14,7 +14,7 @@ const Customers = () => {
     return (
         <div className="w-full justify-center flex flex-col items-center">
             <nav className="space-x-5 mt-5">
-                {["All Clients", "New Clients", "Pending Clients", "New Reports", "Add Client",].map((section) => (
+                {["All Clients", "Pending Clients", "New Reports", "Add Client",].map((section) => (
                     section === "Add Client" ? (
                         <button
                         key={section}
@@ -31,7 +31,7 @@ const Customers = () => {
                 </nav>
             <div className="flex w-2/3 justify-center mt-5">
                 {activeSection === "All Clients" && (<AllClients/>)}
-                {activeSection === "New Clients" && (<NewClients/>)}
+                {activeSection === "Pending Clients" && (<PendingClients/>)}
                 {activeSection === "New Reports" && (<NewReports/>)}
                 {activeSection === "Add Client" && (<AddClient/>)}
             </div>
