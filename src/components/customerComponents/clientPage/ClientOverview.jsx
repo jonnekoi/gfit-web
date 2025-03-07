@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
+import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from "react";
 import {
     LineChart,
@@ -10,7 +10,6 @@ import {
     Tooltip,
     ResponsiveContainer, CartesianGrid,
 } from 'recharts';
-import formatDate from "../../../scripts/formatDate";
 
 const url = 'http://127.0.0.1:3000/v1';
 
@@ -44,18 +43,6 @@ const ClientOverview = ({ client }) => {
 
     const sortedWeights = clientWeights.sort((a, b) => new Date(a.date) - new Date(b.date));
 
-    let lastWeight = null;
-    let differenceWeight = null;
-    let weightTargetDifference = null;
-    let weightDifferenceAmount = null;
-
-    if (sortedWeights.length > 0) {
-        lastWeight = sortedWeights[sortedWeights.length - 1].weight;
-        differenceWeight = lastWeight - clientData.targetWeight;
-        weightTargetDifference = Math.abs(differenceWeight).toFixed(2);
-        weightDifferenceAmount = (differenceWeight > 0 ? "+ " : "- ") + weightTargetDifference + " kg";
-    }
-
     const data = sortedWeights.map(weight => ({
         date: new Date(weight.date).toLocaleDateString(),
         weight: parseFloat(weight.weight)
@@ -65,7 +52,6 @@ const ClientOverview = ({ client }) => {
     const maxWeight = Math.ceil(Math.max(...data.map(d => d.weight)) / 5) * 5;
 
 
-    const weight = clientData.weight;
     const targetWeight = clientData.targetWeight;
 
     const CustomTooltip = ({ active, payload }) => {
@@ -83,19 +69,8 @@ const ClientOverview = ({ client }) => {
 
 
     return (
-        <div className={`grid ${notWeightData ? 'grid-cols-3' : 'grid-cols-4'} space-x-5`}>
-            <div className="mt-5">
-                <div className="text-white montserrat-text text-center text-2xl border rounded p-5">
-                    <FontAwesomeIcon className="text-white text-8xl" icon={faUser}/>
-                    <p className="font-bold text-5xl p-5">{clientData.FirstName} {clientData.LastName}</p>
-                    <p className="p-2">{formatDate(clientData.birthday)}</p>
-                    <p className="p-2"><strong>Start</strong> {weight} kg</p>
-                    <p className="p-2"><strong>Target</strong> {targetWeight} kg</p>
-                    <p><strong>{weightDifferenceAmount}</strong></p>
-                    <p className="p-2 font-semibold text-orange-500">{clientData.plan_name}</p>
-                </div>
-            </div>
-            <div className={`${notWeightData ? 'col-span-1' : 'col-span-2'} mt-5 items-center`}>
+        <div className="w-full grid space-x-5 grid-cols-3">
+            <div className=" mt-5 items-center">
                 {!notWeightData && (
                     <h1 className="text-2xl font-bold text-center text-white montserrat-text">Weight Progress</h1>
                 )}
@@ -128,16 +103,6 @@ const ClientOverview = ({ client }) => {
                         </LineChart>
                     </ResponsiveContainer>
                 )}
-            </div>
-            <div className="mt-5">
-                <div className="text-white montserrat-text text-center text-2xl border rounded p-5">
-                    <FontAwesomeIcon className="text-white text-8xl " icon={faUser}/>
-                    <p className="font-bold text-5xl p-5">{clientData.FirstName} {clientData.LastName}</p>
-                    <p className="p-2">{formatDate(clientData.birthday)}</p>
-                    <p className="p-2"><strong>Current:</strong> {weight} kg</p>
-                    <p className="p-2"><strong>Target</strong> {targetWeight} kg</p>
-                    <p className="p-2 font-semibold text-orange-500">{clientData.plan_name}</p>
-                </div>
             </div>
         </div>
     )

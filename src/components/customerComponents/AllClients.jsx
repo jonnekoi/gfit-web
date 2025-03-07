@@ -2,8 +2,10 @@ import { useNavigate } from "react-router-dom";
 import useFetchClients from "../../hooks/useFetchClients";
 import { useState, useEffect } from "react";
 import formatDate from "../../scripts/formatDate";
+import { faSort } from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-const AllClients = () => {
+const AllClients = ({ searchQuery }) => {
     const clientsData = useFetchClients("all");
     const [clients, setClients] = useState([]);
     const navigate = useNavigate();
@@ -20,9 +22,13 @@ const AllClients = () => {
         return <div>Loading...</div>;
     }
 
+    const filteredClients = clients.filter(client =>
+        `${client.FirstName} ${client.LastName}`.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
     const startIndex = currentPage * rowsPerPage;
     const endIndex = startIndex + rowsPerPage;
-    const clientsVisible = clients.slice(startIndex, endIndex);
+    const clientsVisible = filteredClients.slice(startIndex, endIndex);
 
     const nextPage = () => {
         if (endIndex < clients.length) setCurrentPage((prev) => prev + 1);
@@ -53,10 +59,10 @@ const AllClients = () => {
             <table className="w-full text-white montserrat-text">
                 <thead>
                     <tr className="border-b border-b-orange-500 text-2xl font-bold text-center">
-                        <th onClick={sortClients("FirstName")} className="p-5 cursor-pointer">Name</th>
-                        <th onClick={sortClients("birthday")} className="p-5 cursor-pointer">Birthday</th>
-                        <th onClick={sortClients("plan_name")} className="p-5 cursor-pointer">Plan</th>
-                        <th onClick={sortClients("status")} className="p-5 cursor-pointer">Status</th>
+                        <th onClick={sortClients("FirstName")} className="p-5 cursor-pointer">Name <FontAwesomeIcon icon={faSort} className="text-1" /></th>
+                        <th onClick={sortClients("birthday")} className="p-5 cursor-pointer">Birthday <FontAwesomeIcon icon={faSort} className="text-1" /></th>
+                        <th onClick={sortClients("plan_name")} className="p-5 cursor-pointer">Plan <FontAwesomeIcon icon={faSort} className="text-1" /></th>
+                        <th onClick={sortClients("status")} className="p-5 cursor-pointer">Status <FontAwesomeIcon icon={faSort} className="text-1" /></th>
                     </tr>
                 </thead>
                 <tbody>

@@ -2,9 +2,11 @@ import { useNavigate } from "react-router-dom";
 import useFetchClients from "../../hooks/useFetchClients";
 import {useState} from "react";
 import formatDate from "../../scripts/formatDate";
+import {faSort} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
-const PendingClients = () => {
+const PendingClients = ({ searchQuery }) => {
     const clients = useFetchClients("pending");
     const navigate = useNavigate();
     const [currentPage, setCurrentPage] = useState(0);
@@ -14,9 +16,13 @@ const PendingClients = () => {
         return <div></div>;
     }
 
+    const filteredClients = clients.filter(client =>
+        `${client.FirstName} ${client.LastName}`.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
     const startIndex = currentPage * rowsPerPage;
     const endIndex = startIndex + rowsPerPage;
-    const clientsVisible = clients.slice(startIndex, endIndex);
+    const clientsVisible = filteredClients.slice(startIndex, endIndex);
 
     const nextPage = () => {
         if (endIndex < clients.length) setCurrentPage((prev) => prev + 1);
@@ -31,10 +37,10 @@ const PendingClients = () => {
             <table className="w-full text-white montserrat-text">
                 <thead>
                 <tr className="border-b border-b-orange-500 text-2xl font-bold text-center">
-                    <th className="p-5">Name</th>
-                    <th className="p-5">Birthday</th>
-                    <th className="p-5">Plan</th>
-                    <th className="p-5">Status</th>
+                    <th className="p-5 cursor-pointer">Name <FontAwesomeIcon icon={faSort} className="text-1" /></th>
+                    <th className="p-5 cursor-pointer">Birthday <FontAwesomeIcon icon={faSort} className="text-1" /></th>
+                    <th className="p-5 cursor-pointer">Plan <FontAwesomeIcon icon={faSort} className="text-1" /></th>
+                    <th className="p-5 cursor-pointer">Status <FontAwesomeIcon icon={faSort} className="text-1" /></th>
                 </tr>
                 </thead>
                 <tbody>

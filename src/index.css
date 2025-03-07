@@ -3,6 +3,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Farsan&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Michroma&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&display=swap');
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,7 +17,7 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  background-color: #21263a;
+  background-color: #141f37;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -22,8 +26,14 @@
   height: 100dvh;
 }
 
+.bruno-ace-sc-regular {
+  font-family: "Bruno Ace SC", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 .väribg {
-  background-color: #21263a;
+  background-color: #0f172a;
 }
 .montserrat-text {
   font-family: "Montserrat", sans-serif;
@@ -38,6 +48,13 @@
   font-family: 'Poppins', sans-serif;
 }
 
+.michroma-regular {
+  font-family: "Michroma", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
 .code-text {
   font-family: 'Fira Code', monospace;
   font-weight: 400;
@@ -49,3 +66,26 @@
   font-weight: 400;
   font-style: normal;
 }
+
+.underline-hover {
+  position: relative;
+  display: inline-block;
+}
+
+.underline-hover::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background-color: white;
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+}
+
+.underline-hover:hover::after {
+  width: 100%;
+}
+
+

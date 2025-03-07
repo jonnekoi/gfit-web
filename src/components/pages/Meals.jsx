@@ -11,7 +11,7 @@ const Meals = () => {
     };
 
     return (
-        <div className="w-full justify-center flex flex-col items-center">
+        <div className="w-full justify-center flex flex-col items-center border-t">
             <nav className="space-x-5 mt-5">
                 {["All Meals", "Craft Meal"].map((section) => (
                     section === "Craft Meal" ? (

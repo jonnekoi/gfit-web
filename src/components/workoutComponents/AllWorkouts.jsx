@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import formatDate from "../../scripts/formatDate";
+import {faSort} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
 const URL = "http://127.0.0.1:3000/v1";
@@ -122,10 +124,10 @@ const AllWorkouts = () => {
                 <table className="w-full text-white montserrat-text">
                     <thead>
                     <tr className="border-b border-b-orange-500 text-2xl font-bold text-center">
-                        <th className="p-5">Name</th>
-                        <th className="p-5">Type</th>
-                        <th className="p-5">Level</th>
-                        <th className="p-5">Crafted</th>
+                        <th className="p-5">Name <FontAwesomeIcon icon={faSort} className="text-1" /></th>
+                        <th className="p-5">Type <FontAwesomeIcon icon={faSort} className="text-1" /></th>
+                        <th className="p-5">Level <FontAwesomeIcon icon={faSort} className="text-1" /></th>
+                        <th className="p-5">Crafted <FontAwesomeIcon icon={faSort} className="text-1" /></th>
                     </tr>
                     </thead>
                     <tbody>
