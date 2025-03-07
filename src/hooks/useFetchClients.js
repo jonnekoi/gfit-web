@@ -17,7 +17,7 @@ const useFetchClients = (type) => {
 
     useEffect(() => {
         fetchClients();
-    }, [type]);
+    },[type] );
 
     return clients;
 };

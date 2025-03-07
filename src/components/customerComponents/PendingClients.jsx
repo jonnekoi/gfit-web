@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import useFetchClients from "../../hooks/useFetchClients";
 import {useState} from "react";
+import formatDate from "../../scripts/formatDate";
+
 
 const PendingClients = () => {
     const clients = useFetchClients("pending");
@@ -11,15 +13,6 @@ const PendingClients = () => {
     if (!clients) {
         return <div></div>;
     }
-
-    const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        const day = String(date.getDate());
-        const month = String(date.getMonth() + 1);
-        const year = date.getFullYear();
-
-        return `${day} / ${month} / ${year}`;
-    };
 
     const startIndex = currentPage * rowsPerPage;
     const endIndex = startIndex + rowsPerPage;

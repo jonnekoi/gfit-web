@@ -1,25 +1,24 @@
 import { useNavigate } from "react-router-dom";
 import useFetchClients from "../../hooks/useFetchClients";
-import {useState} from "react";
+import { useState, useEffect } from "react";
+import formatDate from "../../scripts/formatDate";
 
 const AllClients = () => {
-    const clients = useFetchClients("all");
+    const clientsData = useFetchClients("all");
+    const [clients, setClients] = useState([]);
     const navigate = useNavigate();
     const [currentPage, setCurrentPage] = useState(0);
     const rowsPerPage = 8;
 
-    if (!clients) {
-        return <div></div>;
+    useEffect(() => {
+        if (clientsData) {
+            setClients(clientsData);
+        }
+    }, [clientsData]);
+
+    if (!clientsData) {
+        return <div>Loading...</div>;
     }
-
-    const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        const day = String(date.getDate());
-        const month = String(date.getMonth() + 1);
-        const year = date.getFullYear();
-
-        return `${day} / ${month} / ${year}`;
-    };
 
     const startIndex = currentPage * rowsPerPage;
     const endIndex = startIndex + rowsPerPage;
@@ -33,16 +32,32 @@ const AllClients = () => {
         if (currentPage > 0) setCurrentPage((prev) => prev - 1);
     };
 
+    const sortClients = (sortBy) => {
+        return () => {
+            const sorted = [...clients].sort((a, b) => {
+                if (a[sortBy] < b[sortBy]) {
+                    return -1;
+                }
+                if (a[sortBy] > b[sortBy]) {
+                    return 1;
+                }
+                return 0;
+            });
+            setClients(sorted);
+            setCurrentPage(0);
+        };
+    };
+
     return (
         <div className="w-full">
             <table className="w-full text-white montserrat-text">
                 <thead>
-                <tr className="border-b border-b-orange-500 text-2xl font-bold text-center">
-                    <th className="p-5">Name</th>
-                    <th className="p-5">Birthday</th>
-                    <th className="p-5">Plan</th>
-                    <th className="p-5">Status</th>
-                </tr>
+                    <tr className="border-b border-b-orange-500 text-2xl font-bold text-center">
+                        <th onClick={sortClients("FirstName")} className="p-5 cursor-pointer">Name</th>
+                        <th onClick={sortClients("birthday")} className="p-5 cursor-pointer">Birthday</th>
+                        <th onClick={sortClients("plan_name")} className="p-5 cursor-pointer">Plan</th>
+                        <th onClick={sortClients("status")} className="p-5 cursor-pointer">Status</th>
+                    </tr>
                 </thead>
                 <tbody>
                 {clientsVisible.map((client) => (

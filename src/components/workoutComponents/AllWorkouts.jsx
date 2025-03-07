@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import formatDate from "../../scripts/formatDate";
+
 
 const URL = "http://127.0.0.1:3000/v1";
 
@@ -10,6 +12,7 @@ const AllWorkouts = () => {
     const [currentPage, setCurrentPage] = useState(0);
     const rowsPerPage = 8;
     const [updateText, setUpdateText] = useState("");
+
 
 
     const fetchWorkouts = async () => {
@@ -100,13 +103,6 @@ const AllWorkouts = () => {
 
     if (!workouts) return <div></div>;
 
-    const dateFormatter = new Intl.DateTimeFormat("en-FI", {
-        day: "numeric",
-        month: "numeric",
-        year: "numeric",
-        hour: "numeric",
-        minute: "numeric",
-    });
 
     const startIndex = currentPage * rowsPerPage;
     const endIndex = startIndex + rowsPerPage;
@@ -139,7 +135,7 @@ const AllWorkouts = () => {
                             <td className="p-4 border-b border-b-orange-500">{workout.workout_name}</td>
                             <td className="p-4 border-b border-b-orange-500">{workout.workout_type}</td>
                             <td className="p-4 border-b border-b-orange-500">{workout.workout_level}</td>
-                            <td className="p-4 border-b border-b-orange-500">{dateFormatter.format(new Date(workout.workout_created_at))}</td>
+                            <td className="p-4 border-b border-b-orange-500">{formatDate(workout.workout_created_at)}</td>
                         </tr>
                     ))}
                     </tbody>
