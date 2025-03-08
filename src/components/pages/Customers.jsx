@@ -29,7 +29,7 @@ const Customers = () => {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                 /></nav>
-            <div className="flex w-2/3 justify-center mt-5">
+            <div className="flex w-2/3 mt-5">
                 {activeSection === "All Clients" && (<AllClients searchQuery={searchQuery}/>)}
                 {activeSection === "Pending Clients" && (<PendingClients searchQuery={searchQuery}/>)}
                 {activeSection === "New Reports" && (<NewReports/>)}

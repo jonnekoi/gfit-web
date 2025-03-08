@@ -58,7 +58,7 @@ const AllClients = ({ searchQuery }) => {
         <div className="w-full">
             <table className="w-full text-white montserrat-text">
                 <thead>
-                    <tr className="border-b border-b-orange-500 text-2xl font-bold text-center">
+                    <tr className="border-b border-b-orange-500 text-2xl font-bold">
                         <th onClick={sortClients("FirstName")} className="p-5 cursor-pointer">Name <FontAwesomeIcon icon={faSort} className="text-1" /></th>
                         <th onClick={sortClients("birthday")} className="p-5 cursor-pointer">Birthday <FontAwesomeIcon icon={faSort} className="text-1" /></th>
                         <th onClick={sortClients("plan_name")} className="p-5 cursor-pointer">Plan <FontAwesomeIcon icon={faSort} className="text-1" /></th>

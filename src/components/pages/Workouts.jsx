@@ -22,7 +22,7 @@ const Workouts = () => {
                     )
                 )}
             </nav>
-            <div className="flex w-full justify-center mt-5">
+            <div className="flex w-2/3 mt-5">
                 {activeSection === "All Workouts" && (<AllWorkouts/>)}
                 {activeSection === "Craft Workouts" && (<CreateWorkout/>)}
                 {activeSection === "Data" && (<WorkOutData/>)}
