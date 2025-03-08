@@ -207,8 +207,7 @@ const AllWorkouts = () => {
                                         </>
                                     )}
                                             </div>
-                                        {
-                                            editableExercises.map((exercise, index) => (
+                                {editableExercises.map((exercise, index) => (
                                     <li key={exercise.exercise_id}
                                         className="mb-4 flex items-center justify-between text-black">
                                         <h3 className="font-semibold text-orange-500 montserrat-text p-2 w-1/5">{exercise.exercise_name}</h3>

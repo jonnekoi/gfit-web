@@ -16,7 +16,7 @@ const Meals = () => {
                 {["All Meals", "Craft Meals"].map((section) => (
                         <button
                             key={section}
-                            className="text-white font-bold bg-orange-500 text-1xl border min-w-48 border-orange-500 p-2 rounded"
+                            className="text-white font-bold bg-orange-500 montserrat-text text-1xl border border-orange-500 p-2 rounded min-w-48"
                             onClick={() => handleSectionClick(section)}>{section}
                         </button>
                     )
