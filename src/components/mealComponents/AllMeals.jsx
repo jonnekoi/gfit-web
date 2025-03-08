@@ -1,7 +1,6 @@
 import {useEffect, useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSort} from "@fortawesome/free-solid-svg-icons";
-import formatDate from "../../scripts/formatDate.js";
 
 const URL = "http://127.0.0.1:3000/v1";
 
@@ -15,7 +14,7 @@ const AllMeals = () => {
 
 
 
-    const fecthMeals = async () => {
+    const fetchMeals = async () => {
         const fetchOptions = {
             method: "GET",
             headers: {
@@ -33,7 +32,7 @@ const AllMeals = () => {
     };
 
     useEffect(() => {
-        fecthMeals();
+        fetchMeals();
     }, []);
 
     if (!meals) {

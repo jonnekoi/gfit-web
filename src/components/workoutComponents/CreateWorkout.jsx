@@ -5,6 +5,8 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 const url = 'http://127.0.0.1:3000/v1';
 
+// TODO: THIS PAGE NEEDS TO BROKEN DOWN TO SMALLER PARTS TO BE MORE MAINTAINABLE
+
 const CreateWorkout = () => {
     const [exercises, setExercises] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
@@ -60,7 +62,7 @@ const CreateWorkout = () => {
 
     const addToWorkout = () => {
         if (!reps_max || !reps_low || !weight) {
-            setErrorSecond("Check reps and weight");
+            setErrorSecond("Check reps, sets and weight");
             return;
         }
         if (currentExercise) {
