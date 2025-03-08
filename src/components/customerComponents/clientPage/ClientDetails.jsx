@@ -130,13 +130,11 @@ const ClientDetails = () => {
                     </div>
                 </div>
                 <div className="w-full flex justify-center">
-                    <div className="w-2/3">
-                        <div className="flex justify-center mt-5">
+                        <div className="flex w-full justify-center mt-5">
                             {activeSection === "Overview" && (<ClientOverview client={clientData}/>)}
                             {activeSection === "Workouts" && (<ClientWorkouts exercises={clientData.workouts}/>)}
                             {activeSection === "Meals" && (<ClientMeals/>)}
                         </div>
-                    </div>
                 </div>
             </div>
         </>

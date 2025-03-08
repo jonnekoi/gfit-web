@@ -76,15 +76,14 @@ const ClientOverview = ({ client }) => {
 
 
     return (
-        <div className="w-full grid space-x-5 grid-cols-3">
-            <div className=" mt-5 items-center">
+        <div className="w-full flex flex-row justify-center space-x-5">
+            <div className=" w-1/3">
                 {!notWeightData && (
                     <h1 className="text-xl text-center text-orange-500 michroma-regular">Weight Progress</h1>
                 )}
                 {notWeightData ? (
-                    <div
-                        className="col-span-2 border h-full flex items-center justify-center rounded p-5 text-center text-white">
-                        <FontAwesomeIcon icon={faTriangleExclamation} className="text-6xl" title="No data"/>
+                    <div className="border h-full flex items-center justify-center rounded p-5 text-center text-white">
+                        <FontAwesomeIcon icon={ faTriangleExclamation } className="text-6xl" title="No data"/>
                     </div>
                 ) : (
                     <ResponsiveContainer width="100%" height={400}>

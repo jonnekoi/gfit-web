@@ -45,6 +45,7 @@ const AllWorkouts = () => {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token,
                 },
                 body: JSON.stringify({ id: workoutId, exercises: editableExercises }),
             });
@@ -124,16 +125,32 @@ const AllWorkouts = () => {
         if (currentPage > 0) setCurrentPage(prev => prev - 1);
     };
 
+    const sortWorkouts = (sortBy) => {
+        return () => {
+            const sorted = [...workouts].sort((a, b) => {
+                if (a[sortBy] < b[sortBy]) {
+                    return -1;
+                }
+                if (a[sortBy] > b[sortBy]) {
+                    return 1;
+                }
+                return 0;
+            });
+            (setWorkouts(sorted));
+            setCurrentPage(0);
+        };
+    };
+
     return (
         <>
             <div className="w-2/3">
                 <table className="w-full text-white montserrat-text">
                     <thead>
                     <tr className="border-b border-b-orange-500 text-2xl font-bold text-center">
-                        <th className="p-5">Name <FontAwesomeIcon icon={faSort} className="text-1" /></th>
-                        <th className="p-5">Type <FontAwesomeIcon icon={faSort} className="text-1" /></th>
-                        <th className="p-5">Level <FontAwesomeIcon icon={faSort} className="text-1" /></th>
-                        <th className="p-5">Crafted <FontAwesomeIcon icon={faSort} className="text-1" /></th>
+                        <th onClick={sortWorkouts("workout_name")} className="p-5 cursor-pointer">Name <FontAwesomeIcon icon={faSort} className="text-1" /></th>
+                        <th onClick={sortWorkouts("workout_type")} className="p-5 cursor-pointer">Type <FontAwesomeIcon icon={faSort} className="text-1" /></th>
+                        <th onClick={sortWorkouts("workout_level")} className="p-5 cursor-pointer">Level <FontAwesomeIcon icon={faSort} className="text-1" /></th>
+                        <th onClick={sortWorkouts("workout_created_at")} className="p-5 cursor-pointer">Crafted <FontAwesomeIcon icon={faSort} className="text-1" /></th>
                     </tr>
                     </thead>
                     <tbody>
