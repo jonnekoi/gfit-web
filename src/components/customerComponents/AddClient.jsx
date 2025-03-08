@@ -6,6 +6,7 @@ const URL = 'http://localhost:3000/v1';
 const AddClient = () => {
     const [clientText, setClientText] = useState('');
     const [errorText, setErrorText] = useState('');
+    const token = sessionStorage.getItem('token');
 
 
     const handleAddClient = async (e) => {
@@ -24,7 +25,9 @@ const AddClient = () => {
         const options = {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'authorization': 'Bearer ' + token,
+
             },
             body: JSON.stringify(client)
         };

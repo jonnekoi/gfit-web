@@ -14,6 +14,7 @@ const ClientDetails = () => {
     const [profilePicture, setProfilePicture] = useState('');
     const [clientWeights, setClientWeights] = useState(null);
     const [notWeightData, setNotWeightData] = useState(false);
+    const token = sessionStorage.getItem('token');
 
 
     const handleSectionClick = (section) => {
@@ -22,8 +23,14 @@ const ClientDetails = () => {
     };
 
     const fetchProfilePicture = async (clientId) => {
+        const fetchOptions = {
+            method: 'GET',
+            headers: {
+                'authorization': 'Bearer ' + token,
+            }
+        }
         try {
-            const response = await fetch(url + `/users/profilePicture/${clientId}-profile.jpg`);
+            const response = await fetch(url + `/users/profilePicture/${clientId}-profile.jpg`, fetchOptions);
             if (!response.ok) {
                 throw new Error('Profile picture not found');
             }
@@ -36,8 +43,14 @@ const ClientDetails = () => {
     }
 
     const fetchClientWeights = async (id) => {
+        const fetchOptions = {
+            method: 'GET',
+            headers: {
+                'authorization': 'Bearer ' + token,
+            }
+        };
         try {
-            const response = await fetch(url + "/clients/weight/" + id);
+            const response = await fetch(url + "/clients/weight/" + id, fetchOptions);
             const data = await response.json();
             setClientWeights(data);
             if (data.length === 0) {
@@ -50,11 +63,16 @@ const ClientDetails = () => {
 
 
     const fetchClient = async () => {
+        const fetchOptions = {
+            method: 'GET',
+            headers: {
+                'authorization': 'Bearer ' + token,
+            }
+        };
         try {
-            const response = await fetch(url + `/clients/${clientId}`);
+            const response = await fetch(url + `/clients/${clientId}` , fetchOptions);
             const data = await response.json();
             setClientData(data);
-            console.log(data);
         } catch (error) {
             console.log(error);
         }

@@ -16,13 +16,20 @@ const url = 'http://127.0.0.1:3000/v1';
 const ClientOverview = ({ client }) => {
     const [clientWeights, setClientWeights] = useState(null);
     const [notWeightData, setNotWeightData] = useState(false);
+    const token = sessionStorage.getItem('token');
 
     const clientData = client;
     const clientId = clientData.id;
 
     const fetchClientWeights = async () => {
+        const fetchOptions = {
+            method: 'GET',
+            headers: {
+                'authorization': 'Bearer ' + token,
+            }
+        }
         try {
-            const response = await fetch(url + "/clients/weight/" + clientId);
+            const response = await fetch(url + "/clients/weight/" + clientId, fetchOptions);
             const data = await response.json();
             setClientWeights(data);
             if (data.length === 0) {

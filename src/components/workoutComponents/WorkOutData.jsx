@@ -6,10 +6,19 @@ const URL = "http://127.0.0.1:3000/v1";
 const WorkOutData = () => {
     const [workouts, setWorkouts] = useState([]);
     const [chartData, setChartData] = useState([]);
+    const token = sessionStorage.getItem("token");
 
     const fetchWorkouts = async () => {
+
+        const fetchOptions = {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            }
+        }
+
         try {
-            const response = await fetch(URL + "/workouts");
+            const response = await fetch(URL + "/workouts", fetchOptions);
             const data = await response.json();
 
             const workoutsArray = Object.entries(data).map(([key, value]) => ({

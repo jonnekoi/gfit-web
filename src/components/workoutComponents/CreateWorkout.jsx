@@ -22,10 +22,17 @@ const CreateWorkout = () => {
     const [workoutAddedText, setWorkoutAddedText] = useState("");
     const [workOutLevel, setWorkOutLevel] = useState("");
     const [addExercise, setAddExercise] = useState(false);
+    const token = sessionStorage.getItem("token");
 
     const fetchExercises = async () => {
         try {
-            const response = await fetch(url + '/workouts/exercise');
+            const fetchOptions = {
+                method: 'GET',
+                headers: {
+                    'authorization': 'Bearer ' + token,
+                }
+            }
+            const response = await fetch(url + '/workouts/exercise', fetchOptions);
             const data = await response.json();
             setExercises(data);
         } catch (error) {
@@ -81,11 +88,11 @@ const CreateWorkout = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token,
                 },
                 body: JSON.stringify(newExercise),
             });
-            const data = await response.json();
-            console.log(data);
+            await response.json();
             if (response.status === 201) {
                 setExercises((prevExercises) => [...prevExercises, newExercise]);
                 setAddExercise(false);
@@ -113,6 +120,7 @@ const CreateWorkout = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'authorization': 'Bearer ' + token,
                 },
                 body: JSON.stringify(workoutDetails),
             });
