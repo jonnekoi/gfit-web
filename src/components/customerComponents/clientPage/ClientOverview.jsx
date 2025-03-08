@@ -72,7 +72,7 @@ const ClientOverview = ({ client }) => {
         <div className="w-full grid space-x-5 grid-cols-3">
             <div className=" mt-5 items-center">
                 {!notWeightData && (
-                    <h1 className="text-2xl font-bold text-center text-white montserrat-text">Weight Progress</h1>
+                    <h1 className="text-xl text-center text-orange-500 michroma-regular">Weight Progress</h1>
                 )}
                 {notWeightData ? (
                     <div

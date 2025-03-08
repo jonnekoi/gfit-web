@@ -79,13 +79,33 @@
   left: 50%;
   width: 0;
   height: 1px;
-  background-color: white;
+  background-color: #f97316;
   transform: translateX(-50%);
   transition: width 0.3s ease;
 }
 
 .underline-hover:hover::after {
-  width: 100%;
+  width: 70%;
 }
 
+.underline-hover-logout {
+  position: relative;
+  display: inline-block;
+}
+
+.underline-hover-logout::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background-color: white;
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+}
+
+.underline-hover-logout:hover::after {
+  width: 70%;
+}
 

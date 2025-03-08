@@ -30,23 +30,23 @@ const Layout = () => {
                     <>
                         <div className="space-x-5 text-orange-500">
                             <Link to="/"
-                                  className="underline-hover text-white font-semibold michroma-regular text-xl p-2">Home</Link>
+                                  className="underline-hover text-white font-semibold michroma-regular text-1xl p-2">Home</Link>
                             <Link to="/customers"
-                                  className="underline-hover text-white font-semibold michroma-regular text-xl p-2">Customers</Link>
+                                  className="underline-hover text-white font-semibold michroma-regular text-1xl p-2">Customers</Link>
                             <Link to="/workouts"
-                                  className="underline-hover text-white font-semibold michroma-regular text-xl p-2">Workouts</Link>
+                                  className="underline-hover text-white font-semibold michroma-regular text-1xl p-2">Workouts</Link>
                             <Link to="/meals"
-                                  className="underline-hover text-white font-semibold michroma-regular text-xl p-2">Meals</Link>
+                                  className="underline-hover text-white font-semibold michroma-regular text-1xl p-2">Meals</Link>
                             <button onClick={handleLogout}
-                                    className="underline-hover text-orange-500 font-semibold michroma-regular text-xl p-2">Log
+                                    className="underline-hover-logout text-orange-500 font-semibold michroma-regular text-xl p-2">Log
                                 out
                             </button>
                         </div>
                     </>
                 ) : (
                     <div className="space-x-7">
-                        <Link to="/login" className="text-white montserrat-text text-3xl">Login</Link>
-                        <Link to="/register" className="text-white montserrat-text text-3xl">Register</Link>
+                        <Link to="/login" className="text-white michroma-regular text-xl">Login</Link>
+                        <Link to="/register" className="text-white michroma-regular text-xl">Register</Link>
                     </div>
                 )}
             </header>
