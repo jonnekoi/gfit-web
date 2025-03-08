@@ -14,12 +14,18 @@ const AllWorkouts = () => {
     const [currentPage, setCurrentPage] = useState(0);
     const rowsPerPage = 8;
     const [updateText, setUpdateText] = useState("");
-
+    const token = sessionStorage.getItem("token");
 
 
     const fetchWorkouts = async () => {
         try {
-            const response = await fetch(URL + "/workouts");
+            const fetchOptions = {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                },
+            };
+            const response = await fetch(URL + "/workouts", fetchOptions);
             const data = await response.json();
 
             const workoutsArray = Object.entries(data).map(([key, value]) => ({
@@ -55,7 +61,7 @@ const AllWorkouts = () => {
 
     useEffect(() => {
         fetchWorkouts();
-    }, [saveWorkout]);
+    }, []);
 
     const toggleVisibility = (workout) => {
         setSelectedWorkout(workout);
