@@ -19,7 +19,7 @@ const AllClients = ({ searchQuery }) => {
     }, [clientsData]);
 
     if (!clientsData) {
-        return <div>Loading...</div>;
+        return <div></div>;
     }
 
     const filteredClients = clients.filter(client =>
@@ -72,16 +72,16 @@ const AllClients = ({ searchQuery }) => {
                         className="cursor-pointer text-center"
                         onClick={() => navigate(`/clients/${client.id}`)}
                     >
-                        <td className="p-4 border-b border-b-orange-500">
+                        <td className="p-4 border-b border-b-orange-500 max-w-36">
                             {client.FirstName} {client.LastName}
                         </td>
-                        <td className="p-4 border-b border-b-orange-500">
+                        <td className="p-4 border-b border-b-orange-500 max-w-36">
                             {formatDate(client.birthday)}
                         </td>
-                        <td className="p-4 border-b border-b-orange-500">
+                        <td className="p-4 border-b border-b-orange-500 max-w-36">
                             {client.plan_name}
                         </td>
-                        <td className="p-4 border-b border-orange-500">
+                        <td className="p-4 border-b border-orange-500 max-w-36">
                             {client.status}
                         </td>
                     </tr>

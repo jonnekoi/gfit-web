@@ -144,7 +144,7 @@ const AllWorkouts = () => {
 
     return (
         <>
-            <div className="w-full">
+            <div className="w-2/3">
                 <table className="w-full text-white montserrat-text">
                     <thead>
                     <tr className="border-b border-b-orange-500 text-2xl font-bold text-center">
@@ -158,10 +158,10 @@ const AllWorkouts = () => {
                     {visibleWorkouts.map((workout, index) => (
                         <tr key={index} onClick={() => toggleVisibility(workout)}
                             className="cursor-pointer text-center">
-                            <td className="p-4 border-b border-b-orange-500">{workout.workout_name}</td>
-                            <td className="p-4 border-b border-b-orange-500">{workout.workout_type}</td>
-                            <td className="p-4 border-b border-b-orange-500">{workout.workout_level}</td>
-                            <td className="p-4 border-b border-b-orange-500">{formatDate(workout.workout_created_at)}</td>
+                            <td className="p-4 border-b border-b-orange-500 max-w-36">{workout.workout_name}</td>
+                            <td className="p-4 border-b border-b-orange-500 max-w-36">{workout.workout_type}</td>
+                            <td className="p-4 border-b border-b-orange-500 max-w-36">{workout.workout_level}</td>
+                            <td className="p-4 border-b border-b-orange-500 max-w-36">{formatDate(workout.workout_created_at)}</td>
                         </tr>
                     ))}
                     </tbody>

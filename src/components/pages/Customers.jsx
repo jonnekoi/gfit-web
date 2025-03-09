@@ -13,8 +13,11 @@ const Customers = () => {
         setActiveSection((prevSection) => (prevSection === section ? prevSection : section));
     };
 
+    console.log("Customers component rendered");
+
+
     return (
-        <div className="w-full justify-center flex flex-col items-center border-t">
+        <div className="w-full flex flex-col items-center border-t">
             <nav className="space-x-5 mt-5">
                 {["All Clients", "Pending Clients", "New Reports", "Add Client",].map((section) => (
                 <button
@@ -29,7 +32,7 @@ const Customers = () => {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                 /></nav>
-            <div className="flex w-2/3 mt-5">
+            <div className="flex w-2/3 justify-center mt-5">
                 {activeSection === "All Clients" && (<AllClients searchQuery={searchQuery}/>)}
                 {activeSection === "Pending Clients" && (<PendingClients searchQuery={searchQuery}/>)}
                 {activeSection === "New Reports" && (<NewReports/>)}
