@@ -30,7 +30,8 @@ const ClientDetails = () => {
             }
         }
         try {
-            const response = await fetch(url + `/users/profilePicture/${clientId}-profile.jpg`, fetchOptions);
+            // TODO: NEED TO ADD PROFILEPICTURE FILE PATH or NAME TO DATABASE (or something like that)AND GET IT THERE INSTEAD OF DOING IT LIKE THIS
+            const response = await fetch(url + '/users/profilePicture/' + clientId + '-profile.jpg', fetchOptions);
             if (!response.ok) {
                 throw new Error('Profile picture not found');
             }
@@ -82,7 +83,7 @@ const ClientDetails = () => {
         fetchClient();
         fetchProfilePicture(clientId);
         fetchClientWeights(clientId);
-    }, [clientId]);
+    }, []);
 
     if (!clientData) {
         return <div></div>
