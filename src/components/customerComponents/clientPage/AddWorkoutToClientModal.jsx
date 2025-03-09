@@ -169,17 +169,17 @@ const AddWorkoutToClientModal = ({ userId, close }) => {
                 )}
                 <div className="flex flex-row mt-5">
                     <button onClick={toggleEditMode}
-                            className="text-white bg-orange-500 font-bold p-2 m-2 w-full montserrat-text text-1xl border border-orange-500 rounded hover:border-orange-300">
+                            className="text-white bg-orange-500 font-bold p-2 m-2 w-full bruno-ace-sc-regular text-1xl border border-orange-500 rounded hover:border-orange-300">
                         {isEditMode ? "Cancel" : "Customize"}
                     </button>
                     {isEditMode && (
                         <button onClick={handleSave}
-                                className="text-white bg-orange-500 font-bold p-2 m-2 w-full montserrat-text text-1xl border border-orange-500 rounded hover:border-orange-300">
+                                className="text-white bg-orange-500 font-bold p-2 m-2 w-full bruno-ace-sc-regular text-1xl border border-orange-500 rounded hover:border-orange-300">
                             Save
                         </button>
                     )}
                     <button onClick={close}
-                            className="text-white bg-orange-500 font-bold p-2 m-2 w-full montserrat-text text-1xl border border-orange-500 rounded hover:border-orange-300">
+                            className="text-white bg-orange-500 font-bold p-2 m-2 w-full bruno-ace-sc-regular text-1xl border border-orange-500 rounded hover:border-orange-300">
                         Exit
                     </button>
                 </div>

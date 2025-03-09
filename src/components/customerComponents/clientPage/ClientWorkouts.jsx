@@ -24,9 +24,9 @@ const ClientWorkouts = ({ exercises, userId }) => {
         <div className="w-full">
             <div className="flex flex-row justify-end">
                 <button
-                    className="text-white font-bold bg-orange-500 montserrat-text mr-5 text-1xl border min-w-48 border-orange-500 p-2 rounded">Manage Workouts
+                    className="text-white font-bold bg-orange-500 bruno-ace-sc-regular mr-5 text-1xl border min-w-48 border-orange-500 p-2 rounded">Manage Workouts
                 </button>
-                <button onClick={addWorkoutToClientModal} className="text-white font-bold bg-orange-500 montserrat-text text-1xl mr-5 border min-w-48 border-orange-500 p-2 rounded">Add
+                <button onClick={addWorkoutToClientModal} className="text-white font-bold bg-orange-500 bruno-ace-sc-regular text-1xl mr-5 border min-w-48 border-orange-500 p-2 rounded">Add
                     Workout
                 </button>
             </div>

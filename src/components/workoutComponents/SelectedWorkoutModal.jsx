@@ -108,11 +108,11 @@ const SelectedWorkoutModal = ({ selectedWorkout, editableExercises, isReadOnly, 
                 </table>
                 <div className="flex flex-row mt-5">
                     <button onClick={toggleEditMode}
-                            className="text-white bg-orange-500 font-bold p-2 m-2 w-full montserrat-text text-1xl border border-orange-500 rounded hover:border-orange-300">
+                            className="text-white bg-orange-500 font-bold p-2 m-2 w-full bruno-ace-sc-regular text-1xl border border-orange-500 rounded hover:border-orange-300">
                         {isReadOnly ? "Edit" : "Save"}
                     </button>
                     <button onClick={closeModal}
-                            className="text-white bg-orange-500 font-bold p-2 m-2 w-full montserrat-text text-1xl border border-orange-500 rounded hover:border-orange-300">
+                            className="text-white bg-orange-500 font-bold p-2 m-2 w-full bruno-ace-sc-regular text-1xl border border-orange-500 rounded hover:border-orange-300">
                         Close
                     </button>
                 </div>
