@@ -2,21 +2,11 @@ import React from 'react';
 
 const WorkoutCard = ({ workout }) => {
     return (
-        <div className="text-white p-5 border m-5">
-            <h3>{workout.name}</h3>
-            <p>Type: {workout.type}</p>
-            <p>Level: {workout.level}</p>
-            <h4>Exercises:</h4>
-            <ul>
-                {workout.exercises.map((exercise, index) => (
-                    <li key={index}>
-                        <p>Name: {exercise.name}</p>
-                        <p>Reps: {exercise.low_reps}</p>
-                        <p>Weight: {exercise.weight}</p>
-                    </li>
-                ))}
-            </ul>
-        </div>
+        <tr className="text-center">
+            <td className="p-4 border-b border-b-orange-500">{workout.name}</td>
+            <td className="p-4 border-b border-b-orange-500">{workout.type}</td>
+            <td className="p-4 border-b border-b-orange-500">{workout.level}</td>
+        </tr>
     );
 };
 

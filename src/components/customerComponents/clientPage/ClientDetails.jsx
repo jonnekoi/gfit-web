@@ -104,6 +104,8 @@ const ClientDetails = () => {
     }
 
 
+
+
     return (
         <>
             <div className="w-full">
@@ -114,9 +116,9 @@ const ClientDetails = () => {
                         {notWeightData && (
                             <p></p>
                         )}
-                        <p className="montserrat-text font-semibold text-white text-2xl">{lastWeight}</p>
-                        <p className="montserrat-text font-semibold text-white text-2xl">{clientData.targetWeight}</p>
-                        <p className="montserrat-text font-semibold text-2xl text-orange-500">{weightDifferenceAmount}</p>
+                        <p className="montserrat-text font-semibold text-white text-2xl">{lastWeight || "0.00"}</p>
+                        <p className="montserrat-text font-semibold text-white text-2xl">{clientData.targetWeight || 0.00}</p>
+                        <p className="montserrat-text font-semibold text-2xl text-orange-500">{weightDifferenceAmount || "+/- 0.00"}</p>
                     </div>
                     <div className="flex flex-col justify-center">
                         <nav className="space-x-5 mr-5">
@@ -131,7 +133,7 @@ const ClientDetails = () => {
                     </div>
                 </div>
                 <div className="w-full flex justify-center">
-                        <div className="flex w-full justify-center mt-5">
+                        <div className="flex w-full justify-center mt-10">
                             {activeSection === "Overview" && (<ClientOverview client={clientData}/>)}
                             {activeSection === "Workouts" && (<ClientWorkouts exercises={clientData.workouts}/>)}
                             {activeSection === "Meals" && (<ClientMeals/>)}

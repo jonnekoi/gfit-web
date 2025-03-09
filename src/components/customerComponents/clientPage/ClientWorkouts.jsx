@@ -3,19 +3,38 @@ import WorkoutCard from './WorkoutCard';
 
 const ClientWorkouts = ({ exercises }) => {
     if (!exercises) {
-        return <div>Loading...</div>;
-    }
-
-    if (typeof exercises !== 'object') {
-        return <div>No exercises available</div>;
+        return <div></div>;
     }
 
     return (
-        <div className="">
-            <h3></h3>
-            {Object.keys(exercises).map((key, index) => (
-                <WorkoutCard key={index} workout={exercises[key]} />
-            ))}
+        <div className="w-full">
+            <div className="flex flex-row justify-end">
+                <button
+                    className="text-white font-bold bg-orange-500 montserrat-text mr-5 text-1xl border min-w-48 border-orange-500 p-2 rounded">Manage Workouts
+                </button>
+                <button
+                    className="text-white font-bold bg-orange-500 montserrat-text text-1xl mr-5 border min-w-48 border-orange-500 p-2 rounded">Add
+                    Workout
+                </button>
+            </div>
+            <div className="flex justify-center">
+                <div className="w-2/3">
+                    <table className="w-full text-white montserrat-text">
+                        <thead>
+                        <tr className="border-b border-b-orange-500 text-2xl font-bold text-center">
+                            <th className="p-5 cursor-pointer">Workout</th>
+                            <th className="p-5 cursor-pointer">Type</th>
+                            <th className="p-5 cursor-pointer">Level</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {Object.keys(exercises).map((key, index) => (
+                            <WorkoutCard key={index} workout={exercises[key]}/>
+                        ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     );
 };
