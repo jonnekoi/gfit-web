@@ -127,7 +127,7 @@ const ClientDetails = () => {
                             {["Overview", "Workouts", "Meals", "Chat"].map((section) => (
                                 <button
                                     key={section}
-                                    className="text-white font-bold bg-orange-500 montserrat-text text-1xl border min-w-48 border-orange-500 p-2 rounded"
+                                    className="text-white font-bold bg-orange-500 montserrat-text text-1xl min-w-36 border border-orange-500 p-2 rounded"
                                     onClick={() => handleSectionClick(section)}>{section}
                                 </button>
                             ))}

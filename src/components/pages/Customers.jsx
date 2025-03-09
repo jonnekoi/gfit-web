@@ -22,7 +22,7 @@ const Customers = () => {
                 {["All Clients", "Pending Clients", "New Reports", "Add Client",].map((section) => (
                 <button
                     key={section}
-                    className="text-white font-bold bg-orange-500 montserrat-text text-1xl border min-w-48 border-orange-500 p-2 rounded"
+                    className="text-white font-bold bg-orange-500 bruno-ace-sc-regular text-1xl border min-w-48 border-orange-500 p-2 rounded"
                     onClick={() => handleSectionClick(section)}>{section}
                 </button>
                 ))}
