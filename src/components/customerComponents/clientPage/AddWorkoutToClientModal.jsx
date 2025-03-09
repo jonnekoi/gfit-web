@@ -8,6 +8,7 @@ const AddWorkoutToClientModal = ({ userId, close }) => {
     const [selectedWorkout, setSelectedWorkout] = useState(null);
     const [isEditMode, setIsEditMode] = useState(false);
     const [editedExercises, setEditedExercises] = useState([]);
+    const [errortext, setErrortext] = useState("");
 
     const fetchWorkouts = async () => {
         try {
@@ -39,6 +40,7 @@ const AddWorkoutToClientModal = ({ userId, close }) => {
         const workoutName = event.target.value;
         const workout = workouts.find(w => w.workout_name === workoutName);
         setSelectedWorkout(workout);
+        setErrortext("");
         setEditedExercises(workout.exercises);
     };
 
@@ -69,7 +71,10 @@ const AddWorkoutToClientModal = ({ userId, close }) => {
                     exercises: editedExercises
                 }),
             };
-            await fetch(URL + '/clients/workout/client/add', fetchOptions);
+            const response = await fetch(URL + '/clients/workout/client/add', fetchOptions);
+            if (response.status === 409) {
+                setErrortext("Workout already exists. Edit it from the client page.");
+            }
             setSelectedWorkout({ ...selectedWorkout, exercises: editedExercises });
             setIsEditMode(false);
         } catch (error) {
@@ -165,7 +170,7 @@ const AddWorkoutToClientModal = ({ userId, close }) => {
                 <div className="flex flex-row mt-5">
                     <button onClick={toggleEditMode}
                             className="text-white bg-orange-500 font-bold p-2 m-2 w-full montserrat-text text-1xl border border-orange-500 rounded hover:border-orange-300">
-                        {isEditMode ? "Cancel" : "Edit"}
+                        {isEditMode ? "Cancel" : "Customize"}
                     </button>
                     {isEditMode && (
                         <button onClick={handleSave}
@@ -178,6 +183,9 @@ const AddWorkoutToClientModal = ({ userId, close }) => {
                         Exit
                     </button>
                 </div>
+                {errortext && (
+                    <p className="text-red-500 montserrat-text">{errortext}</p>
+                )}
             </div>
         </div>
     );
