@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import AddWorkoutToClientModal from "./AddWorkoutToClientModal.jsx";
 import Button from "../../../buttons/Button.jsx";
 import WorkoutCalender from "./WorkoutCalender.jsx";
+import ButtonNoHover from "../../../buttons/ButtonNoHover.jsx";
 
 
 const ClientWorkouts = ({ exercises, userId }) => {
@@ -47,11 +48,11 @@ const ClientWorkouts = ({ exercises, userId }) => {
             <div className="flex justify-center">
                 <div className="w-2/3">
                     <div className="flex flex-row justify-end mb-2 space-x-5">
-                        <Button text="Workout History">
-                        </Button>
-                        <Button
+                        <ButtonNoHover text="Workout History">
+                        </ButtonNoHover>
+                        <ButtonNoHover
                             onClick={addWorkoutToClientModal} text="Add Workout">
-                        </Button>
+                        </ButtonNoHover>
                     </div>
                     <WorkoutCalender dailyWorkouts={dailyWorkouts} />
                 </div>

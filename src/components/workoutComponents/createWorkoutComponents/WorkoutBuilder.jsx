@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ButtonNoHover from "../../../buttons/ButtonNoHover.jsx";
 
 const WorkoutBuilder = ({ selectedExercises, onRemoveExercise, onSubmitWorkout, error, successMessage }) => {
     const [workoutName, setWorkoutName] = useState("");
@@ -70,13 +71,11 @@ const WorkoutBuilder = ({ selectedExercises, onRemoveExercise, onSubmitWorkout, 
                     <option value="Medium">Medium</option>
                     <option value="Hard">Hard</option>
                 </select>
-                <button
+                <ButtonNoHover
                     onClick={handleSubmit}
                     type="button"
-                    className="text-white min-w-44 bg-gradient-to-r from-orange-600 to-orange-500 font-bold p-3 bruno-ace-sc-regular rounded-lg shadow-md hover:from-orange-500 hover:to-orange-400 transition-all duration-300 transform hover:scale-105"
-                >
-                    Add Workout
-                </button>
+                    text="Add Workout">
+                </ButtonNoHover>
             </div>
 
             <div className="w-full items-center flex flex-col">

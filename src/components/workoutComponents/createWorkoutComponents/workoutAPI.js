@@ -25,6 +25,7 @@ export const addExerciseApi = async (exercise, token) => {
 };
 
 export const addWorkoutApi = async (workout, token) => {
+    console.log(workout);
     const response = await fetch(`${url}/workouts/add`, {
         method: 'POST',
         headers: {

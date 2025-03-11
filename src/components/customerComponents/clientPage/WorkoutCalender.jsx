@@ -26,7 +26,7 @@ const WorkoutCalender = ({ dailyWorkouts }) => {
                                     <ul className="mt-2 divide-y divide-orange-500/20">
                                         {workoutsForDay.map((workout, index) => (
                                             <li key={index}
-                                                className={`text-gray-100 montserrat-text p-3 flex items-center justify-between transition-colors cursor-pointer ${index % 2 === 0 ? 'bg-gray-800/20' : 'bg-transparent'}`}>
+                                                className={`text-gray-100 montserrat-text p-3 flex items-center justify-between transition-colors  ${index % 2 === 0 ? 'bg-gray-800/20' : 'bg-transparent'}`}>
                                                 <div className="flex items-center space-x-3">
                                                     <span className="font-medium">{workout.name}</span>
                                                 </div>

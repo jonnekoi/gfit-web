@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ButtonNoHover from "../../../buttons/ButtonNoHover.jsx";
 
 const ExerciseSearch = ({ exercises, onSelectExercise, onAddNewExercise }) => {
     const [searchQuery, setSearchQuery] = useState("");
@@ -17,12 +18,10 @@ const ExerciseSearch = ({ exercises, onSelectExercise, onAddNewExercise }) => {
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="border border-orange-500/30 rounded-lg bg-gray-800/60 text-gray-100 w-full p-3 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500/50 transition-colors"
                 />
-                <button
+                <ButtonNoHover
                     onClick={onAddNewExercise}
-                    className="text-white min-w-44 bg-gradient-to-r from-orange-600 to-orange-500 font-bold p-3 bruno-ace-sc-regular rounded-lg shadow-md hover:from-orange-500 hover:to-orange-400 transition-all duration-300 transform hover:scale-105"
-                >
-                    Add Exercise
-                </button>
+                    text="Add Exercise">
+                </ButtonNoHover>
             </div>
             <div className="w-full flex flex-wrap justify-center mt-4">
                 {filteredExercises.map((exercise) => (

@@ -90,7 +90,6 @@ const ClientDetails = () => {
         return <div></div>
     }
 
-    console.log(clientData);
 
     const sortedWeights = clientWeights ? clientWeights.sort((a, b) => new Date(a.date) - new Date(b.date)) : [];
 

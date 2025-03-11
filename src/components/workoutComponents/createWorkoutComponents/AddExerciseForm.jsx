@@ -36,8 +36,7 @@ const AddExerciseForm = ({ onSubmit }) => {
 
                 <button
                     type="submit"
-                    className="text-white min-w-36 mt-4 bg-gradient-to-r from-orange-600 to-orange-500 font-bold p-3 bruno-ace-sc-regular rounded-lg shadow-md hover:from-orange-500 hover:to-orange-400 transition-all duration-300 transform hover:scale-105"
-                >
+                    className="text-white min-w-36 mt-4 bg-gradient-to-r from-orange-600 to-orange-500 font-bold p-3 bruno-ace-sc-regular rounded-lg shadow-md hover:from-orange-500 hover:to-orange-400 transition-all duration-300 transform">
                     Add
                 </button>
             </form>
