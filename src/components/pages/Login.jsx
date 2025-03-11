@@ -35,13 +35,30 @@ const Login = () => {
     const { setIsLoggedIn } = useAuth();
 
     return (
-        <div className="flex flex-col text-center p-5 border border-orange-500 rounded-2xl w-1/3 mt-10">
-            <form onSubmit={(e) => handleLogin(e, setIsLoggedIn)} className="flex flex-col m-auto justify-center w-2/3">
-                <label className="montserrat-text text-white m-2">Username</label>
-                <input className="p-2 rounded" type="text" name="username" placeholder="Username" />
-                <label className="montserrat-text text-white m-2">Passoword</label>
-                <input className="p-2 rounded" type="password" name="password" placeholder="Password" />
-                <button className="bg-orange-500 text-white p-2 m-5 rounded montserrat-text hover:cursor-pointer" type="submit">Login</button>
+        <div className="flex flex-col text-center p-6 bg-gray-900/40 border border-orange-500/50 rounded-2xl w-1/3 mt-10 shadow-lg">
+            <form onSubmit={(e) => handleLogin(e, setIsLoggedIn)} className="flex flex-col m-auto justify-center w-full max-w-md">
+                <label className="montserrat-text text-gray-300 text-left ml-1 mb-1">Username</label>
+                <input
+                    className="p-3 rounded-lg bg-gray-800/60 border border-orange-500/30 text-gray-100 mb-4 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500/50 transition-colors"
+                    type="text"
+                    name="username"
+                    placeholder="Enter your username"
+                />
+
+                <label className="montserrat-text text-gray-300 text-left ml-1 mb-1">Password</label>
+                <input
+                    className="p-3 rounded-lg bg-gray-800/60 border border-orange-500/30 text-gray-100 mb-6 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500/50 transition-colors"
+                    type="password"
+                    name="password"
+                    placeholder="Enter your password"
+                />
+
+                <button
+                    className="bg-gradient-to-r from-orange-600 to-orange-500 text-white font-bold py-3 px-6 rounded-lg montserrat-text hover:cursor-pointer hover:from-orange-500 hover:to-orange-400 transition-all duration-300 transform hover:scale-105 shadow-md"
+                    type="submit"
+                >
+                    Login
+                </button>
             </form>
         </div>
     )

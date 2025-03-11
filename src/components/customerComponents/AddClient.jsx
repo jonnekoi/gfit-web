@@ -45,59 +45,104 @@ const AddClient = () => {
 
 
     return (
-        <div className="w-full text-white montserrat-text mt-10">
-            <form onSubmit={handleAddClient} className="flex flex-col">
-                <div className="flex flex-row">
+        <div className="w-2/3 text-white montserrat-text mt-10">
+            <form onSubmit={handleAddClient} className="flex flex-col space-y-4">
+                <div className="flex flex-row gap-4">
                     <div className="flex flex-col w-1/3">
-                        <label htmlFor="firstName" className="ml-2">First Name</label>
-                        <input name="firstName" placeholder="First Name..." type="text"
-                               className="m-2 p-3 rounded text-black"/>
+                        <label htmlFor="firstName" className="text-gray-300 mb-1 ml-1">First Name</label>
+                        <input
+                            name="firstName"
+                            placeholder="First Name..."
+                            type="text"
+                            className="p-3 rounded-lg bg-gray-800/60 border border-orange-500/30 text-gray-100 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500/50 transition-colors"
+                        />
                     </div>
                     <div className="flex flex-col w-1/3">
-                        <label htmlFor="lastName" className="ml-2">Last Name</label>
-                        <input name="lastName" placeholder="Last Name..." type="text"
-                               className="m-2 p-3 rounded text-black"/>
+                        <label htmlFor="lastName" className="text-gray-300 mb-1 ml-1">Last Name</label>
+                        <input
+                            name="lastName"
+                            placeholder="Last Name..."
+                            type="text"
+                            className="p-3 rounded-lg bg-gray-800/60 border border-orange-500/30 text-gray-100 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500/50 transition-colors"
+                        />
                     </div>
                     <div className="flex flex-col w-1/3">
-                        <label htmlFor="birthday" className="ml-2">Birthday</label>
-                        <input name="birthday" type="date" className="m-2 p-3 rounded text-black"/>
-                    </div>
-                </div>
-                <div className="flex flex-row">
-                    <div className="flex flex-col w-1/3">
-                        <label htmlFor="address" className="ml-2">Address</label>
-                        <input name="address" placeholder="Address..." type="text"
-                               className="m-2 p-3 rounded text-black"/>
-                    </div>
-                    <div className="flex flex-col w-1/3">
-                        <label htmlFor="city" className="ml-2">City</label>
-                        <input name="city" placeholder="City..." type="text" className="m-2 p-3 rounded text-black"/>
-                    </div>
-                    <div className="flex flex-col w-1/3">
-                        <label htmlFor="postalCode" className="ml-2">Postal Code</label>
-                        <input name="postalCode" placeholder="Postal Code..." type="text"
-                               className="m-2 p-3 rounded text-black"/>
+                        <label htmlFor="birthday" className="text-gray-300 mb-1 ml-1">Birthday</label>
+                        <input
+                            name="birthday"
+                            type="date"
+                            className="p-3 rounded-lg bg-gray-800/60 border border-orange-500/30 text-gray-100 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500/50 transition-colors"
+                        />
                     </div>
                 </div>
-                <div className="flex flex-row">
+
+                <div className="flex flex-row gap-4">
+                    <div className="flex flex-col w-1/3">
+                        <label htmlFor="address" className="text-gray-300 mb-1 ml-1">Address</label>
+                        <input
+                            name="address"
+                            placeholder="Address..."
+                            type="text"
+                            className="p-3 rounded-lg bg-gray-800/60 border border-orange-500/30 text-gray-100 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500/50 transition-colors"
+                        />
+                    </div>
+                    <div className="flex flex-col w-1/3">
+                        <label htmlFor="city" className="text-gray-300 mb-1 ml-1">City</label>
+                        <input
+                            name="city"
+                            placeholder="City..."
+                            type="text"
+                            className="p-3 rounded-lg bg-gray-800/60 border border-orange-500/30 text-gray-100 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500/50 transition-colors"
+                        />
+                    </div>
+                    <div className="flex flex-col w-1/3">
+                        <label htmlFor="postalCode" className="text-gray-300 mb-1 ml-1">Postal Code</label>
+                        <input
+                            name="postalCode"
+                            placeholder="Postal Code..."
+                            type="text"
+                            className="p-3 rounded-lg bg-gray-800/60 border border-orange-500/30 text-gray-100 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500/50 transition-colors"
+                        />
+                    </div>
+                </div>
+
+                <div className="flex flex-row gap-4">
                     <div className="flex flex-col w-2/3">
-                        <label htmlFor="email" className="ml-2">Email</label>
-                        <input name="email" placeholder="Email..." type="email" className="m-2 p-3 rounded text-black"/>
+                        <label htmlFor="email" className="text-gray-300 mb-1 ml-1">Email</label>
+                        <input
+                            name="email"
+                            placeholder="Email..."
+                            type="email"
+                            className="p-3 rounded-lg bg-gray-800/60 border border-orange-500/30 text-gray-100 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500/50 transition-colors"
+                        />
                     </div>
                     <div className="flex flex-col w-1/3">
-                        <label htmlFor="plan" className="ml-2">Plan</label>
-                        <select name="plan" className="m-2 p-3 rounded text-black">
+                        <label htmlFor="plan" className="text-gray-300 mb-1 ml-1">Plan</label>
+                        <select
+                            name="plan"
+                            className="p-3 rounded-lg bg-gray-800/60 border border-orange-500/30 text-gray-100 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500/50 transition-colors appearance-none"
+                        >
                             <option value="1">Plan 1</option>
                             <option value="2">Plan 2</option>
                             <option value="3">Plan 3</option>
                         </select>
                     </div>
                 </div>
-                <button type="submit" className="text-white font-bold bg-orange-500 montserrat-text text-1xl border min-w-48 border-orange-500 p-2 m-2 rounded">Create Client</button>
+                <div className="flex justify-center">
+                    <button
+                        type="submit"
+                        className="bg-gradient-to-r from-orange-600 to-orange-500 text-white font-bold bruno-ace-sc-regular text-lg px-6 py-3 mt-4 rounded-lg shadow-lg hover:from-orange-500 hover:to-orange-400 transition-all duration-300 transform hover:scale-105"
+                    >
+                        Create Client
+                    </button>
+                </div>
             </form>
+
             <div className="flex justify-center mt-5">
-                {clientText && <p className="montserrat-text text-green-500 text-1xl">{clientText}</p>}
-                {errorText && <p className="montserrat-text text-red-500 text-1xl">{errorText}</p>}
+                {clientText &&
+                    <p className="montserrat-text text-green-400 text-lg bg-green-500/10 px-4 py-2 rounded-full">{clientText}</p>}
+                {errorText &&
+                    <p className="montserrat-text text-red-400 text-lg bg-red-500/10 px-4 py-2 rounded-full">{errorText}</p>}
             </div>
         </div>
     )
