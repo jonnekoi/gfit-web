@@ -22,7 +22,7 @@ const Layout = () => {
 
     return (
         <>
-            <header className="p-10 flex items-center väribg justify-between ">
+            <header className="p-5 flex items-center väribg justify-between ">
                 <div className="text-3xl text-white">
                     <h1 className="bruno-ace-sc-regular text-4xl text-orange-500">G Fit</h1>
                 </div>
