@@ -1,6 +1,7 @@
 import {useState} from "react";
 import AllMeals from "../mealComponents/AllMeals.jsx";
 import CreateMeal from "../mealComponents/CreateMeal.jsx";
+import Button from "../../buttons/Button.jsx";
 
 const Meals = () => {
     const [activeSection, setActiveSection] = useState("All Meals");
@@ -14,11 +15,11 @@ const Meals = () => {
         <div className="w-full justify-center flex flex-col items-center border-t">
             <nav className="space-x-5 mt-5">
                 {["All Meals", "Craft Meals"].map((section) => (
-                        <button
+                        <Button
+                            text={section}
                             key={section}
-                            className="text-white min-w-44 bg-gradient-to-r from-orange-600 to-orange-500 font-bold p-3 bruno-ace-sc-regular rounded-lg shadow-md hover:from-orange-500 hover:to-orange-400 transition-all transform hover:scale-105"
                             onClick={() => handleSectionClick(section)}>{section}
-                        </button>
+                        </Button>
                     )
                 )}
             </nav>

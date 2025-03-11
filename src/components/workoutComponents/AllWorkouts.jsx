@@ -163,17 +163,17 @@ const AllWorkouts = () => {
                                 <FontAwesomeIcon icon={faSort} className="text-orange-300 opacity-70"/>
                             </div>
                         </th>
-                        <th onClick={sortWorkouts("workout_level")}
-                            className="px-6 py-4 transition-colors hover:bg-orange-500/30 cursor-pointer">
-                            <div className="flex items-center justify-center space-x-2">
-                                <span>Level</span>
-                                <FontAwesomeIcon icon={faSort} className="text-orange-300 opacity-70"/>
-                            </div>
-                        </th>
                         <th onClick={sortWorkouts("workout_created_at")}
                             className="px-6 py-4 transition-colors hover:bg-orange-500/30 cursor-pointer">
                             <div className="flex items-center justify-center space-x-2">
                                 <span>Crafted</span>
+                                <FontAwesomeIcon icon={faSort} className="text-orange-300 opacity-70"/>
+                            </div>
+                        </th>
+                        <th onClick={sortWorkouts("workout_level")}
+                            className="px-6 py-4 transition-colors hover:bg-orange-500/30 cursor-pointer">
+                            <div className="flex items-center justify-center space-x-2">
+                                <span>Level</span>
                                 <FontAwesomeIcon icon={faSort} className="text-orange-300 opacity-70"/>
                             </div>
                         </th>
@@ -195,6 +195,9 @@ const AllWorkouts = () => {
                 </span>
                             </td>
                             <td className="px-6 py-4 text-center border-b border-orange-500/20 max-w-36">
+                                {formatDate(workout.workout_created_at)}
+                            </td>
+                            <td className="px-6 py-4 text-center border-b border-orange-500/20 max-w-36">
                 <span className={`px-3 py-1 rounded-full text-sm ${
                     workout.workout_level === 'Easy' ? 'bg-green-500/20 text-green-300' :
                         workout.workout_level === 'Medium' ? 'bg-yellow-500/20 text-yellow-300' :
@@ -203,15 +206,12 @@ const AllWorkouts = () => {
                     {workout.workout_level}
                 </span>
                             </td>
-                            <td className="px-6 py-4 text-center border-b border-orange-500/20 max-w-36">
-                                {formatDate(workout.workout_created_at)}
-                            </td>
                         </tr>
                     ))}
                     </tbody>
                 </table>
                 <div className="flex justify-center mt-4 text-white montserrat-text text-1xl">
-                    <button
+                <button
                         onClick={prevPage}
                         disabled={currentPage === 0}
                         className={`px-4 py-2 rounded ${currentPage === 0 ? "cursor-not-allowed" : "text-white"}`}

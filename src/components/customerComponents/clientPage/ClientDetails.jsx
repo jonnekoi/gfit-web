@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";;
 import ClientWorkouts from "./ClientWorkouts.jsx";
 import ClientOverview from "./ClientOverview.jsx";
 import ClientMeals from "./ClientMeals.jsx";
+import Button from "../../../buttons/Button.jsx";
 
 
 const url = "http://localhost:3000/v1"
@@ -125,11 +126,11 @@ const ClientDetails = () => {
                     <div className="flex flex-col justify-center">
                         <nav className="space-x-5 mr-5">
                             {["Overview", "Workouts", "Meals", "Chat"].map((section) => (
-                                <button
+                                <Button
+                                    text={section}
                                     key={section}
-                                    className="text-white min-w-36 bg-gradient-to-r from-orange-600 to-orange-500 font-bold p-3 bruno-ace-sc-regular rounded-lg shadow-md hover:from-orange-500 hover:to-orange-400 transition-all transform hover:scale-105"
                                     onClick={() => handleSectionClick(section)}>{section}
-                                </button>
+                                </Button>
                             ))}
                         </nav>
                     </div>

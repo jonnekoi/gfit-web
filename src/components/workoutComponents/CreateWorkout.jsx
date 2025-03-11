@@ -169,7 +169,7 @@ const CreateWorkout = () => {
                            className="border rounded w-full p-1"
                     />
                     <button onClick={CreateAddNewExercise}
-                        className="text-white font-bold bg-orange-500 p-1 w-1/3 montserrat-text text-1xl border border-orange-500 rounded">Add
+                        className="text-white min-w-44 bg-gradient-to-r from-orange-600 to-orange-500 font-bold p-3 bruno-ace-sc-regular rounded-lg shadow-md hover:from-orange-500 hover:to-orange-400">Add
                         Exercise
                     </button>
                 </div>
@@ -189,7 +189,7 @@ const CreateWorkout = () => {
                     <label className="mt-2 text-white montserrat-text">Description</label>
                     <textarea placeholder="Description..." name="descri"
                               className="m-1 w-full min-h-24 p-1 border rounded text-top"/>
-                    <button type="submit" className="text-white font-bold p-2.5 m-2 w-full montserrat-text text-1xl border border-orange-500 rounded hover:border-orange-300">Add</button>
+                    <button type="submit" className="text-white min-w-36 bg-gradient-to-r from-orange-600 to-orange-500 font-bold p-3 bruno-ace-sc-regular rounded-lg shadow-md hover:from-orange-500 hover:to-orange-400">Add</button>
                     </form>
                 </div>
             )}
@@ -260,7 +260,7 @@ const CreateWorkout = () => {
                         <option value="Hard">Hard</option>
                     </select>
                     <button onClick={submitWorkout} type="submit"
-                            className="text-white font-bold p-2.5 m-2 w-full montserrat-text text-1xl border border-orange-500 rounded bg-orange-500">Add
+                            className="text-white min-w-44 bg-gradient-to-r from-orange-600 to-orange-500 font-bold p-3 bruno-ace-sc-regular rounded-lg shadow-md hover:from-orange-500 hover:to-orange-400">Add
                         Workout
                     </button>
                 </div>

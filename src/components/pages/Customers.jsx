@@ -3,6 +3,7 @@ import AllClients from "../customerComponents/AllClients.jsx";
 import PendingClients from "../customerComponents/PendingClients.jsx";
 import NewReports from "../customerComponents/NewReports.jsx";
 import AddClient from "../customerComponents/AddClient.jsx";
+import Button from "../../buttons/Button.jsx";
 
 const Customers = () => {
     const [activeSection, setActiveSection] = useState("All Clients");
@@ -18,11 +19,11 @@ const Customers = () => {
         <div className="w-full flex flex-col items-center border-t">
             <nav className="space-x-5 mt-5">
                 {["All Clients", "Pending Clients", "New Reports", "Add Client",].map((section) => (
-                <button
+                <Button
                     key={section}
-                    className="text-white min-w-44 bg-gradient-to-r from-orange-600 to-orange-500 font-bold p-3 bruno-ace-sc-regular rounded-lg shadow-md hover:from-orange-500 hover:to-orange-400 transition-all transform hover:scale-105"
+                    text={section}
                     onClick={() => handleSectionClick(section)}>{section}
-                </button>
+                </Button>
                 ))}
                 <input
                     className="p-2 rounded"

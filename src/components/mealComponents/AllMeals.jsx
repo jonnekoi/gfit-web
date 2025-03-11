@@ -113,36 +113,36 @@ const AllMeals = () => {
                         <tr
                             key={index}
                             onClick={() => toggleVisibility(meal)}
-                            className={`transition-colors hover:bg-orange-500/10 cursor-pointer ${index % 2 === 0 ? 'bg-gray-800/20' : 'bg-transparent'}`}
+                            className="transition-colors hover:bg-orange-500/10 cursor-pointer"
                         >
-                            <td className="px-6 py-4 text-center border-b border-orange-500/20 max-w-44">
-                                {meal.meal_name}
-                            </td>
-                            <td className="px-6 py-4 text-center border-b border-orange-500/20 max-w-44">
-                <span className="px-3 py-1 bg-orange-500/20 rounded-full text-sm">
-                    {meal.meal_category}
-                </span>
-                            </td>
-                            <td className="px-6 py-4 text-center border-b border-orange-500/20 max-w-44">
-                <span className="font-medium text-blue-300">
-                    {Number(meal.total_protein).toFixed(1)} g
-                </span>
-                            </td>
-                            <td className="px-6 py-4 text-center border-b border-orange-500/20 max-w-44">
-                <span className="font-medium text-green-300">
-                    {Number(meal.total_carbs).toFixed(1)} g
-                </span>
-                            </td>
-                            <td className="px-6 py-4 text-center border-b border-orange-500/20 max-w-44">
-                <span className="font-medium text-yellow-300">
-                    {Number(meal.total_fat).toFixed(1)} g
-                </span>
-                            </td>
-                            <td className="px-6 py-4 text-center border-b border-orange-500/20 max-w-44">
-                <span className="font-medium">
-                    {Number(meal.total_calories).toFixed(1)} kcal
-                </span>
-                            </td>
+                                        <td className="px-6 py-4 text-center border-b border-orange-500/20 max-w-44">
+                                            {meal.meal_name}
+                                        </td>
+                                        <td className="p-4 poppins-text text-center border-b border-orange-500/20 max-w-44">
+                            <span className="px-2 py-1 bg-orange-500/20 rounded text-orange-300">
+                                {meal.meal_category.charAt(0).toUpperCase() + meal.meal_category.slice(1)}
+                            </span>
+                                        </td>
+                                        <td className="p-4 poppins-text text-center border-b border-orange-500/20 max-w-44">
+                            <span className="px-2 py-1 bg-green-500/10 rounded text-green-300">
+                                {Number(meal.total_protein).toFixed(1)} G
+                            </span>
+                                        </td>
+                                        <td className="p-4 poppins-text text-center border-b border-orange-500/20 max-w-44">
+                            <span className="px-2 py-1 bg-purple-500/10 rounded text-purple-300">
+                                {Number(meal.total_carbs).toFixed(1)} G
+                            </span>
+                                        </td>
+                                        <td className="p-4 poppins-text text-center border-b border-orange-500/20 max-w-44">
+                            <span className="px-2 py-1 bg-orange-500/10 rounded text-orange-300">
+                                {Number(meal.total_fat).toFixed(1)} G
+                            </span>
+                                        </td>
+                                        <td className="p-4 poppins-text text-center  border-b border-orange-500/20 max-w-44">
+                            <span className="px-2 py-1 bg-blue-500/10 rounded text-blue-300">
+                                {Number(meal.total_calories).toFixed(1)} KCAL
+                            </span>
+                                        </td>
                         </tr>
                     ))}
                     </tbody>

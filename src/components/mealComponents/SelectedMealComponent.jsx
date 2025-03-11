@@ -5,12 +5,12 @@ const selectedMealComponent = ({ selectedMeal, ingredients, closeModal }) => {
                 className="bg-gray-900/90 text-white p-8 rounded-xl max-w-4xl w-full shadow-2xl border border-orange-500/30">
                 <div className="text-center mb-6">
                     <h2 className="font-bold montserrat-text text-3xl bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent pb-2">
-                        {selectedMeal.meal_name || "Unnamed Meal"}
+                        {selectedMeal.meal_name}
                     </h2>
                     <div className="flex items-center justify-center gap-4 text-gray-300">
                         <p className="montserrat-text font-medium">
                     <span className="px-3 py-1 bg-orange-500/20 rounded-full text-sm font-medium text-orange-300">
-                        {selectedMeal.meal_category}
+                        {selectedMeal.meal_category.charAt(0).toUpperCase() + selectedMeal.meal_category.slice(1)}
                     </span>
                         </p>
                     </div>
@@ -23,7 +23,7 @@ const selectedMealComponent = ({ selectedMeal, ingredients, closeModal }) => {
                     <table className="w-full text-white">
                         <thead>
                         <tr className="bg-gradient-to-r from-orange-600/60 to-orange-500/40 text-lg font-medium">
-                            <th className="p-4 text-center">Calories</th>
+                            <th className="p-4 text-center max-w-24">Calories</th>
                             <th className="p-4 text-center">Protein</th>
                             <th className="p-4 text-center">Carbs</th>
                             <th className="p-4 text-center">Fat</th>
@@ -31,24 +31,24 @@ const selectedMealComponent = ({ selectedMeal, ingredients, closeModal }) => {
                         </thead>
                         <tbody>
                         <tr className="bg-gray-800/20">
-                            <td className="p-4 poppins-text text-center">
+                            <td className="p-4 poppins-text text-center max-w-24">
                             <span className="px-2 py-1 bg-blue-500/10 rounded text-blue-300">
-                                {Number(selectedMeal.total_calories).toFixed(1)} kcal
+                                {Number(selectedMeal.total_calories).toFixed(1)} KCAL
                             </span>
                             </td>
                             <td className="p-4 poppins-text text-center">
                             <span className="px-2 py-1 bg-green-500/10 rounded text-green-300">
-                                {Number(selectedMeal.total_protein).toFixed(1)} g
+                                {Number(selectedMeal.total_protein).toFixed(1)} G
                             </span>
                             </td>
                             <td className="p-4 poppins-text text-center">
                             <span className="px-2 py-1 bg-purple-500/10 rounded text-purple-300">
-                                {Number(selectedMeal.total_carbs).toFixed(1)} g
+                                {Number(selectedMeal.total_carbs).toFixed(1)} G
                             </span>
                             </td>
                             <td className="p-4 poppins-text text-center">
                             <span className="px-2 py-1 bg-orange-500/10 rounded text-orange-300">
-                                {Number(selectedMeal.total_fat).toFixed(1)} g
+                                {Number(selectedMeal.total_fat).toFixed(1)} G
                             </span>
                             </td>
                         </tr>
