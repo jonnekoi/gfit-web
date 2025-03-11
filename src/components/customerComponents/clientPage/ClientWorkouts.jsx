@@ -22,27 +22,39 @@ const ClientWorkouts = ({ exercises, userId }) => {
 
     return (
         <div className="w-full">
-            <div className="flex flex-row justify-end">
-                <button
-                    className="text-white font-bold bg-orange-500 bruno-ace-sc-regular mr-5 text-1xl border min-w-48 border-orange-500 p-2 rounded">Manage Workouts
-                </button>
-                <button onClick={addWorkoutToClientModal} className="text-white font-bold bg-orange-500 bruno-ace-sc-regular text-1xl mr-5 border min-w-48 border-orange-500 p-2 rounded">Add
-                    Workout
-                </button>
-            </div>
             <div className="flex justify-center">
                 <div className="w-2/3">
-                    <table className="w-full text-white montserrat-text">
+                    <div className="flex flex-row justify-end mb-2">
+                        <button
+                            onClick={addWorkoutToClientModal}
+                            className="text-white bg-gradient-to-r from-orange-600 to-orange-500 font-bold p-3 bruno-ace-sc-regular rounded-lg shadow-md hover:from-orange-500 hover:to-orange-400 transition-all transform hover:scale-105">
+                            Add Workout
+                        </button>
+                    </div>
+                    <table
+                        className="w-full text-gray-100 montserrat-text bg-gray-900/40 rounded-lg overflow-hidden shadow-lg">
                         <thead>
-                        <tr className="border-b border-b-orange-500 text-2xl font-bold text-center">
-                            <th className="p-5 cursor-pointer">Workout</th>
-                            <th className="p-5 cursor-pointer">Type</th>
-                            <th className="p-5 cursor-pointer">Level</th>
+                        <tr className="bg-gradient-to-r from-orange-600/80 to-orange-500/60 text-lg font-medium">
+                            <th className="px-6 py-4 transition-colors hover:bg-orange-500/30 cursor-pointer">
+                                <div className="flex items-center justify-center space-x-2">
+                                    <span>Workout</span>
+                                </div>
+                            </th>
+                            <th className="px-6 py-4 transition-colors hover:bg-orange-500/30 cursor-pointer">
+                                <div className="flex items-center justify-center space-x-2">
+                                    <span>Type</span>
+                                </div>
+                            </th>
+                            <th className="px-6 py-4 transition-colors hover:bg-orange-500/30 cursor-pointer">
+                                <div className="flex items-center justify-center space-x-2">
+                                    <span>Level</span>
+                                </div>
+                            </th>
                         </tr>
                         </thead>
                         <tbody>
                         {Object.keys(exercises).map((key, index) => (
-                            <WorkoutCard key={index} workout={exercises[key]}/>
+                            <WorkoutCard key={index} workout={exercises[key]} index={index}/>
                         ))}
                         </tbody>
                     </table>

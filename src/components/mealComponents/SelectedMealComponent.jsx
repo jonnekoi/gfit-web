@@ -1,62 +1,106 @@
 const selectedMealComponent = ({ selectedMeal, ingredients, closeModal }) => {
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-55">
-            <div className="väribg text-white p-8 rounded max-w-5xl w-full text-center">
-                <h2 className="font-bold montserrat-text text-2xl pb-2">{selectedMeal.meal_name || "Unnamed Meal"}</h2>
-                <p className="montserrat-text font-bold text-1xl">{selectedMeal.meal_category}</p>
-                <p className="montserrat-text m-2"></p>
-                <p className="montserrat-text m-2">{selectedMeal.meal_description}</p>
-                <div className="flex flex-row justify-center">
-                    <table>
-                        <thead className="text-orange-500">
-                        <tr>
-                            <th className="m-2 montserrat-text p-5">Calories</th>
-                            <th className="m-2 montserrat-text p-5">Protein</th>
-                            <th className="m-2 montserrat-text p-5">Carbs</th>
-                            <th className="m-2 montserrat-text p-5">Fat</th>
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 backdrop-blur-sm">
+            <div
+                className="bg-gray-900/90 text-white p-8 rounded-xl max-w-4xl w-full shadow-2xl border border-orange-500/30">
+                <div className="text-center mb-6">
+                    <h2 className="font-bold montserrat-text text-3xl bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent pb-2">
+                        {selectedMeal.meal_name || "Unnamed Meal"}
+                    </h2>
+                    <div className="flex items-center justify-center gap-4 text-gray-300">
+                        <p className="montserrat-text font-medium">
+                    <span className="px-3 py-1 bg-orange-500/20 rounded-full text-sm font-medium text-orange-300">
+                        {selectedMeal.meal_category}
+                    </span>
+                        </p>
+                    </div>
+                    <p className="montserrat-text mt-4 max-w-2xl mx-auto text-gray-300 italic">
+                        {selectedMeal.meal_description || "No description available"}
+                    </p>
+                </div>
+
+                <div className="overflow-hidden rounded-lg border border-gray-700/50 mb-6">
+                    <table className="w-full text-white">
+                        <thead>
+                        <tr className="bg-gradient-to-r from-orange-600/60 to-orange-500/40 text-lg font-medium">
+                            <th className="p-4 text-center">Calories</th>
+                            <th className="p-4 text-center">Protein</th>
+                            <th className="p-4 text-center">Carbs</th>
+                            <th className="p-4 text-center">Fat</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>{Number(selectedMeal.total_calories).toFixed(1)} g</td>
-                            <td>{Number(selectedMeal.total_protein).toFixed(1)} g</td>
-                            <td>{Number(selectedMeal.total_carbs).toFixed(1)} g</td>
-                            <td>{Number(selectedMeal.total_fat).toFixed(1)} g</td>
+                        <tr className="bg-gray-800/20">
+                            <td className="p-4 poppins-text text-center">
+                            <span className="px-2 py-1 bg-blue-500/10 rounded text-blue-300">
+                                {Number(selectedMeal.total_calories).toFixed(1)} kcal
+                            </span>
+                            </td>
+                            <td className="p-4 poppins-text text-center">
+                            <span className="px-2 py-1 bg-green-500/10 rounded text-green-300">
+                                {Number(selectedMeal.total_protein).toFixed(1)} g
+                            </span>
+                            </td>
+                            <td className="p-4 poppins-text text-center">
+                            <span className="px-2 py-1 bg-purple-500/10 rounded text-purple-300">
+                                {Number(selectedMeal.total_carbs).toFixed(1)} g
+                            </span>
+                            </td>
+                            <td className="p-4 poppins-text text-center">
+                            <span className="px-2 py-1 bg-orange-500/10 rounded text-orange-300">
+                                {Number(selectedMeal.total_fat).toFixed(1)} g
+                            </span>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
-                <ul>
-                    <div className="flex justify-center">
-                        <table className="w-full">
-                            <thead className="">
-                            <tr>
-                                <th className="m-2 montserrat-text p-5">Name</th>
-                                <th className="m-2 montserrat-text p-5">Weight (g)</th>
-                                <th className="m-2 montserrat-text p-5">Protein / 100g</th>
-                                <th className="m-2 montserrat-text p-5">Carbs / 100g</th>
-                                <th className="m-2 montserrat-text p-5">Fat / 100g</th>
-                                <th className="m-2 montserrat-text p-5">Calories / 100g</th>
+
+                <div className="overflow-hidden rounded-lg border border-gray-700/50">
+                    <table className="w-full text-white">
+                        <thead>
+                        <tr className="bg-gradient-to-r from-orange-600/60 to-orange-500/40 text-lg font-medium">
+                            <th className="p-4 text-left">Ingredient</th>
+                            <th className="p-4 text-center">Weight (g)</th>
+                            <th className="p-4 text-center">Protein / 100g</th>
+                            <th className="p-4 text-center">Carbs / 100g</th>
+                            <th className="p-4 text-center">Fat / 100g</th>
+                            <th className="p-4 text-center">Calories / 100g</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {ingredients.map((ingredient, index) => (
+                            <tr key={index}
+                                className={`${index % 2 === 0 ? 'bg-gray-800/20' : 'bg-transparent'} transition-colors`}>
+                                <td className="p-4 poppins-text font-medium text-orange-400">
+                                    {ingredient.ingredient_name}
+                                </td>
+                                <td className="p-4 poppins-text text-center text-gray-300">
+                                    {ingredient.ingredient_quantity_g}
+                                </td>
+                                <td className="p-4 poppins-text text-center text-gray-300">
+                                    {ingredient.protein_per_100g}
+                                </td>
+                                <td className="p-4 poppins-text text-center text-gray-300">
+                                    {ingredient.carbs_per_100g}
+                                </td>
+                                <td className="p-4 poppins-text text-center text-gray-300">
+                                    {ingredient.fat_per_100g}
+                                </td>
+                                <td className="p-4 poppins-text text-center text-gray-300">
+                                    {ingredient.calories_per_100g}
+                                </td>
                             </tr>
-                            </thead>
-                            <tbody>
-                            {ingredients.map((ingredient, index) => (
-                                <tr key={index}>
-                                    <td className="m-2 poppins-text p-2 text-orange-500">{ingredient.ingredient_name}</td>
-                                    <td className="m-2 poppins-text p-2">{ingredient.ingredient_quantity_g}</td>
-                                    <td className="m-2 poppins-text p-2">{ingredient.protein_per_100g}</td>
-                                    <td className="m-2 poppins-text p-2">{ingredient.carbs_per_100g}</td>
-                                    <td className="m-2 poppins-text p-2">{ingredient.fat_per_100g}</td>
-                                    <td className="m-2 poppins-text p-2">{ingredient.calories_per_100g}</td>
-                                </tr>
-                            ))}
-                            </tbody>
-                        </table>
-                    </div>
-                </ul>
-                <div className="flex flex-row justify-center">
-                    <button onClick={closeModal}
-                            className="text-white bg-orange-500 font-bold p-2 mt-5 w-1/3 montserrat-text text-1xl border border-orange-500 rounded hover:border-orange-300">
+                        ))}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div className="flex flex-row mt-6 gap-4 justify-center">
+                    <button
+                        onClick={closeModal}
+                        className="text-white bg-gradient-to-r from-orange-600 to-orange-500 font-bold p-3 w-1/3 bruno-ace-sc-regular rounded-lg shadow-md hover:from-orange-500 hover:to-orange-400 transition-all transform hover:scale-105"
+                    >
                         Close
                     </button>
                 </div>

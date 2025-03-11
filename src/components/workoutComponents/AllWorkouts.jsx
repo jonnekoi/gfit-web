@@ -145,23 +145,67 @@ const AllWorkouts = () => {
     return (
         <>
             <div className="w-2/3">
-                <table className="w-full text-white montserrat-text">
+                <table
+                    className="w-full text-gray-100 montserrat-text bg-gray-900/40 rounded-lg overflow-hidden shadow-lg">
                     <thead>
-                    <tr className="border-b border-b-orange-500 text-2xl font-bold text-center">
-                        <th onClick={sortWorkouts("workout_name")} className="p-5 cursor-pointer">Name <FontAwesomeIcon icon={faSort} className="text-1" /></th>
-                        <th onClick={sortWorkouts("workout_type")} className="p-5 cursor-pointer">Type <FontAwesomeIcon icon={faSort} className="text-1" /></th>
-                        <th onClick={sortWorkouts("workout_level")} className="p-5 cursor-pointer">Level <FontAwesomeIcon icon={faSort} className="text-1" /></th>
-                        <th onClick={sortWorkouts("workout_created_at")} className="p-5 cursor-pointer">Crafted <FontAwesomeIcon icon={faSort} className="text-1" /></th>
+                    <tr className="bg-gradient-to-r from-orange-600/80 to-orange-500/60 text-lg font-medium">
+                        <th onClick={sortWorkouts("workout_name")}
+                            className="px-6 py-4 transition-colors hover:bg-orange-500/30 cursor-pointer">
+                            <div className="flex items-center justify-center space-x-2">
+                                <span>Name</span>
+                                <FontAwesomeIcon icon={faSort} className="text-orange-300 opacity-70"/>
+                            </div>
+                        </th>
+                        <th onClick={sortWorkouts("workout_type")}
+                            className="px-6 py-4 transition-colors hover:bg-orange-500/30 cursor-pointer">
+                            <div className="flex items-center justify-center space-x-2">
+                                <span>Type</span>
+                                <FontAwesomeIcon icon={faSort} className="text-orange-300 opacity-70"/>
+                            </div>
+                        </th>
+                        <th onClick={sortWorkouts("workout_level")}
+                            className="px-6 py-4 transition-colors hover:bg-orange-500/30 cursor-pointer">
+                            <div className="flex items-center justify-center space-x-2">
+                                <span>Level</span>
+                                <FontAwesomeIcon icon={faSort} className="text-orange-300 opacity-70"/>
+                            </div>
+                        </th>
+                        <th onClick={sortWorkouts("workout_created_at")}
+                            className="px-6 py-4 transition-colors hover:bg-orange-500/30 cursor-pointer">
+                            <div className="flex items-center justify-center space-x-2">
+                                <span>Crafted</span>
+                                <FontAwesomeIcon icon={faSort} className="text-orange-300 opacity-70"/>
+                            </div>
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
                     {visibleWorkouts.map((workout, index) => (
-                        <tr key={index} onClick={() => toggleVisibility(workout)}
-                            className="cursor-pointer text-center">
-                            <td className="p-4 border-b border-b-orange-500 max-w-36">{workout.workout_name}</td>
-                            <td className="p-4 border-b border-b-orange-500 max-w-36">{workout.workout_type}</td>
-                            <td className="p-4 border-b border-b-orange-500 max-w-36">{workout.workout_level}</td>
-                            <td className="p-4 border-b border-b-orange-500 max-w-36">{formatDate(workout.workout_created_at)}</td>
+                        <tr
+                            key={index}
+                            onClick={() => toggleVisibility(workout)}
+                            className={`transition-colors hover:bg-orange-500/10 cursor-pointer ${index % 2 === 0 ? 'bg-gray-800/20' : 'bg-transparent'}`}
+                        >
+                            <td className="px-6 py-4 text-center border-b border-orange-500/20 max-w-36">
+                                {workout.workout_name}
+                            </td>
+                            <td className="px-6 py-4 text-center border-b border-orange-500/20 max-w-36">
+                <span className="px-3 py-1 bg-orange-500/20 rounded-full text-sm">
+                    {workout.workout_type}
+                </span>
+                            </td>
+                            <td className="px-6 py-4 text-center border-b border-orange-500/20 max-w-36">
+                <span className={`px-3 py-1 rounded-full text-sm ${
+                    workout.workout_level === 'Easy' ? 'bg-green-500/20 text-green-300' :
+                        workout.workout_level === 'Medium' ? 'bg-yellow-500/20 text-yellow-300' :
+                            'bg-red-500/20 text-red-300'
+                }`}>
+                    {workout.workout_level}
+                </span>
+                            </td>
+                            <td className="px-6 py-4 text-center border-b border-orange-500/20 max-w-36">
+                                {formatDate(workout.workout_created_at)}
+                            </td>
                         </tr>
                     ))}
                     </tbody>
@@ -183,8 +227,11 @@ const AllWorkouts = () => {
                     </button>
                 </div>
                 {selectedWorkout && (
-                    <SelectedWorkoutModal selectedWorkout={selectedWorkout} editableExercises={editableExercises} isReadOnly={isReadOnly} closeModal={closeModal} handleInputChange={handleInputChange} toggleEditMode={toggleEditMode} updateText={updateText} />
-                    )}
+                    <SelectedWorkoutModal selectedWorkout={selectedWorkout} editableExercises={editableExercises}
+                                          isReadOnly={isReadOnly} closeModal={closeModal}
+                                          handleInputChange={handleInputChange} toggleEditMode={toggleEditMode}
+                                          updateText={updateText}/>
+                )}
             </div>
         </>
     );

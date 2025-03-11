@@ -25,8 +25,7 @@ const AllMeals = () => {
         try {
             const response = await fetch(URL + "/meals", fetchOptions);
             const data = await response.json();
-            console.log(data);
-            setMeals(data.meals); // No need to process further
+            setMeals(data.meals);
         } catch (error) {
             console.error("Error: ", error);
         }
@@ -67,38 +66,83 @@ const AllMeals = () => {
     return (
         <>
             <div className="w-2/3">
-                <table className="w-full text-white montserrat-text">
+                <table
+                    className="w-full text-gray-100 montserrat-text bg-gray-900/40 rounded-lg overflow-hidden shadow-lg">
                     <thead>
-                    <tr className="border-b border-b-orange-500 text-2xl font-bold text-center">
-                        <th className="p-5 cursor-pointer">
-                            Name <FontAwesomeIcon icon={faSort} className="text-1"/>
+                    <tr className="bg-gradient-to-r from-orange-600/80 to-orange-500/60 text-lg font-medium">
+                        <th className="px-6 py-4 transition-colors hover:bg-orange-500/30 cursor-pointer">
+                            <div className="flex items-center justify-center space-x-2">
+                                <span>Name</span>
+                                <FontAwesomeIcon icon={faSort} className="text-orange-300 opacity-70"/>
+                            </div>
                         </th>
-                        <th className="p-5 cursor-pointer">
-                            Category <FontAwesomeIcon icon={faSort} className="text-1"/>
+                        <th className="px-6 py-4 transition-colors hover:bg-orange-500/30 cursor-pointer">
+                            <div className="flex items-center justify-center space-x-2">
+                                <span>Category</span>
+                                <FontAwesomeIcon icon={faSort} className="text-orange-300 opacity-70"/>
+                            </div>
                         </th>
-                        <th className="p-5 cursor-pointer">
-                            Protein <FontAwesomeIcon icon={faSort} className="text-1"/>
+                        <th className="px-6 py-4 transition-colors hover:bg-orange-500/30 cursor-pointer">
+                            <div className="flex items-center justify-center space-x-2">
+                                <span>Protein</span>
+                                <FontAwesomeIcon icon={faSort} className="text-orange-300 opacity-70"/>
+                            </div>
                         </th>
-                        <th className="p-5 cursor-pointer">
-                            Carbs <FontAwesomeIcon icon={faSort} className="text-1"/>
+                        <th className="px-6 py-4 transition-colors hover:bg-orange-500/30 cursor-pointer">
+                            <div className="flex items-center justify-center space-x-2">
+                                <span>Carbs</span>
+                                <FontAwesomeIcon icon={faSort} className="text-orange-300 opacity-70"/>
+                            </div>
                         </th>
-                        <th className="p-5 cursor-pointer">
-                            Fat <FontAwesomeIcon icon={faSort} className="text-1"/>
+                        <th className="px-6 py-4 transition-colors hover:bg-orange-500/30 cursor-pointer">
+                            <div className="flex items-center justify-center space-x-2">
+                                <span>Fat</span>
+                                <FontAwesomeIcon icon={faSort} className="text-orange-300 opacity-70"/>
+                            </div>
                         </th>
-                        <th className="p-5 cursor-pointer">
-                            Calories <FontAwesomeIcon icon={faSort} className="text-1"/>
+                        <th className="px-6 py-4 transition-colors hover:bg-orange-500/30 cursor-pointer">
+                            <div className="flex items-center justify-center space-x-2">
+                                <span>Calories</span>
+                                <FontAwesomeIcon icon={faSort} className="text-orange-300 opacity-70"/>
+                            </div>
                         </th>
                     </tr>
                     </thead>
                     <tbody>
                     {visibleMeals.map((meal, index) => (
-                        <tr key={index} onClick={() => toggleVisibility(meal)} className="cursor-pointer text-center">
-                            <td className="p-4 border-b border-b-orange-500">{meal.meal_name}</td>
-                            <td className="p-4 border-b border-b-orange-500">{meal.meal_category}</td>
-                            <td className="p-4 border-b border-b-orange-500">{Number(meal.total_protein).toFixed(1)} g</td>
-                            <td className="p-4 border-b border-b-orange-500">{Number (meal.total_carbs).toFixed(1)} g</td>
-                            <td className="p-4 border-b border-b-orange-500">{Number (meal.total_fat).toFixed(1)} g</td>
-                            <td className="p-4 border-b border-b-orange-500">{Number (meal.total_calories).toFixed(1)}</td>
+                        <tr
+                            key={index}
+                            onClick={() => toggleVisibility(meal)}
+                            className={`transition-colors hover:bg-orange-500/10 cursor-pointer ${index % 2 === 0 ? 'bg-gray-800/20' : 'bg-transparent'}`}
+                        >
+                            <td className="px-6 py-4 text-center border-b border-orange-500/20 max-w-44">
+                                {meal.meal_name}
+                            </td>
+                            <td className="px-6 py-4 text-center border-b border-orange-500/20 max-w-44">
+                <span className="px-3 py-1 bg-orange-500/20 rounded-full text-sm">
+                    {meal.meal_category}
+                </span>
+                            </td>
+                            <td className="px-6 py-4 text-center border-b border-orange-500/20 max-w-44">
+                <span className="font-medium text-blue-300">
+                    {Number(meal.total_protein).toFixed(1)} g
+                </span>
+                            </td>
+                            <td className="px-6 py-4 text-center border-b border-orange-500/20 max-w-44">
+                <span className="font-medium text-green-300">
+                    {Number(meal.total_carbs).toFixed(1)} g
+                </span>
+                            </td>
+                            <td className="px-6 py-4 text-center border-b border-orange-500/20 max-w-44">
+                <span className="font-medium text-yellow-300">
+                    {Number(meal.total_fat).toFixed(1)} g
+                </span>
+                            </td>
+                            <td className="px-6 py-4 text-center border-b border-orange-500/20 max-w-44">
+                <span className="font-medium">
+                    {Number(meal.total_calories).toFixed(1)} kcal
+                </span>
+                            </td>
                         </tr>
                     ))}
                     </tbody>
@@ -120,7 +164,8 @@ const AllMeals = () => {
                     </button>
                 </div>
                 {selectedMeal && (
-                    <SelectedMealComponent selectedMeal={selectedMeal} ingredients={ingredients} closeModal={closeModal}/>
+                    <SelectedMealComponent selectedMeal={selectedMeal} ingredients={ingredients}
+                                           closeModal={closeModal}/>
                 )}
             </div>
         </>

@@ -65,9 +65,13 @@ const ClientOverview = ({ client }) => {
         if (active && payload && payload.length) {
             const { date, weight } = payload[0].payload;
             return (
-                <div className="custom-tooltip bg-orange-500 text-white p-2 rounded">
-                    <p><strong>{date}</strong></p>
-                    <p><strong>{weight}</strong></p>
+                <div className="bg-gray-900/90 text-white p-3 rounded-lg shadow-xl border border-orange-500/30">
+                    <p className="montserrat-text font-medium text-gray-300">
+                        <span className="text-orange-300">Date:</span> {date}
+                    </p>
+                    <p className="montserrat-text font-bold">
+                        <span className="text-orange-400">{weight}</span> kg
+                    </p>
                 </div>
             );
         }
@@ -99,13 +103,51 @@ const ClientOverview = ({ client }) => {
                                 bottom: 0,
                             }}
                         >
-                            <XAxis dataKey="date" tick={{fill: "white", dy: 10, dx: 15}} stroke="none" interval={5}/>
-                            <YAxis tickCount={6} tick={{fill: "white"}} stroke="none" domain={[minWeight, maxWeight]}/>
-                            <CartesianGrid strokeDasharray="" horizontal={true} vertical={false} stroke="#ffff"
-                                           strokeOpacity={0.2}/>
-                            <Tooltip content={<CustomTooltip/>}/>
-                            <Line type="monotone" dataKey="weight" stroke="#ffff" fill="#ffff"/>
-                            <ReferenceLine y={targetWeight} stroke="#ea580c" strokeDasharray="6 6"/>
+                            <defs>
+                                <linearGradient id="weightGradient" x1="0" y1="0" x2="1" y2="0">
+                                    <stop offset="0%" stopColor="#f97316" />
+                                    <stop offset="100%" stopColor="#ea580c" />
+                                </linearGradient>
+                            </defs>
+                            <XAxis
+                                dataKey="date"
+                                tick={{fill: "#d1d5db", dy: 10, dx: 15}}
+                                stroke="none"
+                                interval={5}
+                            />
+                            <YAxis
+                                tickCount={6}
+                                tick={{fill: "#d1d5db"}}
+                                stroke="none"
+                                domain={[minWeight, maxWeight]}
+                            />
+                            <CartesianGrid
+                                strokeDasharray=""
+                                horizontal={true}
+                                vertical={false}
+                                stroke="#9ca3af"
+                                strokeOpacity={0.2}
+                            />
+                            <Tooltip content={<CustomTooltip />} />
+                            <Line
+                                type="monotone"
+                                dataKey="weight"
+                                stroke="url(#weightGradient)"
+                                strokeWidth={3}
+                                dot={{ stroke: '#ea580c', strokeWidth: 2, r: 4, fill: '#1f2937' }}
+                                activeDot={{ stroke: '#ea580c', strokeWidth: 2, r: 6, fill: '#f97316' }}
+                            />
+                            <ReferenceLine
+                                y={targetWeight}
+                                stroke="#ea580c"
+                                strokeDasharray="6 6"
+                                label={{
+                                    value: "",
+                                    position: "right",
+                                    fill: "#ea580c",
+                                    fontSize: 12
+                                }}
+                            />
                         </LineChart>
                     </ResponsiveContainer>
                 )}
