@@ -12,7 +12,7 @@ const ClientDetails = () => {
     const { clientId} = useParams();
     const [clientData, setClientData] = useState(null);
     const [activeSection, setActiveSection] = useState("Overview");
-    const [profilePicture, setProfilePicture] = useState('');
+    const [profilePicture, setProfilePicture] = useState(null);
     const [clientWeights, setClientWeights] = useState(null);
     const [notWeightData, setNotWeightData] = useState(false);
     const token = sessionStorage.getItem('token');
@@ -20,7 +20,6 @@ const ClientDetails = () => {
 
     const handleSectionClick = (section) => {
         setActiveSection((prevSection) => (prevSection === section ? prevSection : section));
-        console.log(activeSection);
     };
 
     const fetchProfilePicture = async (clientId) => {
