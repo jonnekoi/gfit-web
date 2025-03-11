@@ -119,9 +119,11 @@ const ClientDetails = () => {
                         {notWeightData && (
                             <p></p>
                         )}
+                        <div className="flex flex-row space-x-5 mt-2">
                         <p className="montserrat-text font-semibold text-white text-2xl">{lastWeight || "0.00"}</p>
                         <p className="montserrat-text font-semibold text-white text-2xl">{clientData.targetWeight || 0.00}</p>
                         <p className="montserrat-text font-semibold text-2xl text-orange-500">{weightDifferenceAmount || "+/- 0.00"}</p>
+                        </div>
                     </div>
                     <div className="flex flex-col justify-center">
                         <nav className="space-x-5 mr-5">
