@@ -113,7 +113,7 @@ const ClientDetails = () => {
             <div className="w-full">
                 <div className="väribg flex flex-row w-full justify-between border-b">
                     <div className="flex flex-row items-center space-x-7">
-                        <img src={profilePicture} alt="profile" className="rounded-full w-44 h-44 m-3"/>
+                        <img src={profilePicture} alt="profile" className="rounded-full w-44 h-44 m-3 border-2 border-orange-500"/>
                         <h1 className="michroma-regular font-bold text-white text-3xl">{clientData.FirstName} {clientData.LastName}</h1>
                         {notWeightData && (
                             <p></p>
@@ -135,7 +135,7 @@ const ClientDetails = () => {
                     </div>
                 </div>
                 <div className="w-full flex justify-center">
-                        <div className="flex w-full justify-center mt-10">
+                        <div className="flex w-full justify-center m-10">
                             {activeSection === "Overview" && (<ClientOverview client={clientData}/>)}
                             {activeSection === "Workouts" && (<ClientWorkouts exercises={clientData.workouts} userId={clientId}/>)}
                             {activeSection === "Meals" && (<ClientMeals/>)}

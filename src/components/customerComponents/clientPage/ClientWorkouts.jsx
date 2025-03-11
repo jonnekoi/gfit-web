@@ -4,21 +4,36 @@ import AddWorkoutToClientModal from "./AddWorkoutToClientModal.jsx";
 
 
 const ClientWorkouts = ({ exercises, userId }) => {
-    const [workoutModal, setWorkoutModal] = useState(false);
+    const [addWorkoutModal, setAddWorkoutModal] = useState(false);
+    const [currentPage, setCurrentPage] = useState(0);
+    const rowsPerPage = 8;
 
 
     const addWorkoutToClientModal = () => {
-        setWorkoutModal(true);
+        setAddWorkoutModal(true);
     }
 
     const closeModal = () => {
-        setWorkoutModal(false);
+        setAddWorkoutModal(false);
     };
 
 
     if (!exercises) {
         return <div></div>;
     }
+
+    const exercisesArray = Object.values(exercises);
+    const startIndex = currentPage * rowsPerPage;
+    const endIndex = startIndex + rowsPerPage;
+    const visibleExercises = exercisesArray.slice(startIndex, endIndex);
+
+    const nextPage = () => {
+        if (endIndex < exercisesArray.length) setCurrentPage(prev => prev + 1);
+    };
+
+    const prevPage = () => {
+        if (currentPage > 0) setCurrentPage(prev => prev - 1);
+    };
 
     return (
         <div className="w-full">
@@ -53,15 +68,31 @@ const ClientWorkouts = ({ exercises, userId }) => {
                         </tr>
                         </thead>
                         <tbody>
-                        {Object.keys(exercises).map((key, index) => (
-                            <WorkoutCard key={index} workout={exercises[key]} index={index}/>
+                        {visibleExercises.map((exercise, index) => (
+                            <WorkoutCard key={index} workout={exercise} index={index}/>
                         ))}
                         </tbody>
                     </table>
+                    <div className="flex justify-center mt-4 text-white montserrat-text text-1xl">
+                        <button
+                            onClick={prevPage}
+                            disabled={currentPage === 0}
+                            className={`px-4 py-2 rounded ${currentPage === 0 ? "cursor-not-allowed" : "text-white"}`}
+                        >
+                            Previous
+                        </button>
+                        <button
+                            onClick={nextPage}
+                            disabled={endIndex >= exercises.length}
+                            className={`px-4 py-2 rounded ${endIndex >= exercises.length ? "cursor-not-allowed" : "text-white"}`}
+                        >
+                            Next
+                        </button>
+                    </div>
                 </div>
             </div>
-            {workoutModal && (
-                <AddWorkoutToClientModal userId={userId} setWorkoutModal={setWorkoutModal} close={closeModal}/>
+            {addWorkoutModal && (
+                <AddWorkoutToClientModal userId={userId} setWorkoutModal={setAddWorkoutModal} close={closeModal}/>
             )}
         </div>
     );

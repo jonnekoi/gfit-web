@@ -74,9 +74,11 @@ const AddWorkoutToClientModal = ({ userId, close }) => {
             const response = await fetch(URL + '/clients/workout/client/add', fetchOptions);
             if (response.status === 409) {
                 setErrortext("Workout already exists. Edit it from the client page.");
+                return;
             }
             setSelectedWorkout({ ...selectedWorkout, exercises: editedExercises });
             setIsEditMode(false);
+            close();
         } catch (error) {
             console.error("Error saving exercises:", error);
         }
