@@ -36,7 +36,7 @@ const Layout = () => {
                             <Link to="/workouts"
                                   className="underline-hover text-white font-semibold bruno-ace-sc-regular text-1xl p-2">Workouts</Link>
                             <Link to="/meals"
-                                  className="underline-hover text-white font-semibold bruno-ace-sc-regular text-1xl p-2">Meals</Link>
+                                  className="underline-hover text-white font-semibold bruno-ace-sc-regular text-1xl p-2">Nutrition</Link>
                             <button onClick={handleLogout}
                                     className="underline-hover-logout text-orange-500 font-semibold bruno-ace-sc-regular text-xl p-2">Log
                                 out

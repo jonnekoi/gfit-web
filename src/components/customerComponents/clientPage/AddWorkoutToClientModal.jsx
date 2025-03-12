@@ -9,6 +9,7 @@ const AddWorkoutToClientModal = ({ userId, close }) => {
     const [isEditMode, setIsEditMode] = useState(false);
     const [editedExercises, setEditedExercises] = useState([]);
     const [errortext, setErrortext] = useState("");
+    const [selectedDay, setSelectedDay] = useState("");
 
     const fetchWorkouts = async () => {
         try {
@@ -44,6 +45,10 @@ const AddWorkoutToClientModal = ({ userId, close }) => {
         setEditedExercises(workout.exercises);
     };
 
+    const handleDayChange = (event) => {
+        setSelectedDay(event.target.value);
+    };
+
     const toggleEditMode = () => {
         setIsEditMode(!isEditMode);
         if (!isEditMode) {
@@ -53,11 +58,17 @@ const AddWorkoutToClientModal = ({ userId, close }) => {
 
     const handleInputChange = (index, field, value) => {
         const updatedExercises = [...editedExercises];
-        updatedExercises[index][field] = value;
+        if (field === "low_reps" || field === "max_reps" || field === "sets") {
+            updatedExercises[index][field] = Number(value);
+        } else {
+            updatedExercises[index][field] = value;
+        }
+
         setEditedExercises(updatedExercises);
     };
 
     const handleSave = async () => {
+        console.log(editedExercises);
         try {
             const fetchOptions = {
                 method: 'POST',
@@ -68,7 +79,8 @@ const AddWorkoutToClientModal = ({ userId, close }) => {
                 body: JSON.stringify({
                     client_id: userId,
                     workout_id: selectedWorkout.workout_id,
-                    exercises: editedExercises
+                    exercises: editedExercises,
+                    workout_day: selectedDay
                 }),
             };
             const response = await fetch(URL + '/clients/workout/client/add', fetchOptions);
@@ -84,18 +96,46 @@ const AddWorkoutToClientModal = ({ userId, close }) => {
         }
     };
 
+    const addNewExercise = () => {
+        const newExercise = {
+            exercise_name: "Name",
+            low_reps: 0,
+            max_reps: 0,
+            weight: 0,
+            sets: 0
+        };
+
+        setEditedExercises([...editedExercises, newExercise]);
+    };
+
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 backdrop-blur-sm">
             <div
                 className="bg-gray-900/90 text-white p-8 rounded-xl max-w-4xl w-full shadow-2xl border border-orange-500/30">
+                <div className="flex flex-col space-y-5">
                 <select
                     onChange={handleWorkoutChange}
                     className="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                 >
+                    <option value="">Select a workout</option>
                     {workouts.map((workout, index) => (
                         <option key={index} value={workout.workout_name}>{workout.workout_name}</option>
                     ))}
                 </select>
+                <select
+                    onChange={handleDayChange}
+                    className="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                >
+                    <option value="">Select a day</option>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                    <option value="Sunday">Sunday</option>
+                </select>
+                </div>
 
                 {selectedWorkout && (
                     <div className="mt-6">
@@ -127,7 +167,17 @@ const AddWorkoutToClientModal = ({ userId, close }) => {
                                         className={`${index % 2 === 0 ? 'bg-gray-800/20' : 'bg-transparent'} transition-colors`}
                                     >
                                         <td className="p-4 poppins-text font-medium text-orange-400">
-                                            {exercise.exercise_name}
+                                            {isEditMode ? (
+                                                <input
+                                                    type="text"
+                                                    value={exercise.exercise_name}
+                                                    onChange={(e) => handleInputChange(index, "exercise_name", e.target.value)}
+                                                    className="p-2 w-full rounded bg-gray-800 border border-gray-700 text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                                                    placeholder="Exercise name"
+                                                />
+                                            ) : (
+                                                exercise.exercise_name
+                                            )}
                                         </td>
 
                                         {isEditMode ? (
@@ -186,28 +236,55 @@ const AddWorkoutToClientModal = ({ userId, close }) => {
                                             </span>
                                             )}
                                         </td>
+                                        <td>
+                                        </td>
                                     </tr>
                                 ))}
+                                {isEditMode && (
+                                    <tr className="border-t border-gray-700/50">
+                                        <td colSpan={5} className="p-4">
+                                            <button
+                                                onClick={addNewExercise}
+                                                className="w-full py-3 flex items-center justify-center text-orange-400 hover:text-orange-300 hover:bg-gray-800/30 rounded-md transition-colors"
+                                            >
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                                                </svg>
+                                                Add New Exercise
+                                            </button>
+                                        </td>
+                                    </tr>
+                                )}
                                 </tbody>
                             </table>
+                            <div className="flex justify-center m-2">
+                                {isEditMode ? (
+                                    <textarea placeholder="Add Description..." name="desci"
+                                              className="w-full min-h-24 p-3 border border-orange-500/30 rounded-lg bg-gray-800/60 text-gray-100 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500/50 transition-colors"/>
+                                ) : (
+                                    <span className="px-2 py-1 bg-green-500/10 rounded text-green-300">
+                                            </span>
+                                )}
+                            </div>
                         </div>
                     </div>
                 )}
 
                 <div className="flex flex-row mt-6 gap-4">
-                    <button
-                        onClick={toggleEditMode}
-                        className="text-white bg-gradient-to-r from-orange-600 to-orange-500 font-bold p-3 w-full bruno-ace-sc-regular rounded-lg shadow-md hover:from-orange-500 hover:to-orange-400 transition-all transform hover:scale-105"
-                    >
-                        {isEditMode ? "Cancel" : "Customize"}
-                    </button>
-
+                    {selectedWorkout && (
+                        <button
+                            onClick={toggleEditMode}
+                            className="text-white bg-gradient-to-r from-orange-600 to-orange-500 font-bold p-3 w-full bruno-ace-sc-regular rounded-lg shadow-md hover:from-orange-500 hover:to-orange-400 transition-all transform hover:scale-105"
+                        >
+                            {isEditMode ? "Cancel" : "Customize"}
+                        </button>
+                    )}
                     {isEditMode && (
                         <button
                             onClick={handleSave}
                             className="text-white bg-gradient-to-r from-orange-600 to-orange-500 font-bold p-3 w-full bruno-ace-sc-regular rounded-lg shadow-md hover:from-orange-500 hover:to-orange-400 transition-all transform hover:scale-105"
                         >
-                            Save
+                        Save
                         </button>
                     )}
 

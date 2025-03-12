@@ -125,7 +125,7 @@ const ClientDetails = () => {
                     </div>
                     <div className="flex flex-col justify-center">
                         <nav className="space-x-5 mr-5">
-                            {["Overview", "Workouts", "Meals", "Chat"].map((section) => (
+                            {["Overview", "Workouts", "Nutrition", "Chat"].map((section) => (
                                 <Button
                                     text={section}
                                     key={section}
@@ -139,7 +139,7 @@ const ClientDetails = () => {
                         <div className="flex w-full justify-center m-10">
                             {activeSection === "Overview" && (<ClientOverview client={clientData}/>)}
                             {activeSection === "Workouts" && (<ClientWorkouts exercises={clientData.workouts} userId={clientId}/>)}
-                            {activeSection === "Meals" && (<ClientMeals/>)}
+                            {activeSection === "Nutrition" && (<ClientMeals/>)}
                         </div>
                 </div>
             </div>
