@@ -59,13 +59,13 @@ const WorkoutCalender = ({ dailyWorkouts, userId }) => {
                                     </ul>
                                 )}
                             </div>
-                            {isModalOpen && (
-                                <EditClientWorkoutModal workout={selectedWorkout} userId={userId} closeModal={closeModal}/>
-                            )}
                         </div>
                     );
                 })}
             </div>
+            {isModalOpen && selectedWorkout && (
+                <EditClientWorkoutModal workout={selectedWorkout} userId={userId} closeModal={closeModal}/>
+            )}
         </div>
     );
 };

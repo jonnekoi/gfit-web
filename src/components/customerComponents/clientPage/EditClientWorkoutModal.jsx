@@ -61,7 +61,8 @@ const EditClientWorkoutModal = ({ workout, userId, closeModal }) => {
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-20 backdrop-blur-sm overflow-y-auto p-4">
-            <div className="bg-gray-900/90 text-white p-6 rounded-xl w-full max-w-6xl shadow-2xl border border-orange-500/30 flex flex-col max-h-[90vh]">
+            <div
+                className="bg-gray-900/90 text-white p-6 rounded-xl w-full max-w-6xl shadow-2xl border border-orange-500/30 flex flex-col max-h-[90vh]">
                 <WorkoutHeader
                     workout={workout}
                     isEditMode={isEditMode}

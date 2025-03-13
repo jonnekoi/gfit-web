@@ -1,8 +1,8 @@
 const selectedMealComponent = ({ selectedMeal, ingredients, closeModal }) => {
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 backdrop-blur-sm">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-20 backdrop-blur-sm overflow-y-auto p-4">
             <div
-                className="bg-gray-900/90 text-white p-8 rounded-xl max-w-4xl w-full shadow-2xl border border-orange-500/30">
+                className="bg-gray-900/90 text-white p-6 rounded-xl w-full max-w-6xl shadow-2xl border border-orange-500/30 flex flex-col max-h-[90vh]">
                 <div className="text-center mb-6">
                     <h2 className="font-bold montserrat-text text-3xl bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent pb-2">
                         {selectedMeal.meal_name}
