@@ -1,12 +1,19 @@
-import React from "react";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEllipsisV} from "@fortawesome/free-solid-svg-icons";
+import React, {useState} from "react";
+import EditClientWorkoutModal from "./EditClientWorkoutModal.jsx";
 
-const WorkoutCalender = ({ dailyWorkouts }) => {
+const WorkoutCalender = ({ dailyWorkouts, userId }) => {
+    const [selectedWorkout, setSelectedWorkout] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleEditClick = (e, workout) => {
         e.stopPropagation();
-        console.log(workout);
+        setSelectedWorkout(workout);
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setSelectedWorkout(null);
     };
 
     return (
@@ -43,8 +50,8 @@ const WorkoutCalender = ({ dailyWorkouts }) => {
                                             </span>
                                                     <button
                                                         onClick={(e) => handleEditClick(e, workout)}
-                                                        className="px-3 py-1 bg-orange-500/20 rounded-full text-sm hover:bg-orange-500/40 transition-colors">
-                                                        <FontAwesomeIcon icon={faEllipsisV} className="" />
+                                                        className="px-3 py-1 bg-white/20 rounded-full text-sm hover:bg-orange-500/40 transition-colors">
+                                                        Edit
                                                     </button>
                                                 </div>
                                             </li>
@@ -52,6 +59,9 @@ const WorkoutCalender = ({ dailyWorkouts }) => {
                                     </ul>
                                 )}
                             </div>
+                            {isModalOpen && (
+                                <EditClientWorkoutModal workout={selectedWorkout} userId={userId} closeModal={closeModal}/>
+                            )}
                         </div>
                     );
                 })}

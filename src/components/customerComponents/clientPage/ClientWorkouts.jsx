@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import AddWorkoutToClientModal from "./AddWorkoutToClientModal.jsx";
-import Button from "../../../buttons/Button.jsx";
 import WorkoutCalender from "./WorkoutCalender.jsx";
 import ButtonNoHover from "../../../buttons/ButtonNoHover.jsx";
 
@@ -40,8 +39,6 @@ const ClientWorkouts = ({ exercises, userId }) => {
     }
     );
 
-    console.log(dailyWorkouts);
-
 
     return (
         <div className="w-full">
@@ -54,7 +51,7 @@ const ClientWorkouts = ({ exercises, userId }) => {
                             onClick={addWorkoutToClientModal} text="Add Workout">
                         </ButtonNoHover>
                     </div>
-                    <WorkoutCalender dailyWorkouts={dailyWorkouts} />
+                    <WorkoutCalender dailyWorkouts={dailyWorkouts} userId={userId} />
                 </div>
             </div>
             {addWorkoutModal && (

@@ -158,6 +158,7 @@ const AddWorkoutToClientModal = ({ userId, close }) => {
                                     )}
                                     <th className="p-4 text-center">Weight</th>
                                     <th className="p-4 text-center">Sets</th>
+                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
