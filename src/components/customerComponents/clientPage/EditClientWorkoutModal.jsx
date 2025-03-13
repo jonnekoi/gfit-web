@@ -83,7 +83,6 @@ const EditClientWorkoutModal = ({ workout, userId, closeModal }) => {
                             onChange={handleDayChange}
                             className="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                         >
-                            <option value="">Select a day</option>
                             <option value="Monday">Monday</option>
                             <option value="Tuesday">Tuesday</option>
                             <option value="Wednesday">Wednesday</option>
