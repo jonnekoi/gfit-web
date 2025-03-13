@@ -3,6 +3,7 @@ import formatDate from "../../scripts/formatDate";
 import {faSort} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import SelectedWorkoutModal from "./SelectedWorkoutModal.jsx";
+import {useNavigate} from "react-router-dom";
 
 
 const URL = "http://127.0.0.1:3000/v1";
@@ -16,6 +17,7 @@ const AllWorkouts = () => {
     const rowsPerPage = 8;
     const [updateText, setUpdateText] = useState("");
     const token = sessionStorage.getItem("token");
+    const navigate = useNavigate();
 
 
     const fetchWorkouts = async () => {
@@ -33,6 +35,10 @@ const AllWorkouts = () => {
                 workout_name: key,
                 ...value,
             }));
+
+            if (response.status === 403) {
+                navigate("/login");
+            }
 
             setWorkouts(workoutsArray);
         } catch (error) {
@@ -125,6 +131,8 @@ const AllWorkouts = () => {
     const prevPage = () => {
         if (currentPage > 0) setCurrentPage(prev => prev - 1);
     };
+
+    console.log("visibleWorkouts", visibleWorkouts);
 
     const sortWorkouts = (sortBy) => {
         return () => {

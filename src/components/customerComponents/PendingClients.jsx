@@ -16,6 +16,10 @@ const PendingClients = ({ searchQuery }) => {
         return <div></div>;
     }
 
+    if (clients.message === "Invalid token") {
+        navigate("/login");
+    }
+
     const filteredClients = clients.filter(client =>
         `${client.FirstName} ${client.LastName}`.toLowerCase().includes(searchQuery.toLowerCase())
     );

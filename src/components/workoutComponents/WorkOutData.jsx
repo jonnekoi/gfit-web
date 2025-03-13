@@ -21,6 +21,10 @@ const WorkOutData = () => {
             const response = await fetch(URL + "/workouts", fetchOptions);
             const data = await response.json();
 
+            if (response.status === 403) {
+                return;
+            }
+
             const workoutsArray = Object.entries(data).map(([key, value]) => ({
                 workout_name: key,
                 ...value,
@@ -56,6 +60,7 @@ const WorkOutData = () => {
             count: workoutTypeCounts[key],
         }));
     };
+
 
     const CustomTooltip = ({ active, payload }) => {
         if (active && payload && payload.length) {

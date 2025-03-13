@@ -22,6 +22,10 @@ const AllClients = ({ searchQuery }) => {
         return <div></div>;
     }
 
+    if (clientsData.message === "Invalid token") {
+        navigate("/login");
+    }
+
     const filteredClients = clients.filter(client =>
         `${client.FirstName} ${client.LastName}`.toLowerCase().includes(searchQuery.toLowerCase())
     );

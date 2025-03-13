@@ -15,18 +15,23 @@ const CreateWorkout = () => {
     const [workoutAddedText, setWorkoutAddedText] = useState("");
     const token = sessionStorage.getItem("token");
 
-    useEffect(() => {
-        const loadExercises = async () => {
-            try {
-                const data = await fetchExercisesApi(token);
-                setExercises(data);
-            } catch (error) {
-                console.error("Error fetching exercises:", error);
+    const loadExercises = async () => {
+        try {
+            const data = await fetchExercisesApi(token);
+            if (data.response.status === 403) {
+                return;
             }
-        };
+            setExercises(data);
+        } catch (error) {
+            console.error("Error fetching exercises:", error);
+        }
+    };
 
+
+
+    useEffect(() => {
         loadExercises();
-    }, [token]);
+    }, []);
 
     if (!exercises) {
         return <p>Loading...</p>;

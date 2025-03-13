@@ -6,8 +6,10 @@ import Button from "../../buttons/Button.jsx";
 
 const Workouts = () => {
     const [activeSection, setActiveSection] = useState("All Workouts");
+    const [error, setError] = useState("");
 
     const handleSectionClick = (section) => {
+        setError("");
         setActiveSection((prevSection) => (prevSection === section ? prevSection : section));
     };
 
@@ -24,6 +26,7 @@ const Workouts = () => {
                 )}
             </nav>
             <div className="flex w-full justify-center mt-5">
+                {error && <p className="text-red-500 bold bruno-ace-sc-regular text-2xl">{error}</p>}
                 {activeSection === "All Workouts" && (<AllWorkouts/>)}
                 {activeSection === "Craft Workouts" && (<CreateWorkout/>)}
                 {activeSection === "Data" && (<WorkOutData/>)}
