@@ -26,14 +26,14 @@ const WorkoutCalender = ({ dailyWorkouts, userId }) => {
                             <h3 className="px-6 py-4 bg-gradient-to-r from-orange-600/80 to-orange-500/60 text-lg font-medium text-gray-100 bruno-ace-sc-regular">
                                 {day}
                             </h3>
-                            <div className="p-4 rounded-b-lg">
+                            <div className="p-3 rounded-b-lg">
                                 {workoutsForDay.length === 0 ? (
                                     <p className="text-gray-400 montserrat-text px-2 py-3">Rest day</p>
                                 ) : (
                                     <ul className="mt-2 divide-y divide-orange-500/20">
                                         {workoutsForDay.map((workout, index) => (
                                             <li key={index}
-                                                className={`text-gray-100 montserrat-text p-3 flex items-center justify-between transition-colors  ${index % 2 === 0 ? 'bg-gray-800/20' : 'bg-transparent'}`}>
+                                                className="text-gray-100 montserrat-text p-3 flex items-center justify-between transition-colors">
                                                 <div className="flex items-center space-x-3">
                                                     <span className="font-medium">{workout.name}</span>
                                                 </div>
