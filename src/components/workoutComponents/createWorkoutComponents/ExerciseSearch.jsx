@@ -8,6 +8,8 @@ const ExerciseSearch = ({ exercises, onSelectExercise, onAddNewExercise }) => {
         exercise.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
+    console.log(exercises);
+
     return (
         <div className="w-full flex flex-wrap justify-center bg-gray-900/40 border border-orange-500/30 p-5 m-5 rounded-lg shadow-lg min-h-[300px]">
             <div className="w-full max-h-12 flex space-x-4 justify-center m-2">

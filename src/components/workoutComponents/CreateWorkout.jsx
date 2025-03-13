@@ -18,7 +18,7 @@ const CreateWorkout = () => {
     const loadExercises = async () => {
         try {
             const data = await fetchExercisesApi(token);
-            if (data.response.status === 403) {
+            if (data && data.response && data.response.status === 403) {
                 return;
             }
             setExercises(data);
