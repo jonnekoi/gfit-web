@@ -1,6 +1,7 @@
 import formatDate from "../../scripts/formatDate.js";
+import ErrorMessage from "../customerComponents/clientPage/addWorkoutToClientComponents/ErrorMessage.jsx";
 
-const SelectedWorkoutModal = ({ selectedWorkout, editableExercises, isReadOnly, closeModal, handleInputChange, toggleEditMode, updateText }) => {
+const SelectedWorkoutModal = ({ selectedWorkout, editableExercises, isReadOnly, closeModal, handleInputChange, toggleEditMode, updateText, errorText }) => {
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-20 backdrop-blur-sm overflow-y-auto p-4">
@@ -142,6 +143,7 @@ const SelectedWorkoutModal = ({ selectedWorkout, editableExercises, isReadOnly, 
                         <p className="text-green-400 montserrat-text text-center font-medium">{updateText}</p>
                     </div>
                 )}
+                {errorText && <ErrorMessage message={errorText} />}
             </div>
         </div>
     )

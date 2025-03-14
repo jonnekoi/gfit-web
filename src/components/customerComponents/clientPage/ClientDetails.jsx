@@ -89,7 +89,6 @@ const ClientDetails = () => {
         return <div></div>
     }
 
-
     const sortedWeights = clientWeights ? clientWeights.sort((a, b) => new Date(a.date) - new Date(b.date)) : [];
 
     let lastWeight = null;
@@ -136,7 +135,7 @@ const ClientDetails = () => {
                         <div className="flex w-full justify-center m-10">
                             {activeSection === "Overview" && (<ClientOverview client={clientData}/>)}
                             {activeSection === "Workouts" && (<ClientWorkouts exercises={clientData.workouts} userId={clientId}/>)}
-                            {activeSection === "Nutrition" && (<ClientMeals/>)}
+                            {activeSection === "Nutrition" && (<ClientMeals userId={clientId}/>)}
                         </div>
                 </div>
             </div>

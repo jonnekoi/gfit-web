@@ -18,6 +18,7 @@ const AllWorkouts = () => {
     const [updateText, setUpdateText] = useState("");
     const token = sessionStorage.getItem("token");
     const navigate = useNavigate();
+    const [errorText, setErrorText] = useState("");
 
 
     const fetchWorkouts = async () => {
@@ -57,10 +58,12 @@ const AllWorkouts = () => {
                 body: JSON.stringify({ id: workoutId, exercises: editableExercises }),
             });
 
-            if (!response.ok) {
-                throw new Error('Failed to save workout');
+            if (response.status === 201) {
+                setErrorText("");
+                setUpdateText("Workout updated successfully");
+            } else {
+                setErrorText("Failed to update workout");
             }
-            setUpdateText("Workout updated successfully");
 
         } catch (error) {
             console.error('Error saving workout:', error);
@@ -79,6 +82,7 @@ const AllWorkouts = () => {
     const closeModal = () => {
         setSelectedWorkout(null);
         setIsReadOnly(true);
+        setErrorText("");
         setUpdateText("");
     };
 
@@ -132,7 +136,6 @@ const AllWorkouts = () => {
         if (currentPage > 0) setCurrentPage(prev => prev - 1);
     };
 
-    console.log("visibleWorkouts", visibleWorkouts);
 
     const sortWorkouts = (sortBy) => {
         return () => {
@@ -238,7 +241,7 @@ const AllWorkouts = () => {
                     <SelectedWorkoutModal selectedWorkout={selectedWorkout} editableExercises={editableExercises}
                                           isReadOnly={isReadOnly} closeModal={closeModal}
                                           handleInputChange={handleInputChange} toggleEditMode={toggleEditMode}
-                                          updateText={updateText}/>
+                                          updateText={updateText} errorText={errorText}/>
                 )}
             </div>
         </>
