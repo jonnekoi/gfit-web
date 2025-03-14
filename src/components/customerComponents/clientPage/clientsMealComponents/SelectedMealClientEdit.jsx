@@ -133,7 +133,7 @@ const SelectedMealClientEdit = ({ selectedMeal, ingredients, closeModal, custome
                             <th className="p-4 text-center">Carbs / 100g</th>
                             <th className="p-4 text-center">Fat / 100g</th>
                             <th className="p-4 text-center">Calories / 100g</th>
-                            {!isReadOnly && <th className="p-4 text-center">Action</th>}
+                            {!isReadOnly && <th className="p-4 text-center"></th>}
                         </tr>
                         </thead>
                         <tbody>
@@ -173,7 +173,7 @@ const SelectedMealClientEdit = ({ selectedMeal, ingredients, closeModal, custome
                                     <td className="p-4 poppins-text text-center">
                                         <button
                                             onClick={() => removeIngredient(index)}
-                                            className="p-1 text-red-400 hover:text-red-300 hover:bg-red-500/20 rounded transition-colors"
+                                            className="p-1 text-red-400 hover:text-red-300 bg-red-500/20 rounded hover:bg-red-500/50  transition-colors"
                                         >
                                             Remove
                                         </button>
@@ -190,7 +190,7 @@ const SelectedMealClientEdit = ({ selectedMeal, ingredients, closeModal, custome
                         <div className="flex w-full">
                             <input
                                 type="text"
-                                placeholder="Search for ingredients to add..."
+                                placeholder="Search ingredients..."
                                 value={searchTerm}
                                 onChange={handleSearch}
                                 className="p-3 w-full rounded-lg bg-gray-800 border border-gray-700 text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent"

@@ -30,7 +30,6 @@ const ClientMeals = ({ userId }) => {
         mealCategories[meal.meal_category].push(meal);
     });
 
-    console.log(mealCategories);
 
     return (
         <div className="w-full">

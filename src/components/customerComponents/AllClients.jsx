@@ -107,12 +107,12 @@ const AllClients = ({ searchQuery }) => {
                             {formatDate(client.birthday)}
                         </td>
                         <td className="px-6 py-4 text-center border-b border-orange-500/20 max-w-36">
-                <span className="px-3 py-1 bg-orange-500/20 rounded-full text-sm">
+                <span className="px-3 py-1 bg-orange-500/20 rounded">
                     {client.plan_name}
                 </span>
                         </td>
                         <td className="px-6 py-4 text-center border-b border-orange-500/20 max-w-36">
-                <span className={`px-3 py-1 rounded-full text-sm ${
+                <span className={`px-3 py-1 rounded ${
                     client.status === 'Active' ? 'bg-green-500/20 text-green-300' :
                         client.status === 'Pending' ? 'bg-yellow-500/20 text-yellow-300' :
                             'bg-red-500/20 text-red-300'

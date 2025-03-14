@@ -2,7 +2,7 @@ import ExerciseRow from "./ExerciseRow.jsx";
 
 const ExerciseTable = ({ exercises, isEditMode, handleInputChange, addNewExercise }) => {
     return (
-        <div className="rounded-lg border border-gray-700/50">
+        <div className="rounded-lg overflow-hidden border border-gray-700/50">
             <table className="w-full text-white">
                 <thead className="sticky top-0 bg-gray-900/95">
                 <tr className="bg-gradient-to-r from-orange-600/60 to-orange-500/40 text-lg font-medium">
