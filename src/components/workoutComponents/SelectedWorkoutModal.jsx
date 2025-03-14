@@ -132,9 +132,9 @@ const SelectedWorkoutModal = ({ selectedWorkout, editableExercises, isReadOnly, 
                     </button>
                     <button
                         onClick={closeModal}
-                        className="text-orange-500 bg-transparent font-bold p-3 w-full bruno-ace-sc-regular rounded-lg border border-orange-500/50 hover:bg-orange-500/10 transition-all transform hover:scale-105"
+                        className="text-orange-500 bg-transparent font-bold p-2 flex-1 bruno-ace-sc-regular rounded-lg border border-orange-500/50 hover:bg-orange-500/10"
                     >
-                        Close
+                        Exit
                     </button>
                 </div>
 

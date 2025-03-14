@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {fetchClientMeals} from "./clientsMealComponents/clientMealService.js";
 import ButtonNoHover from "../../../buttons/ButtonNoHover.jsx";
-import WorkoutCalender from "./WorkoutCalender.jsx";
-import AddWorkoutToClientModal from "./AddWorkoutToClientModal.jsx";
 import MealCalender from "./clientsMealComponents/MealCalender.jsx";
 
 const ClientMeals = ({ userId }) => {
@@ -39,6 +37,7 @@ const ClientMeals = ({ userId }) => {
             <div className="flex justify-center">
                 <div className="w-2/3">
                     <div className="flex flex-row justify-end mb-2 space-x-5">
+                        <ButtonNoHover text="Adjust Targets"/>
                         <ButtonNoHover text="Add Meal">
                         </ButtonNoHover>
                     </div>

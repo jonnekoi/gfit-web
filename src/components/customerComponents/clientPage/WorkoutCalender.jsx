@@ -38,10 +38,10 @@ const WorkoutCalender = ({ dailyWorkouts, userId }) => {
                                                     <span className="font-medium">{workout.name}</span>
                                                 </div>
                                                 <div className="flex items-center space-x-3">
-                                            <span className="px-3 py-1 bg-orange-500/20 rounded-full text-sm">
+                                            <span className="px-2 py-1 bg-orange-500/20 rounded">
                                                 {workout.type}
                                             </span>
-                                                    <span className={`px-3 py-1 rounded-full text-sm ${
+                                                    <span className={`px-2 py-1 rounded ${
                                                         workout.level === 'Easy' ? 'bg-green-500/20 text-green-300' :
                                                             workout.level === 'Medium' ? 'bg-yellow-500/20 text-yellow-300' :
                                                                 'bg-red-500/20 text-red-300'
@@ -50,7 +50,7 @@ const WorkoutCalender = ({ dailyWorkouts, userId }) => {
                                             </span>
                                                     <button
                                                         onClick={(e) => handleEditClick(e, workout)}
-                                                        className="px-3 py-1 bg-white/20 rounded-full text-sm hover:bg-orange-500/40 transition-colors">
+                                                        className="px-2 py-1 bg-white/20 rounded hover:bg-orange-500/40 transition-colors">
                                                         Edit
                                                     </button>
                                                 </div>
