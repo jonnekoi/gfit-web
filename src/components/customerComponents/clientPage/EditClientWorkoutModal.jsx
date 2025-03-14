@@ -2,7 +2,7 @@ import { useState } from "react";
 import ActionButtons from "./editClientWorkoutModalComponents/ActionButtons.jsx";
 import WorkoutDescription from "./editClientWorkoutModalComponents/WorkoutDescription.jsx";
 import ExerciseTable from "./editClientWorkoutModalComponents/ExerciseTable.jsx";
-import {saveWorkout} from "./editClientWorkoutModalComponents/WorkoutService.js";
+import {deleteWorkout, saveWorkout} from "./editClientWorkoutModalComponents/WorkoutService.js";
 import WorkoutHeader from "./editClientWorkoutModalComponents/WorkoutHeader.jsx";
 
 const EditClientWorkoutModal = ({ workout, userId, closeModal }) => {
@@ -11,6 +11,7 @@ const EditClientWorkoutModal = ({ workout, userId, closeModal }) => {
     const [selectedDay, setSelectedDay] = useState(workout.day);
     const [exercises, setExercises] = useState(workout.exercises);
     const [workoutDescription, setWorkoutDescription] = useState(workout.description || "");
+    const [confirmDelete, setConfirmDelete] = useState(false);
 
     const toggleEditMode = () => {
         setIsEditMode(!isEditMode);
@@ -31,6 +32,27 @@ const EditClientWorkoutModal = ({ workout, userId, closeModal }) => {
         if (success) {
             setIsEditMode(false);
             setExercises([...editedExercises]);
+        }
+    };
+
+    const handleDelete = async () => {
+        const deletedWorkout = {
+            client_id: userId,
+            workout_id: workout.id,
+            workout_day: selectedDay,
+        };
+
+        const deleted = await deleteWorkout(deletedWorkout);
+        if (deleted) {
+            closeModal();
+        }
+    };
+
+    const handleDeleteClick = () => {
+        if (confirmDelete) {
+            handleDelete();
+        } else {
+            setConfirmDelete(true);
         }
     };
 
@@ -96,6 +118,8 @@ const EditClientWorkoutModal = ({ workout, userId, closeModal }) => {
                     toggleEditMode={toggleEditMode}
                     handleSave={handleSave}
                     closeModal={closeModal}
+                    confirmDelete={confirmDelete}
+                    handleDeleteClick={handleDeleteClick}
                 />
             </div>
         </div>
