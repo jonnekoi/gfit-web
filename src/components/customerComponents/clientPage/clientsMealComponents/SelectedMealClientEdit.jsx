@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-const SelectedMealClientEdit = ({ selectedMeal, ingredients, closeModal, customer, successSave ,deleteMeal, handleIngredientChange, allIngredients, updateMeal }) => {
+const SelectedMealClientEdit = ({ selectedMeal, ingredients, closeModal, customer, error, successSave ,deleteMeal, handleIngredientChange, allIngredients, updateMeal }) => {
     const [isReadOnly, setIsReadOnly] = useState(true);
     const [searchTerm, setSearchTerm] = useState("");
     const [filteredIngredients, setFilteredIngredients] = useState([]);
@@ -247,6 +247,11 @@ const SelectedMealClientEdit = ({ selectedMeal, ingredients, closeModal, custome
                 {successSave &&
                     <div className="mt-5 p-3 bg-green-500/10 border border-green-500/30 rounded-lg">
                         <p className="text-green-400 montserrat-text text-center font-medium">{successSave}</p>
+                    </div>
+                }
+                {error &&
+                    <div className="mt-5 p-3 bg-red-500/10 border border-red-500/30 rounded-lg">
+                        <p className="text-red-400 montserrat-text text-center font-medium">{error}</p>
                     </div>
                 }
             </div>

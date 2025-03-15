@@ -9,8 +9,7 @@ const MealCalender = ({ meals: initialMeals , userId }) => {
     const [selectedMeal, setSelectedMeal] = useState(null);
     const [ingredients, setIngredients] = useState(null);
     const [allIngredients, setAllIngredients] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState("");
     const customer = true;
     const [successSave, setSuccessSave] = useState("");
 
@@ -26,13 +25,13 @@ const MealCalender = ({ meals: initialMeals , userId }) => {
             }
         } catch (error) {
             console.error("Error fetching ingredients:", error);
-            setError("Failed to load ingredients. Please try again.");
         }
     }
 
     const handleEditClick = (e, meal) => {
         e.stopPropagation();
         setSuccessSave("");
+        setError("");
         setSelectedMealActive(true);
         setSelectedMeal(meal);
         setIngredients(meal.ingredients);
@@ -45,9 +44,8 @@ const MealCalender = ({ meals: initialMeals , userId }) => {
     }
 
     const updateMeal = async (updatedMeal) => {
-        setIsLoading(true);
-        setError(null);
-
+        setError("");
+        setSuccessSave("");
         try {
             const body = {
                 user_id: userId,
@@ -78,6 +76,7 @@ const MealCalender = ({ meals: initialMeals , userId }) => {
             const result = await response.json();
 
             if (!response.ok) {
+                setError('Failed to update meal');
                 throw new Error(result.error || 'Failed to update meal');
             }
             if (response.status === 201) {
@@ -100,8 +99,6 @@ const MealCalender = ({ meals: initialMeals , userId }) => {
             console.error("Error updating meal:", error);
             setError("Failed to update meal. Please try again.");
             throw error;
-        } finally {
-            setIsLoading(false);
         }
     }
     // TODO: IMPLEMENT DELETE MEAL ON BACKEND
@@ -111,10 +108,6 @@ const MealCalender = ({ meals: initialMeals , userId }) => {
         if (!confirm("Are you sure you want to delete this meal?")) {
             return;
         }
-
-        setIsLoading(true);
-        setError(null);
-
         try {
             const response = await fetch(`${url}/meals/${selectedMeal.meal_id}`, {
                 method: 'DELETE'
@@ -140,8 +133,6 @@ const MealCalender = ({ meals: initialMeals , userId }) => {
         } catch (error) {
             console.error("Error deleting meal:", error);
             setError("Failed to delete meal. Please try again.");
-        } finally {
-            setIsLoading(false);
         }
     }
 
@@ -200,12 +191,6 @@ const MealCalender = ({ meals: initialMeals , userId }) => {
 
     return (
         <>
-            {error && (
-                <div className="bg-red-500/20 text-red-300 p-3 mb-4 rounded-lg">
-                    {error}
-                </div>
-            )}
-
             <div className="flex flex-col mt-6">
                 <div className="flex justify-end gap-4 text-sm text-gray-300 mb-3 px-2">
                     <span className="px-2 py-1 bg-blue-500/10 rounded text-blue-300">Calories</span>
@@ -275,6 +260,7 @@ const MealCalender = ({ meals: initialMeals , userId }) => {
                     customer={customer}
                     closeModal={closeEditModal}
                     successSave={successSave}
+                    error={error}
                 />
             }
         </>
