@@ -12,6 +12,7 @@ const EditClientWorkoutModal = ({ workout, userId, closeModal }) => {
     const [exercises, setExercises] = useState(workout.exercises);
     const [workoutDescription, setWorkoutDescription] = useState(workout.description || "");
     const [confirmDelete, setConfirmDelete] = useState(false);
+    const [succesSave, setSuccessSave] = useState("");
 
     const toggleEditMode = () => {
         setIsEditMode(!isEditMode);
@@ -31,6 +32,7 @@ const EditClientWorkoutModal = ({ workout, userId, closeModal }) => {
         const success = await saveWorkout(savedWorkout);
         if (success) {
             setIsEditMode(false);
+            setSuccessSave("Workout saved successfully");
             setExercises([...editedExercises]);
         }
     };
@@ -121,6 +123,11 @@ const EditClientWorkoutModal = ({ workout, userId, closeModal }) => {
                     confirmDelete={confirmDelete}
                     handleDeleteClick={handleDeleteClick}
                 />
+                {succesSave && (
+                    <div className="mt-5 p-3 bg-green-500/10 border border-green-500/30 rounded-lg">
+                        <p className="text-green-400 montserrat-text text-center font-medium">{succesSave}</p>
+                    </div>
+                )}
             </div>
         </div>
     );

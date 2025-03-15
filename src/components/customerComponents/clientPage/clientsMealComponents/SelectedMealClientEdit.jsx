@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-const SelectedMealClientEdit = ({ selectedMeal, ingredients, closeModal, customer, deleteMeal, handleIngredientChange, allIngredients, updateMeal }) => {
+const SelectedMealClientEdit = ({ selectedMeal, ingredients, closeModal, customer, successSave ,deleteMeal, handleIngredientChange, allIngredients, updateMeal }) => {
     const [isReadOnly, setIsReadOnly] = useState(true);
     const [searchTerm, setSearchTerm] = useState("");
     const [filteredIngredients, setFilteredIngredients] = useState([]);
@@ -225,7 +225,7 @@ const SelectedMealClientEdit = ({ selectedMeal, ingredients, closeModal, custome
                         disabled={isSaving}
                         className={`text-white bg-gradient-to-r from-orange-600 w-full to-orange-500 font-bold p-3 bruno-ace-sc-regular rounded-lg shadow-md hover:from-orange-500 hover:to-orange-400 transition-all transform hover:scale-105 ${isSaving ? 'opacity-50 cursor-not-allowed' : ''}`}
                     >
-                        {isReadOnly ? "Edit" : (isSaving ? "Saving..." : "Save")}
+                        {isReadOnly ? "Edit" : "Save"}
                     </button>
                     {customer === true && (
                         <button
@@ -244,6 +244,11 @@ const SelectedMealClientEdit = ({ selectedMeal, ingredients, closeModal, custome
                         Exit
                     </button>
                 </div>
+                {successSave &&
+                    <div className="mt-5 p-3 bg-green-500/10 border border-green-500/30 rounded-lg">
+                        <p className="text-green-400 montserrat-text text-center font-medium">{successSave}</p>
+                    </div>
+                }
             </div>
         </div>
     )

@@ -12,6 +12,7 @@ const MealCalender = ({ meals: initialMeals , userId }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const customer = true;
+    const [successSave, setSuccessSave] = useState("");
 
     const getAllIngredients = async () => {
         try {
@@ -31,6 +32,7 @@ const MealCalender = ({ meals: initialMeals , userId }) => {
 
     const handleEditClick = (e, meal) => {
         e.stopPropagation();
+        setSuccessSave("");
         setSelectedMealActive(true);
         setSelectedMeal(meal);
         setIngredients(meal.ingredients);
@@ -77,6 +79,9 @@ const MealCalender = ({ meals: initialMeals , userId }) => {
 
             if (!response.ok) {
                 throw new Error(result.error || 'Failed to update meal');
+            }
+            if (response.status === 201) {
+                setSuccessSave("Meal updated successfully");
             }
 
             const updatedMeals = {...meals};
@@ -269,6 +274,7 @@ const MealCalender = ({ meals: initialMeals , userId }) => {
                     ingredients={ingredients}
                     customer={customer}
                     closeModal={closeEditModal}
+                    successSave={successSave}
                 />
             }
         </>
