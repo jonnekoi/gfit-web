@@ -104,37 +104,6 @@ const MealCalender = ({ meals: initialMeals , userId }) => {
     }
     // TODO: IMPLEMENT DELETE MEAL ON BACKEND
     const deleteMeal = async () => {
-        if (!selectedMeal) return;
-
-        if (!confirm("Are you sure you want to delete this meal?")) {
-            return;
-        }
-        try {
-            const response = await fetch(`${url}/meals/${selectedMeal.meal_id}`, {
-                method: 'DELETE'
-            });
-
-            if (!response.ok) {
-                const result = await response.json();
-                throw new Error(result.error || 'Failed to delete meal');
-            }
-
-            const updatedMeals = {...meals};
-            const category = selectedMeal.meal_category;
-
-            if (updatedMeals[category]) {
-                updatedMeals[category] = updatedMeals[category].filter(meal =>
-                    meal.meal_id !== selectedMeal.meal_id
-                );
-                setMeals(updatedMeals);
-            }
-
-            closeEditModal();
-
-        } catch (error) {
-            console.error("Error deleting meal:", error);
-            setError("Failed to delete meal. Please try again.");
-        }
     }
 
     const handleIngredientChange = (index, key, value) => {

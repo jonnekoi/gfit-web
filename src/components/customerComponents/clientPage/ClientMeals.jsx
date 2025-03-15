@@ -4,11 +4,13 @@ import ButtonNoHover from "../../../buttons/ButtonNoHover.jsx";
 import MealCalender from "./clientsMealComponents/MealCalender.jsx";
 import AdjustTargets from "./clientsMealComponents/AdjustTargets.jsx";
 import TargetsBars from "./clientsMealComponents/TargetBars.jsx";
+import AddMealModal from "./clientsMealComponents/AddMealModal.jsx";
 
 const ClientMeals = ({ userId }) => {
     const [meals, setMeals] = useState(null);
     const [adjustTargets, setAdjustTargets] = useState(false);
     const [targets, setTargets] = useState(null);
+    const [showAddMealModal, setShowAddMealModal] = useState(false);
     const [mealCategories, setMealCategories] = useState({
         breakfast: [],
         lunch: [],
@@ -81,10 +83,19 @@ const ClientMeals = ({ userId }) => {
     const closeModal = () => {
         setAdjustTargets(false);
     }
-    // TODO: TO BE IMPLEMENTED
-    const handleAddMeal = async () => {
-        console.log("Add meal button clicked");
+
+    const handleAddMeal = () => {
+        setShowAddMealModal(true);
     };
+
+    const closeAddMealModal = () => {
+        setShowAddMealModal(false);
+    };
+
+    const handleMealAdded = () => {
+        getMeals(userId);
+    };
+
 
     return (
         <div className="w-full">
@@ -92,7 +103,6 @@ const ClientMeals = ({ userId }) => {
                 <div className="w-2/3">
                     <div className="flex flex-row justify-between mb-2 items-center">
                         <div className="w-1/2">
-                            {/* Pass the raw meals array as well for debugging */}
                             <TargetsBars targets={targets} meals={mealCategories} rawMeals={meals} />
                         </div>
                         <div className="flex space-x-5">
@@ -108,6 +118,15 @@ const ClientMeals = ({ userId }) => {
                             onTargetsUpdated={handleTargetsUpdated}
                         />
                     )}
+
+                    {showAddMealModal && (
+                        <AddMealModal
+                            userId={userId}
+                            closeModal={closeAddMealModal}
+                            onMealAdded={handleMealAdded}
+                        />
+                    )}
+
                     <MealCalender meals={mealCategories} userId={userId}/>
                 </div>
             </div>
