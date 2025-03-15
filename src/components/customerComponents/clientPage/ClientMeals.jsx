@@ -21,7 +21,6 @@ const ClientMeals = ({ userId }) => {
     const getMeals = async (userId) => {
         try {
             const fetchedMeals = await fetchClientMeals(userId);
-            console.log("Fetched meals:", fetchedMeals);
             setMeals(fetchedMeals);
 
             const categories = {

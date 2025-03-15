@@ -14,8 +14,15 @@ const MealCalender = ({ meals: initialMeals , userId }) => {
     const [successSave, setSuccessSave] = useState("");
 
     const getAllIngredients = async () => {
+        const fetchOptions = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+            }
+        }
         try {
-            const response = await fetch(url + '/meals/ingredients');
+            const response = await fetch(url + '/meals/ingredients', fetchOptions);
             const ingredients = await response.json();
 
             if (response.error) {
@@ -66,7 +73,8 @@ const MealCalender = ({ meals: initialMeals , userId }) => {
             const fetchOptions = {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + sessionStorage.getItem('token')
                 },
                 body: JSON.stringify(body)
             }

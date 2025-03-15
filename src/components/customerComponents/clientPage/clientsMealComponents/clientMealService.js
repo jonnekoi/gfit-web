@@ -1,9 +1,18 @@
 const url = "http://localhost:3000/v1";
 const token = sessionStorage.getItem("token");
 
+
+
 export const fetchClientMeals = async (id) => {
+    const fetchOptions = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "authorization": "Bearer " + token,
+    },
+    };
     try {
-        const response = await fetch(url + '/meals/' + id);
+        const response = await fetch(url + '/meals/' + id, fetchOptions);
         const data = await response.json();
         return data;
     } catch (error) {
