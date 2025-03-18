@@ -103,6 +103,7 @@ const ClientDetails = () => {
         weightDifferenceAmount = (differenceWeight > 0 ? "+ " : "- ") + weightTargetDifference + " kg";
     }
 
+
     return (
         <>
             <div className="w-full">

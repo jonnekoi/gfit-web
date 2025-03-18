@@ -1,10 +1,14 @@
 import React, {useState} from "react";
 import EditClientWorkoutModal from "./EditClientWorkoutModal.jsx";
+import AddWorkoutToClientModal from './AddWorkoutToClientModal.jsx';
+import ButtonNoHover from '../../../buttons/ButtonNoHover.jsx';
 
 const WorkoutCalender = ({ dailyWorkouts, userId }) => {
     const [selectedWorkout, setSelectedWorkout] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [workouts, setWorkouts] = useState(dailyWorkouts)
+    const [addWorkoutModal, setAddWorkoutModal] = useState(false);
+
 
     const handleEditClick = (e, workout) => {
         e.stopPropagation();
@@ -17,12 +21,28 @@ const WorkoutCalender = ({ dailyWorkouts, userId }) => {
         setSelectedWorkout(null);
     };
 
+    const closeAdd = () => {
+        setAddWorkoutModal(false);
+    }
+
     const updateWorkouts = (updatedWorkouts) => {
         setWorkouts(updatedWorkouts);
     };
 
+    const addWorkoutToClientModal = () => {
+        setAddWorkoutModal(true);
+    }
+
+
     return (
-        <div className="flex flex-col mt-6">
+        <div className="flex flex-col">
+            <div className="flex flex-row justify-end gap-5 mb-5">
+            <ButtonNoHover text="Workout History">
+            </ButtonNoHover>
+            <ButtonNoHover
+                onClick={addWorkoutToClientModal} text="Add Workout">
+            </ButtonNoHover>
+            </div>
             <div className="flex flex-col gap-4">
                 {Object.keys(workouts).map(day => {
                     const workoutsForDay = workouts[day];
@@ -70,6 +90,9 @@ const WorkoutCalender = ({ dailyWorkouts, userId }) => {
             </div>
             {isModalOpen && selectedWorkout && (
                 <EditClientWorkoutModal workout={selectedWorkout} updateWorkouts={updateWorkouts} userId={userId} closeModal={closeModal}/>
+            )}
+            {addWorkoutModal && (
+                <AddWorkoutToClientModal userId={userId} updateWorkouts={updateWorkouts} setWorkoutModal={setAddWorkoutModal} closeAdd={closeAdd}/>
             )}
         </div>
     );

@@ -7,7 +7,7 @@ import ErrorMessage from "./addWorkoutToClientComponents/ErrorMessage.jsx";
 
 const URL = "http://localhost:3000/v1";
 
-const AddWorkoutToClientModal = ({ userId, close }) => {
+const AddWorkoutToClientModal = ({ userId, closeAdd, updateWorkouts }) => {
     const token = sessionStorage.getItem('token');
     const [workouts, setWorkouts] = useState([]);
     const [selectedWorkout, setSelectedWorkout] = useState(null);
@@ -76,7 +76,15 @@ const AddWorkoutToClientModal = ({ userId, close }) => {
         setEditedExercises(updatedExercises);
     };
 
+
     const handleSave = async () => {
+        const data = {
+            client_id: userId,
+            workout_id: selectedWorkout.workout_id,
+            exercises: editedExercises,
+            workout_day: selectedDay,
+            description: workoutDescription,
+        };
         try {
             const fetchOptions = {
                 method: 'POST',
@@ -84,13 +92,7 @@ const AddWorkoutToClientModal = ({ userId, close }) => {
                     'Authorization': 'Bearer ' + token,
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    client_id: userId,
-                    workout_id: selectedWorkout.workout_id,
-                    exercises: editedExercises,
-                    workout_day: selectedDay,
-                    description: workoutDescription
-                }),
+                body: JSON.stringify(data),
             };
             const response = await fetch(URL + '/clients/workout/client', fetchOptions);
             if (response.status === 409) {
@@ -98,10 +100,35 @@ const AddWorkoutToClientModal = ({ userId, close }) => {
                 return;
             }
 
+            if (response.ok) {
+                const updatedExercises = editedExercises.map(exercise => ({
+                    ...exercise,
+                    name: exercise.exercise_name,
+
+                    exercise_name: undefined
+                }));
+                updateWorkouts(prevWorkouts => {
+                    const updatedWorkouts = { ...prevWorkouts };
+                    if (!updatedWorkouts[selectedDay]) {
+                        updatedWorkouts[selectedDay] = [];
+                    }
+                    updatedWorkouts[selectedDay] = updatedWorkouts[selectedDay].filter(workout => workout.id !== selectedWorkout.workout_id);
+                    updatedWorkouts[selectedDay].push({
+                        name: selectedWorkout.workout_name,
+                        type: selectedWorkout.workout_type,
+                        level: selectedWorkout.workout_level,
+                        id: selectedWorkout.workout_id,
+                        exercises: updatedExercises,
+                        day: selectedDay,
+                        description: workoutDescription
+                    });
+                    return updatedWorkouts;
+                });
+            }
+
             setSelectedWorkout({ ...selectedWorkout, exercises: editedExercises });
             setIsEditMode(false);
-            //TODO: WHEN ADDED NEED TO REFRESH THE WORKOUT CALENDER TO SHOW THE ADDED WORKOUT
-            close();
+            closeAdd();
         } catch (error) {
             console.error("Error saving exercises:", error);
         }
@@ -161,7 +188,7 @@ const AddWorkoutToClientModal = ({ userId, close }) => {
                     isEditMode={isEditMode}
                     toggleEditMode={toggleEditMode}
                     handleSave={handleSave}
-                    close={close}
+                    close={closeAdd}
                 />
 
                 {errortext && <ErrorMessage message={errortext} />}

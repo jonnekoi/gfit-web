@@ -47,3 +47,4 @@ export const deleteWorkout = async (workoutData) => {
         return false;
     }
 }
+
