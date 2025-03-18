@@ -36,8 +36,7 @@ const ClientWorkouts = ({ exercises, userId }) => {
         if (dailyWorkouts[exercise.day]) {
             dailyWorkouts[exercise.day].push(exercise);
         }
-    }
-    );
+    });
 
 
     return (

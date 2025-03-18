@@ -4,6 +4,7 @@ import EditClientWorkoutModal from "./EditClientWorkoutModal.jsx";
 const WorkoutCalender = ({ dailyWorkouts, userId }) => {
     const [selectedWorkout, setSelectedWorkout] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [workouts, setWorkouts] = useState(dailyWorkouts)
 
     const handleEditClick = (e, workout) => {
         e.stopPropagation();
@@ -16,11 +17,15 @@ const WorkoutCalender = ({ dailyWorkouts, userId }) => {
         setSelectedWorkout(null);
     };
 
+    const updateWorkouts = (updatedWorkouts) => {
+        setWorkouts(updatedWorkouts);
+    };
+
     return (
         <div className="flex flex-col mt-6">
             <div className="flex flex-col gap-4">
-                {Object.keys(dailyWorkouts).map(day => {
-                    const workoutsForDay = dailyWorkouts[day];
+                {Object.keys(workouts).map(day => {
+                    const workoutsForDay = workouts[day];
                     return (
                         <div key={day} className="overflow-hidden shadow-lg rounded-lg bg-gray-900/60">
                             <h3 className="px-6 py-4 bg-gradient-to-r from-orange-600/80 to-orange-500/60 text-lg font-medium text-gray-100 bruno-ace-sc-regular">
@@ -64,7 +69,7 @@ const WorkoutCalender = ({ dailyWorkouts, userId }) => {
                 })}
             </div>
             {isModalOpen && selectedWorkout && (
-                <EditClientWorkoutModal workout={selectedWorkout} userId={userId} closeModal={closeModal}/>
+                <EditClientWorkoutModal workout={selectedWorkout} updateWorkouts={updateWorkouts} userId={userId} closeModal={closeModal}/>
             )}
         </div>
     );

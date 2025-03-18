@@ -5,7 +5,7 @@ import ExerciseTable from "./editClientWorkoutModalComponents/ExerciseTable.jsx"
 import {deleteWorkout, saveWorkout} from "./editClientWorkoutModalComponents/WorkoutService.js";
 import WorkoutHeader from "./editClientWorkoutModalComponents/WorkoutHeader.jsx";
 
-const EditClientWorkoutModal = ({ workout, userId, closeModal }) => {
+const EditClientWorkoutModal = ({ workout, userId, closeModal, updateWorkouts }) => {
     const [isEditMode, setIsEditMode] = useState(false);
     const [editedExercises, setEditedExercises] = useState(workout.exercises || []);
     const [selectedDay, setSelectedDay] = useState(workout.day);
@@ -46,6 +46,11 @@ const EditClientWorkoutModal = ({ workout, userId, closeModal }) => {
 
         const deleted = await deleteWorkout(deletedWorkout);
         if (deleted) {
+            updateWorkouts(prevWorkouts => {
+                const updatedWorkouts = { ...prevWorkouts };
+                updatedWorkouts[selectedDay] = updatedWorkouts[selectedDay].filter(w => w.id !== workout.id);
+                return updatedWorkouts;
+            });
             closeModal();
         }
     };

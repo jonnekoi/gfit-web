@@ -1,17 +1,28 @@
 import {useAuth} from "../../context/AuthContext.jsx";
 import ErrorMessage from "../customerComponents/clientPage/addWorkoutToClientComponents/ErrorMessage.jsx";
 import {useState} from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 const url = 'http://127.0.0.1:3000/v1';
 
 const Login = () => {
     const { setIsLoggedIn } = useAuth();
     const [errortext, setErrortext] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
 
     const handleLogin = async (event, setIsLoggedIn) => {
         event.preventDefault();
         const formdata = new FormData(event.target);
         const data = Object.fromEntries(formdata);
+        setLoading(true);
+
+        await delay(800);
+
+        setLoading(false);
 
         const fetchOption = {
             method: 'POST',
@@ -24,6 +35,7 @@ const Login = () => {
         try {
             const response = await fetch(url + '/users/login', fetchOption);
             const result = await response.json();
+
             if (response.status === 200) {
                 setIsLoggedIn(true);
                 sessionStorage.setItem('token', result.token);
@@ -56,11 +68,12 @@ const Login = () => {
                     name="password"
                     placeholder="Enter your password"
                 />
-
                 <button
                     className="bg-gradient-to-r from-orange-600 to-orange-500 text-white font-bold py-3 px-6 rounded-lg montserrat-text hover:cursor-pointer hover:from-orange-500 hover:to-orange-400 transition-all duration-300 transform hover:scale-105 shadow-md"
                     type="submit"
-                >
+                >  {loading &&
+                    <FontAwesomeIcon icon={faSpinner} spin/>
+                    }
                     Login
                 </button>
             </form>

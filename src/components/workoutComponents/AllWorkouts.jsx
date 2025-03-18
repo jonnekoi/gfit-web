@@ -155,7 +155,7 @@ const AllWorkouts = () => {
 
     return (
         <>
-            <div className="w-2/3">
+            <div className="w-3/4">
                 <table
                     className="w-full text-gray-100 montserrat-text bg-gray-900/60 rounded-lg overflow-hidden shadow-lg">
                     <thead>
