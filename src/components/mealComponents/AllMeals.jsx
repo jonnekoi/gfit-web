@@ -67,7 +67,7 @@ const AllMeals = () => {
         <>
             <div className="w-2/3">
                 <table
-                    className="w-full text-gray-100 montserrat-text bg-gray-900/40 rounded-lg overflow-hidden shadow-lg">
+                    className="w-full text-gray-100 montserrat-text bg-gray-900/60 rounded-lg overflow-hidden shadow-lg">
                     <thead>
                     <tr className="bg-gradient-to-r from-orange-600/80 to-orange-500/60 text-lg font-medium">
                         <th className="px-6 py-4 transition-colors hover:bg-orange-500/30 cursor-pointer">
@@ -113,7 +113,7 @@ const AllMeals = () => {
                         <tr
                             key={index}
                             onClick={() => toggleVisibility(meal)}
-                            className="transition-colors hover:bg-orange-500/10 cursor-pointer"
+                            className={`transition-colors hover:bg-orange-500/10 cursor-pointer ${index % 2 === 0 ? 'bg-gray-800/20' : 'bg-transparent'}`}
                         >
                                         <td className="px-6 py-4 text-center border-b border-orange-500/20 max-w-44">
                                             {meal.meal_name}

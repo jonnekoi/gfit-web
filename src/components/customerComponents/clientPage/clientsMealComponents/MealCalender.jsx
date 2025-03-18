@@ -181,7 +181,7 @@ const MealCalender = ({ meals: initialMeals , userId }) => {
                     {Object.keys(meals).map(category => {
                         const mealsForCategory = meals[category];
                         return (
-                            <div key={category} className="overflow-hidden shadow-lg rounded-lg bg-gray-900/40">
+                            <div key={category} className="overflow-hidden shadow-lg rounded-lg bg-gray-900/60">
                                 <h3 className="px-6 py-4 bg-gradient-to-r from-orange-600/80 to-orange-500/60 text-lg font-medium text-gray-100 bruno-ace-sc-regular">
                                     {category}
                                 </h3>

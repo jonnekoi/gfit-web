@@ -30,13 +30,7 @@
 }
 
 .väribg {
-  background-color: #18233c;
-  background-image: linear-gradient(
-          to right,
-          transparent 0%,
-          rgb(1, 6, 19) 0%,
-          transparent 80%
-  );
+  background-color: #0a1532;
 }
 
 .väribg2 {
