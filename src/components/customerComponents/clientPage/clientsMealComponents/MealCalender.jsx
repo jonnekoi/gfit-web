@@ -192,7 +192,7 @@ const MealCalender = ({ meals: initialMeals , userId }) => {
                                         <ul className="mt-2 divide-y divide-orange-500/20">
                                             {mealsForCategory.map((meal, index) => (
                                                 <li key={index}
-                                                    className="text-gray-100 montserrat-text p-3 flex items-center justify-between transition-colors">
+                                                    className="text-gray-100 montserrat-text p-3 flex items-center justify-between">
                                                     <div className="flex items-center space-x-3">
                                                         <span className="font-medium">{meal.meal_name}</span>
                                                     </div>

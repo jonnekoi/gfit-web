@@ -52,8 +52,6 @@ const AllMeals = () => {
     const endIndex = startIndex + rowsPerPage;
     const visibleMeals = meals.slice(startIndex, endIndex);
 
-    console.log(visibleMeals);
-
 
     const nextPage = () => {
         if (endIndex < meals.length) setCurrentPage(prev => prev + 1);

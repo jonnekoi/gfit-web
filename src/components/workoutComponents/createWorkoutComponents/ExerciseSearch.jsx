@@ -8,7 +8,6 @@ const ExerciseSearch = ({ exercises, onSelectExercise, onAddNewExercise }) => {
         exercise.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    console.log(exercises);
 
     return (
         <div className="w-full flex flex-wrap justify-center bg-gray-900/40 border border-orange-500/30 p-5 m-5 rounded-lg shadow-lg min-h-[300px]">
@@ -25,17 +24,18 @@ const ExerciseSearch = ({ exercises, onSelectExercise, onAddNewExercise }) => {
                     text="Add Exercise">
                 </ButtonNoHover>
             </div>
-            <div className="w-full flex flex-wrap justify-center mt-4">
-                {filteredExercises.map((exercise) => (
-                    <button
-                        onClick={() => onSelectExercise(exercise)}
-                        key={exercise.id}
-                        className="m-2 text-white p-3 text-center montserrat-text border border-orange-500/60 bg-gray-800/40 rounded-lg w-1/5 hover:bg-orange-500/20 transition-colors"
-                    >
-                        {exercise.name}
-                    </button>
-                ))}
-            </div>
+          <div className="w-full flex flex-wrap justify-center mt-4">
+            {filteredExercises.map((exercise) => (
+                <button
+                    onClick={() => onSelectExercise(exercise)}
+                    key={exercise.id}
+                    className="m-2 text-white p-3 text-center montserrat-text border border-orange-500/60 bg-gray-800/40 rounded-lg w-32 h-24 hover:bg-orange-500/20 transition-colors flex items-center justify-center"
+                >
+                  <span
+                      className="overflow-hidden text-sm">{exercise.name}</span>
+                </button>
+            ))}
+          </div>
         </div>
     );
 };

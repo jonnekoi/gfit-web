@@ -14,7 +14,7 @@ const Workouts = () => {
     };
 
     return (
-        <div className="w-full justify-center flex flex-col items-center border-t">
+        <div className="w-full justify-center flex flex-col items-center">
             <nav className="space-x-5 mt-5">
                 {["All Workouts", "Data", "Craft Workouts"].map((section) => (
                         <Button

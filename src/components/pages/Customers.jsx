@@ -16,7 +16,7 @@ const Customers = () => {
 
 
     return (
-        <div className="w-full flex flex-col items-center border-t">
+        <div className="w-full flex flex-col items-center">
             <nav className="space-x-5 mt-5">
                 {["All Clients", "Pending Clients", "New Reports", "Add Client",].map((section) => (
                 <Button

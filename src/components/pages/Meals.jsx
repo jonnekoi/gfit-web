@@ -8,13 +8,12 @@ const Meals = () => {
 
     const handleSectionClick = (section) => {
         setActiveSection((prevSection) => (prevSection === section ? null : section));
-        console.log(activeSection);
     };
 
     return (
-        <div className="w-full justify-center flex flex-col items-center border-t">
+        <div className="w-full justify-center flex flex-col items-center">
             <nav className="space-x-5 mt-5">
-                {["All Meals", "Craft Meals"].map((section) => (
+                {["All Meals", "Craft Meal"].map((section) => (
                         <Button
                             text={section}
                             key={section}

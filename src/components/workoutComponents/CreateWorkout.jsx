@@ -1,4 +1,3 @@
-"use client";
 import { useState, useEffect } from "react";
 import {addExerciseApi, addWorkoutApi, fetchExercisesApi} from "./createWorkoutComponents/workoutAPI.js";
 import ExerciseSearch from "./createWorkoutComponents/ExerciseSearch.jsx";
