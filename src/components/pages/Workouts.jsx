@@ -10,7 +10,7 @@ const Workouts = () => {
 
     const handleSectionClick = (section) => {
         setError("");
-        setActiveSection((prevSection) => (prevSection === section ? prevSection : section));
+        setActiveSection(section);
     };
 
     return (

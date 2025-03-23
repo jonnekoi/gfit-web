@@ -7,7 +7,7 @@ const Meals = () => {
     const [activeSection, setActiveSection] = useState("All Meals");
 
     const handleSectionClick = (section) => {
-        setActiveSection((prevSection) => (prevSection === section ? null : section));
+        setActiveSection(section);
     };
 
     return (

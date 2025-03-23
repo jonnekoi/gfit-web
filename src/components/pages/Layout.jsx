@@ -1,6 +1,5 @@
 import {Link, Outlet} from "react-router-dom";
 import { useAuth } from '../../context/AuthContext.jsx';
-import {useEffect, useState} from "react";
 
 const handleLogout = () => {
     sessionStorage.clear();
@@ -9,16 +8,6 @@ const handleLogout = () => {
 
 const Layout = () => {
     const { isLoggedIn } = useAuth();
-    const [username, setUsername] = useState('');
-
-    const getUsername = () => {
-        const user = sessionStorage.getItem('username');
-        setUsername(user);
-    }
-
-    useEffect(() => {
-        getUsername();
-    }, []);
 
     return (
         <>

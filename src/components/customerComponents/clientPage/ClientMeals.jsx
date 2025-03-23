@@ -68,11 +68,11 @@ const ClientMeals = ({ userId }) => {
     }, [userId]);
 
     if (!targets) {
-        return <div>Loading targets...</div>
+        return <div></div>
     }
 
     if (!meals) {
-        return <div>Loading meals...</div>
+        return <div></div>
     }
 
     const handleShowAdjustTargets = () => {

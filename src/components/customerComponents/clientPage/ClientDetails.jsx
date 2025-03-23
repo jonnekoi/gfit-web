@@ -19,7 +19,7 @@ const ClientDetails = () => {
 
 
     const handleSectionClick = (section) => {
-        setActiveSection((prevSection) => (prevSection === section ? prevSection : section));
+        setActiveSection(section);
     };
 
     const fetchProfilePicture = async (clientId) => {

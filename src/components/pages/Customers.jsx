@@ -11,7 +11,7 @@ const Customers = () => {
 
 
     const handleSectionClick = (section) => {
-        setActiveSection((prevSection) => (prevSection === section ? prevSection : section));
+        setActiveSection(section);
     };
 
 
