@@ -88,6 +88,12 @@ const EditClientWorkoutModal = ({ workout, userId, closeModal, updateWorkouts })
         setEditedExercises(updatedExercises);
     };
 
+    const handleDeleteRow = (index) => {
+        const updatedExercises = [...editedExercises];
+        updatedExercises.splice(index, 1);
+        setEditedExercises(updatedExercises);
+    }
+
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-20 backdrop-blur-sm overflow-y-auto p-4">
             <div
@@ -110,6 +116,7 @@ const EditClientWorkoutModal = ({ workout, userId, closeModal, updateWorkouts })
                         isEditMode={isEditMode}
                         handleInputChange={handleInputChange}
                         addNewExercise={addNewExercise}
+                        handleDeleteRow={handleDeleteRow}
                     />
 
                     <WorkoutDescription

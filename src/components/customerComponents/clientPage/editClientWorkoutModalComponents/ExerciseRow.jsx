@@ -1,4 +1,6 @@
-const ExerciseRow = ({ exercise, index, isEditMode, handleInputChange }) => {
+import React from 'react';
+
+const ExerciseRow = ({ exercise, index, isEditMode, handleInputChange, handleDeleteRow }) => {
     return (
         <tr className={`${index % 2 === 0 ? 'bg-gray-800/20' : 'bg-transparent'} transition-colors`}>
             <td className="p-3 poppins-text font-medium text-orange-400">
@@ -87,6 +89,16 @@ const ExerciseRow = ({ exercise, index, isEditMode, handleInputChange }) => {
                     </span>
                 )}
             </td>
+          {isEditMode && (
+              <td>
+                <button
+                    onClick={() => handleDeleteRow(index)}
+                    className="text-white font-bold montserrat-text mr-5 hover:text-red-300 transition-colors px-3 py-1"
+                >
+                  X
+                </button>
+              </td>
+          )}
         </tr>
     );
 };

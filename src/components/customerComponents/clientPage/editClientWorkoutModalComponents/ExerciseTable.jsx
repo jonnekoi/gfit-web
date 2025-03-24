@@ -1,6 +1,6 @@
 import ExerciseRow from "./ExerciseRow.jsx";
 
-const ExerciseTable = ({ exercises, isEditMode, handleInputChange, addNewExercise }) => {
+const ExerciseTable = ({ exercises, isEditMode, handleInputChange, addNewExercise, handleDeleteRow }) => {
     return (
         <div className="rounded-lg overflow-hidden border border-gray-700/50">
             <table className="w-full text-white">
@@ -18,6 +18,8 @@ const ExerciseTable = ({ exercises, isEditMode, handleInputChange, addNewExercis
                     <th className="p-3 text-center">Weight</th>
                     <th className="p-3 text-center">Sets</th>
                     <th className="p-3 text-center">Description</th>
+                    {isEditMode && <th></th>
+                    }
                 </tr>
                 </thead>
                 <tbody>
@@ -28,6 +30,7 @@ const ExerciseTable = ({ exercises, isEditMode, handleInputChange, addNewExercis
                         index={index}
                         isEditMode={isEditMode}
                         handleInputChange={handleInputChange}
+                        handleDeleteRow={handleDeleteRow}
                     />
                 ))}
 
