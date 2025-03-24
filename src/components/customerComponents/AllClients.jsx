@@ -3,7 +3,7 @@ import useFetchClients from "../../hooks/useFetchClients";
 import { useState, useEffect } from "react";
 import formatDate from "../../scripts/formatDate";
 import { faSort } from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const AllClients = ({ searchQuery }) => {
     const clientsData = useFetchClients("all");
@@ -11,6 +11,7 @@ const AllClients = ({ searchQuery }) => {
     const navigate = useNavigate();
     const [currentPage, setCurrentPage] = useState(0);
     const rowsPerPage = 8;
+    const [sortConfig, setSortConfig] = useState({ key: null, direction: 'ascending' });
 
     useEffect(() => {
         if (clientsData) {
@@ -19,11 +20,12 @@ const AllClients = ({ searchQuery }) => {
     }, [clientsData]);
 
     if (!clientsData) {
-        return <div></div>;
+        return <div className="w-full text-center py-8 text-white">Loading...</div>;
     }
 
     if (clientsData.message === "Invalid token") {
         navigate("/login");
+        return null;
     }
 
     const filteredClients = clients.filter(client =>
@@ -35,7 +37,7 @@ const AllClients = ({ searchQuery }) => {
     const clientsVisible = filteredClients.slice(startIndex, endIndex);
 
     const nextPage = () => {
-        if (endIndex < clients.length) setCurrentPage((prev) => prev + 1);
+        if (endIndex < filteredClients.length) setCurrentPage((prev) => prev + 1);
     };
 
     const prevPage = () => {
@@ -44,101 +46,145 @@ const AllClients = ({ searchQuery }) => {
 
     const sortClients = (sortBy) => {
         return () => {
+            let direction = 'ascending';
+            if (sortConfig.key === sortBy && sortConfig.direction === 'ascending') {
+                direction = 'descending';
+            }
+
             const sorted = [...clients].sort((a, b) => {
-                if (a[sortBy] < b[sortBy]) {
-                    return -1;
+                if (direction === 'ascending') {
+                    return a[sortBy] < b[sortBy] ? -1 : a[sortBy] > b[sortBy] ? 1 : 0;
+                } else {
+                    return a[sortBy] > b[sortBy] ? -1 : a[sortBy] < b[sortBy] ? 1 : 0;
                 }
-                if (a[sortBy] > b[sortBy]) {
-                    return 1;
-                }
-                return 0;
             });
+
             setClients(sorted);
+            setSortConfig({ key: sortBy, direction });
             setCurrentPage(0);
         };
     };
 
+    const StatusBadge = ({ status }) => (
+        <span className={`px-3 py-1 rounded ${
+            status === 'Active' ? 'bg-green-500/20 text-green-300' :
+                status === 'Pending' ? 'bg-yellow-500/20 text-yellow-300' :
+                    'bg-red-500/20 text-red-300'
+        }`}>
+            {status}
+        </span>
+    );
+
     return (
-        <div className="w-3/4">
-            <table className="w-full text-gray-100 montserrat-text bg-gray-900/60 rounded-lg overflow-hidden shadow-lg">
-                <thead>
-                <tr className="bg-gradient-to-r from-orange-600/80 to-orange-500/60 text-lg font-medium">
-                    <th onClick={sortClients("FirstName")}
-                        className="px-6 py-4 text-center transition-colors hover:bg-orange-500/30 cursor-pointer">
-                        <div className="flex items-center justify-center space-x-2">
-                            <span>Name</span>
-                            <FontAwesomeIcon icon={faSort} className="text-orange-300 opacity-70"/>
-                        </div>
-                    </th>
-                    <th onClick={sortClients("birthday")}
-                        className="px-6 py-4 text-center transition-colors hover:bg-orange-500/30 cursor-pointer">
-                        <div className="flex items-center justify-center space-x-2">
-                            <span>Birthday</span>
-                            <FontAwesomeIcon icon={faSort} className="text-orange-300 opacity-70"/>
-                        </div>
-                    </th>
-                    <th onClick={sortClients("plan_name")}
-                        className="px-6 py-4 text-center transition-colors hover:bg-orange-500/30 cursor-pointer">
-                        <div className="flex items-center justify-center space-x-2">
-                            <span>Plan</span>
-                            <FontAwesomeIcon icon={faSort} className="text-orange-300 opacity-70"/>
-                        </div>
-                    </th>
-                    <th onClick={sortClients("status")}
-                        className="px-6 py-4 text-center transition-colors hover:bg-orange-500/30 cursor-pointer">
-                        <div className="flex items-center justify-center space-x-2">
-                            <span>Status</span>
-                            <FontAwesomeIcon icon={faSort} className="text-orange-300 opacity-70"/>
-                        </div>
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                {clientsVisible.map((client, index) => (
-                    <tr
+        <div className="w-full">
+            <div className="hidden md:block">
+                <table className="w-full text-gray-100 montserrat-text bg-gray-900/60 rounded-lg overflow-hidden shadow-lg">
+                    <thead>
+                    <tr className="bg-gradient-to-r from-orange-600/80 to-orange-500/60 text-lg font-medium">
+                        <th onClick={sortClients("FirstName")}
+                            className="px-6 py-4 text-center transition-colors hover:bg-orange-500/30 cursor-pointer">
+                            <div className="flex items-center justify-center space-x-2">
+                                <span>Name</span>
+                                <FontAwesomeIcon icon={faSort} className="text-orange-300 opacity-70"/>
+                            </div>
+                        </th>
+                        <th onClick={sortClients("birthday")}
+                            className="px-6 py-4 text-center transition-colors hover:bg-orange-500/30 cursor-pointer">
+                            <div className="flex items-center justify-center space-x-2">
+                                <span>Birthday</span>
+                                <FontAwesomeIcon icon={faSort} className="text-orange-300 opacity-70"/>
+                            </div>
+                        </th>
+                        <th onClick={sortClients("plan_name")}
+                            className="px-6 py-4 text-center transition-colors hover:bg-orange-500/30 cursor-pointer">
+                            <div className="flex items-center justify-center space-x-2">
+                                <span>Plan</span>
+                                <FontAwesomeIcon icon={faSort} className="text-orange-300 opacity-70"/>
+                            </div>
+                        </th>
+                        <th onClick={sortClients("status")}
+                            className="px-6 py-4 text-center transition-colors hover:bg-orange-500/30 cursor-pointer">
+                            <div className="flex items-center justify-center space-x-2">
+                                <span>Status</span>
+                                <FontAwesomeIcon icon={faSort} className="text-orange-300 opacity-70"/>
+                            </div>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {clientsVisible.map((client, index) => (
+                        <tr
+                            key={client.id}
+                            className={`transition-colors hover:bg-orange-500/10 cursor-pointer ${index % 2 === 0 ? 'bg-gray-800/20' : 'bg-transparent'}`}
+                            onClick={() => navigate(`/clients/${client.id}`)}
+                        >
+                            <td className="px-6 py-4 text-center border-b border-orange-500/20">
+                                {client.FirstName} {client.LastName}
+                            </td>
+                            <td className="px-6 py-4 text-center border-b border-orange-500/20">
+                                {formatDate(client.birthday)}
+                            </td>
+                            <td className="px-6 py-4 text-center border-b border-orange-500/20">
+                                    <span className="px-3 py-1 bg-orange-500/20 rounded">
+                                        {client.plan_name}
+                                    </span>
+                            </td>
+                            <td className="px-6 py-4 text-center border-b border-orange-500/20">
+                                <StatusBadge status={client.status} />
+                            </td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+            </div>
+
+            <div className="md:hidden">
+                {clientsVisible.map((client) => (
+                    <div
                         key={client.id}
-                        className={`transition-colors hover:bg-orange-500/10 cursor-pointer ${index % 2 === 0 ? 'bg-gray-800/20' : 'bg-transparent'}`}
+                        className="bg-gray-900/60 rounded-lg p-4 mb-4 shadow-lg cursor-pointer"
                         onClick={() => navigate(`/clients/${client.id}`)}
                     >
-                        <td className="px-6 py-4 text-center border-b border-orange-500/20 max-w-36">
-                            {client.FirstName} {client.LastName}
-                        </td>
-                        <td className="px-6 py-4 text-center border-b border-orange-500/20 max-w-36">
-                            {formatDate(client.birthday)}
-                        </td>
-                        <td className="px-6 py-4 text-center border-b border-orange-500/20 max-w-36">
-                <span className="px-3 py-1 bg-orange-500/20 rounded">
-                    {client.plan_name}
-                </span>
-                        </td>
-                        <td className="px-6 py-4 text-center border-b border-orange-500/20 max-w-36">
-                <span className={`px-3 py-1 rounded ${
-                    client.status === 'Active' ? 'bg-green-500/20 text-green-300' :
-                        client.status === 'Pending' ? 'bg-yellow-500/20 text-yellow-300' :
-                            'bg-red-500/20 text-red-300'
-                }`}>
-                    {client.status}
-                </span>
-                        </td>
-                    </tr>
+                        <div className="flex justify-between items-center mb-2">
+                            <h3 className="text-lg font-semibold text-white">
+                                {client.FirstName} {client.LastName}
+                            </h3>
+                            <StatusBadge status={client.status} />
+                        </div>
+                        <div className="grid grid-cols-2 gap-2 text-gray-300 text-sm">
+                            <div>
+                                <p className="text-gray-400">Birthday:</p>
+                                <p>{formatDate(client.birthday)}</p>
+                            </div>
+                            <div className="flex flex-col items-end">
+                                <span className="px-2 py-1 bg-orange-500/20 rounded text-orange-300">
+                                    {client.plan_name}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 ))}
-                </tbody>
-            </table>
-            <div className="flex justify-center mt-4 text-white montserrat-text text-1xl">
+            </div>
+
+            <div className="flex justify-center items-center space-x-2 mt-4 text-white montserrat-text">
                 <button
                     onClick={prevPage}
                     disabled={currentPage === 0}
                     className={`px-4 py-2 rounded ${
-                        currentPage === 0 ? "cursor-not-allowed" : "text-white"
+                        currentPage === 0
+                            ? "bg-gray-700 cursor-not-allowed opacity-50"
+                            : "bg-orange-600 hover:bg-orange-500"
                     }`}
                 >
                     Previous
                 </button>
                 <button
                     onClick={nextPage}
-                    disabled={endIndex >= clients.length}
+                    disabled={endIndex >= filteredClients.length}
                     className={`px-4 py-2 rounded ${
-                        endIndex >= clients.length ? "cursor-not-allowed" : "text-white"
+                        endIndex >= filteredClients.length
+                            ? "bg-gray-700 cursor-not-allowed opacity-50"
+                            : "bg-orange-600 hover:bg-orange-500"
                     }`}
                 >
                     Next

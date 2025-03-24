@@ -45,7 +45,7 @@ const ClientOverview = ({ client }) => {
     }, [clientId]);
 
     if (!clientWeights) {
-        return <div></div>
+        return <div className="w-full text-center py-8 text-white">Loading...</div>
     }
 
     const sortedWeights = clientWeights.sort((a, b) => new Date(a.date) - new Date(b.date));
@@ -80,8 +80,8 @@ const ClientOverview = ({ client }) => {
 
 
     return (
-        <div className="w-full flex flex-row justify-center space-x-5">
-            <div className=" w-1/3">
+        <div className="w-full flex flex-col sm:flex-row justify-center sm:space-x-5 mt-5 sm:px-0">
+            <div className="w-full sm:w-2/3 md:w-1/2 lg:w-1/3">
                 {!notWeightData && (
                     <h1 className="text-xl text-center text-orange-500 michroma-regular">Weight Progress</h1>
                 )}
