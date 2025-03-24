@@ -11,7 +11,6 @@ const ClientWorkouts = ({ exercises, userId }) => {
 
     const exercisesArray = Object.values(exercises).flat();
 
-    console.log("exercisesArray",exercisesArray);
 
     const dailyWorkouts = {
         "Monday": [],
