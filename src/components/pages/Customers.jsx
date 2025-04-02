@@ -16,8 +16,8 @@ const Customers = () => {
   const sections = ["All Clients", "Pending Clients", "New Reports", "Add Client"];
 
   return (
-      <div className="w-full max-w-6xl flex flex-col">
-        <div className="flex flex-col items-end w-full mt-5 px-4">
+      <div className="w-full flex flex-col">
+        <div className="flex flex-col items-center w-full mt-5 px-4">
           <nav className="flex flex-wrap gap-2">
             {sections.map((section) => (
                 <Button
@@ -36,7 +36,7 @@ const Customers = () => {
           </nav>
         </div>
 
-        <div className="w-full mt-5 px-4">
+        <div className="m-auto w-2/3 mt-5">
           {activeSection === 'All Clients' && <AllClients searchQuery={searchQuery}/>}
           {activeSection === 'Pending Clients' && <PendingClients searchQuery={searchQuery}/>}
           {activeSection === "New Reports" && <NewReports />}

@@ -6,7 +6,7 @@ const Button = ({ text, onClick, active }) => {
                 ? "from-orange-500 to-orange-400"
                 : "from-orange-600 to-orange-500"} 
                 font-bold py-2 px-3 bruno-ace-sc-regular rounded-lg shadow-md 
-                hover:from-orange-500 hover:to-orange-400 transition-all transform hover:scale-105`}
+                hover:from-orange-500 hover:to-orange-400 transition-all transform`}
             onClick={onClick}
         >
             {text}

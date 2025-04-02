@@ -45,7 +45,7 @@ const AddClient = () => {
 
 
     return (
-        <div className="w-3/4 text-white montserrat-text mt-10">
+        <div className="w-full text-white montserrat-text mt-10">
             <form onSubmit={handleAddClient} className="flex flex-col space-y-4">
                 <div className="flex flex-row gap-4">
                     <div className="flex flex-col w-1/3">

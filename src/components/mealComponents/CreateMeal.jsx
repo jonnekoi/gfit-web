@@ -62,7 +62,7 @@ const CreateMeal = () => {
 
 
   return (
-        <div className="flex flex-row">
+        <div className="flex">
           <Ingridients onSelectIngredient={handleMoveIngredient} ingredients={ingredients}/>
           {currentIngredient &&
              <SelectedIngredient ingredient={currentIngredient} onMoveBack={handleMoveBack} error={error} handleAddToMeal={addIngredientToMeal}/>}

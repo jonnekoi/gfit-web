@@ -120,7 +120,7 @@ const AllMeals = () => {
     };
 
     return (
-        <div className="w-full">
+        <div className="w-2/3">
             <div className="hidden md:block">
                 <table className="w-full text-gray-100 montserrat-text bg-gray-900/60 rounded-lg overflow-hidden shadow-lg">
                     <thead>

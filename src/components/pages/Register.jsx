@@ -50,7 +50,7 @@ const Register = () => {
     const [error, setError] = useState('');
 
     return (
-        <div className="flex flex-col text-center p-6 bg-gray-900/40 border border-orange-500/50 rounded-2xl w-1/3 mt-10 shadow-lg">
+        <div className="flex flex-col h-1/3 text-center p-6 bg-gray-900/40 border border-orange-500/50 rounded-2xl w-1/3 mt-10 shadow-lg">
             <form onSubmit={(e)=> handleRegister(e, setError, setIsLoggedIn)} className="flex flex-col m-auto justify-center w-2/3">
                 <label className="montserrat-text text-gray-300 text-left ml-1 mb-1">Name</label>
                 <input className="p-3 rounded-lg bg-gray-800/60 border border-orange-500/30 text-gray-100 mb-4 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500/50 transition-colors" type="text" name="name" placeholder="Name" />

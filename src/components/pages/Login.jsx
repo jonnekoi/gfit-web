@@ -51,7 +51,7 @@ const Login = () => {
     }
 
     return (
-        <div className="flex flex-col text-center p-6 bg-gray-900/40 border border-orange-500/50 rounded-2xl w-1/3 mt-10 shadow-lg">
+        <div className="flex h-1/3 lex-col text-center p-6 bg-gray-900/40 border border-orange-500/50 rounded-2xl w-1/3 mt-10 shadow-lg">
             <form onSubmit={(e) => handleLogin(e, setIsLoggedIn)} className="flex flex-col m-auto justify-center w-full max-w-md">
                 <label className="montserrat-text text-gray-300 text-left ml-1 mb-1">Username</label>
                 <input
